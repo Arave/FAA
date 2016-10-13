@@ -1,0 +1,29 @@
+
+ASM - particionesSimples
+
+ASC - Desviación típica de los errores
+
+ASC - prob. Priori (P=clase)
+
+ASM - prob. máx Verosimilitud (D=a|P=clase)
+
+ASC - prob. dato (D=a)
+
+ASC - media y desviación típica de atributo continuo condicionado clase X.
+	ojo, sumar + miniValor correo
+
+ASM - Gaussiana **_**
+
+- Entrenamiento Bayes
+	- Crear la tabla
+	- Aplicar o no Laplace (Parametro?) 
+
+- Clasifica NB
+	- argmax? Y log
+
+
+- Memoria - ypthon Notebook (Conforme se vaya haciendo)
+	1
+	2
+	3
+	4
