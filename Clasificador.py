@@ -10,6 +10,16 @@ class Clasificador(object):
   # Clase abstracta
   __metaclass__ = ABCMeta
   
+  
+  #Calcula la probabilidad a priori P(H=clase)
+  def probAPriori(self, dataset, clase):
+      datos = dataset.datos
+      numFilas = datos.shape[0]
+      numColumnas = datos.shape[1]
+      idClase =  dataset.diccionarios[numColumnas-1][clase]
+      numOcurrencias = Counter(datos[:,numColumnas-1])[idClase]          
+      return numOcurrencias / numFilas
+  
   # Metodos abstractos que se implementan en casa clasificador concreto
   @abstractmethod
   # TODO: esta funcion deben ser implementadas en cada clasificador concreto

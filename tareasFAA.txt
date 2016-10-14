@@ -1,9 +1,9 @@
 
 ASM - particionesSimples
 
-ASC - Desviación típica de los errores
+DONE - ASC - Desviación típica de los errores
 
-ASC - prob. Priori (P=clase)
+DONE - ASC - prob. Priori (P=clase)
 
 ASM - prob. máx Verosimilitud (D=a|P=clase)
 
