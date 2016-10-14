@@ -11,14 +11,19 @@ class Clasificador(object):
   __metaclass__ = ABCMeta
   
   
-  #Calcula la probabilidad a priori P(H=clase)
-  def probAPriori(self, dataset, clase):
+
+  #Calcula la probabilidad a priori P(nombreColumna=clase)
+  def probAPriori(self, dataset, nombreColumna, clase):
       datos = dataset.datos
       numFilas = datos.shape[0]
-      numColumnas = datos.shape[1]
-      idClase =  dataset.diccionarios[numColumnas-1][clase]
-      numOcurrencias = Counter(datos[:,numColumnas-1])[idClase]          
+      #Obtener el índice de la columna deseada
+      idxColumna =  dataset.nombreAtributos.index(nombreColumna)
+      #Obtener el valor del diccionario para esa clase
+      idClase =  dataset.diccionarios[idxColumna][clase]
+      #Contar las ocurrencias para ese valor del diccionar en esa columna
+      numOcurrencias = Counter(datos[:,idxColumna])[idClase]          
       return numOcurrencias / numFilas
+
   
   # Metodos abstractos que se implementan en casa clasificador concreto
   @abstractmethod

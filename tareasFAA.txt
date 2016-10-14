@@ -7,7 +7,7 @@ DONE - ASC - prob. Priori (P=clase)
 
 ASM - prob. máx Verosimilitud (D=a|P=clase)
 
-ASC - prob. dato (D=a)
+DONE - ASC - prob. dato (D=a)
 
 ASC - media y desviación típica de atributo continuo condicionado clase X.
 	ojo, sumar + miniValor correo

@@ -85,8 +85,8 @@ class Datos(object):
     float_formatter = lambda x: "%.3f" % x
     np.set_printoptions(formatter={'float_kind':float_formatter})            
 
-    print "Datos (numpy)"
-    print self.datos 
+    #print "Datos (numpy)"
+    #print self.datos 
    
   # idx: lista de indices de los patrones a extraer 
   def extraeDatos(self,idx):
