@@ -51,8 +51,10 @@ class Clasificador(object):
     # - Para validacion simple (hold-out): entrenamos el clasificador con la particion de train
     # y obtenemos el error en la particion test      
        particiones = particionado.creaParticiones(dataset.datos)
-
+       
+       
        if particionado.nombreEstrategia == "ValidacionSimple":
+           arrayErrores = np.empty(particionado.numParticionesSimples)
            print "Indices de train: "
            print particiones.indicesTrain
            print "Indices de test: "
@@ -63,8 +65,7 @@ class Clasificador(object):
            print datosTrain
            print "=>DatosTest:"
            print datosTest
-           
-           
+                     
            predClass = clasificador.entrenamiento(datosTrain)
            print "Predicción (Clase mayoritaria): "
            print predClass
@@ -78,6 +79,7 @@ class Clasificador(object):
            
        elif particionado.nombreEstrategia == "ValidacionCruzada":
            errorTotal = 0
+           arrayErrores = np.empty(particionado.numeroParticiones)
            print 'Datos de train y test para [', particionado.numeroParticiones,'] grupos:'
            for idx,p in enumerate(particiones):
                print "Indices de train: "
@@ -97,13 +99,20 @@ class Clasificador(object):
                pred = clasificador.clasifica(datosTest)
                print "Predicción: "
                print pred
-               errores = clasificador.error(datosTest,pred)
-               errorTotal += errores
-               print "Porcentaje de errores (%): "
-               print errores
-           print "Media de errores total: "
-           print errorTotal / len(particiones)
                
+               error = clasificador.error(datosTest,pred)
+               arrayErrores[idx] = error
+               print "Porcentaje de error (%): "
+               print error
+               
+           #estadística
+           print arrayErrores    
+           print "Media de errores total: "
+           print np.mean(arrayErrores)
+           print "Mediana de errores total: "
+           print np.median(arrayErrores)           
+           print "Desviación típica: "
+           print np.std(arrayErrores)     
        else:
            print "nombre de estrategia no valido"
            exit(1)
