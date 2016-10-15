@@ -10,6 +10,38 @@ class Clasificador(object):
   # Clase abstracta
   __metaclass__ = ABCMeta
   
+  
+
+  #Calcula la probabilidad a priori P(nombreColumna=clase)
+  def probAPriori(self, dataset, nombreColumna, clase):
+      datos = dataset.datos
+      numFilas = datos.shape[0]
+      #Obtener el índice de la columna deseada
+      idxColumna =  dataset.nombreAtributos.index(nombreColumna)
+      #Obtener el valor del diccionario para esa clase
+      idClase =  dataset.diccionarios[idxColumna][clase]
+      #Contar las ocurrencias para ese valor del diccionar en esa columna
+      numOcurrencias = Counter(datos[:,idxColumna])[idClase]          
+      return numOcurrencias / numFilas
+
+  #Calcula la Media y desviación típica de los atributos continuos condiconados
+  #a la clase. 
+  def mediaDesviacionAtr(self, dataset, nombreColumna, nombreColumnaClase, clase):
+      datos = dataset.datos
+      #Obtener el índice de la columna deseada
+      idxColumna =  dataset.nombreAtributos.index(nombreColumna)
+      #Obtener el índice de la columna de clase
+      idxColumnaClase =  dataset.nombreAtributos.index(nombreColumnaClase)      
+      #Obtener el valor del diccionario para esa clase
+      idClase =  dataset.diccionarios[idxColumnaClase][clase]
+      
+      #Lista de índices donde la clase es la que nos pasan
+      indices, = np.where(datos[:,idxColumnaClase] == idClase)
+      media = np.mean(datos[indices,idxColumna])
+      std = np.std(datos[indices,idxColumna]) + 1e-6  #+ 0.000001 
+      return media, std
+      
+  
   # Metodos abstractos que se implementan en casa clasificador concreto
   @abstractmethod
   # TODO: esta funcion deben ser implementadas en cada clasificador concreto
@@ -51,8 +83,10 @@ class Clasificador(object):
     # - Para validacion simple (hold-out): entrenamos el clasificador con la particion de train
     # y obtenemos el error en la particion test      
        particiones = particionado.creaParticiones(dataset.datos)
-
+       
+       
        if particionado.nombreEstrategia == "ValidacionSimple":
+           arrayErrores = np.empty(particionado.numParticionesSimples)
            print "Indices de train: "
            print particiones.indicesTrain
            print "Indices de test: "
@@ -63,8 +97,7 @@ class Clasificador(object):
            print datosTrain
            print "=>DatosTest:"
            print datosTest
-           
-           
+                     
            predClass = clasificador.entrenamiento(datosTrain)
            print "Predicción (Clase mayoritaria): "
            print predClass
@@ -77,7 +110,7 @@ class Clasificador(object):
            
            
        elif particionado.nombreEstrategia == "ValidacionCruzada":
-           errorTotal = 0
+           arrayErrores = np.empty(particionado.numeroParticiones)
            print 'Datos de train y test para [', particionado.numeroParticiones,'] grupos:'
            for idx,p in enumerate(particiones):
                print "Indices de train: "
@@ -97,13 +130,20 @@ class Clasificador(object):
                pred = clasificador.clasifica(datosTest)
                print "Predicción: "
                print pred
-               errores = clasificador.error(datosTest,pred)
-               errorTotal += errores
-               print "Porcentaje de errores (%): "
-               print errores
-           print "Media de errores total: "
-           print errorTotal / len(particiones)
                
+               error = clasificador.error(datosTest,pred)
+               arrayErrores[idx] = error
+               print "Porcentaje de error (%): "
+               print error
+               
+           #estadística
+           print arrayErrores    
+           print "Media de errores total: "
+           print np.mean(arrayErrores)
+           print "Mediana de errores total: "
+           print np.median(arrayErrores)           
+           print "Desviación típica: "
+           print np.std(arrayErrores)     
        else:
            print "nombre de estrategia no valido"
            exit(1)

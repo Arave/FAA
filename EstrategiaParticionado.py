@@ -19,11 +19,10 @@ class EstrategiaParticionado(object):
   
   # Atributos: deben rellenarse adecuadamente para cada estrategia concreta
   nombreEstrategia="null"
-  numeroParticiones=0
+  numeroParticiones=0 #Valdicacion cruzada
   particiones=[] #lista de objetos particion
-  numParticionesSimples=0
-  numParticionesComplejas=0
-  porcentajeParticiones=0
+  numParticionesSimples=0 #Validacion simple
+  porcentajeParticiones=0 #Validacion simple
   
   
   
