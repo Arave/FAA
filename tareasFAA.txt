@@ -9,7 +9,7 @@ ASM - prob. máx Verosimilitud (D=a|P=clase)
 
 DONE - ASC - prob. dato (D=a)
 
-ASC - media y desviación típica de atributo continuo condicionado clase X.
+DONE - ASC - media y desviación típica de atributo continuo condicionado clase X.
 	ojo, sumar + miniValor correo
 
 ASM - Gaussiana **_**

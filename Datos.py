@@ -79,7 +79,8 @@ class Datos(object):
             for i in range(data_lines):
                 self.datos[i][idx] = [self.diccionarios[idx][x] for x in atribute][i]
         else:
-            self.datos[i][idx] = transposed[idx][i]
+            for i in range(data_lines):
+                self.datos[i][idx] = transposed[idx][i]
             
     #solo para el printeo. En la estructura se mantiene el float completo
     float_formatter = lambda x: "%.3f" % x

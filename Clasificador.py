@@ -24,6 +24,23 @@ class Clasificador(object):
       numOcurrencias = Counter(datos[:,idxColumna])[idClase]          
       return numOcurrencias / numFilas
 
+  #Calcula la Media y desviación típica de los atributos continuos condiconados
+  #a la clase. 
+  def mediaDesviacionAtr(self, dataset, nombreColumna, nombreColumnaClase, clase):
+      datos = dataset.datos
+      #Obtener el índice de la columna deseada
+      idxColumna =  dataset.nombreAtributos.index(nombreColumna)
+      #Obtener el índice de la columna de clase
+      idxColumnaClase =  dataset.nombreAtributos.index(nombreColumnaClase)      
+      #Obtener el valor del diccionario para esa clase
+      idClase =  dataset.diccionarios[idxColumnaClase][clase]
+      
+      #Lista de índices donde la clase es la que nos pasan
+      indices, = np.where(datos[:,idxColumnaClase] == idClase)
+      media = np.mean(datos[indices,idxColumna])
+      std = np.std(datos[indices,idxColumna]) + 1e-6  #+ 0.000001 
+      return media, std
+      
   
   # Metodos abstractos que se implementan en casa clasificador concreto
   @abstractmethod
@@ -93,7 +110,6 @@ class Clasificador(object):
            
            
        elif particionado.nombreEstrategia == "ValidacionCruzada":
-           errorTotal = 0
            arrayErrores = np.empty(particionado.numeroParticiones)
            print 'Datos de train y test para [', particionado.numeroParticiones,'] grupos:'
            for idx,p in enumerate(particiones):
