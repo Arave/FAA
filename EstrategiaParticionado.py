@@ -1,3 +1,4 @@
+from __future__ import print_function
 from abc import ABCMeta,abstractmethod
 import numpy as np
 
@@ -9,6 +10,16 @@ class Particion:
   def __init__(self, indicesTrain, indicesTest):
     self.indicesTrain= indicesTrain
     self.indicesTest= indicesTest
+
+  def __str__(self):
+      s = ">iTrain:["
+      for i in self.indicesTrain:
+          s = s + str(i) + " "
+      s += "]\n>itest:["
+      for i in self.indicesTest:
+          s = s + str(i) + " "
+      s += "]\n"
+      return s
 
 #####################################################################################################
 
@@ -27,7 +38,6 @@ class EstrategiaParticionado(object):
   
   
   @abstractmethod
-  # TODO: esta funcion deben ser implementadas en cada estrategia concreta  
   def creaParticiones(self,datos,seed=None):
     pass
   
@@ -46,7 +56,6 @@ class ValidacionSimple(EstrategiaParticionado):
   
   # Crea particiones segun el metodo tradicional de division de los datos segun el porcentaje deseado.
   # Devuelve una lista de particiones (clase Particion)
-  # TODO: implementar
   def creaParticiones(self,datos,seed=None):
     
     np.random.seed(seed)                            #semilla, "default: system time to generate next random num"
@@ -57,7 +66,14 @@ class ValidacionSimple(EstrategiaParticionado):
     training_idx, test_idx = indices[:numTraining], indices[numTraining:]
     #training, test = datos[training_idx,:], datos[test_idx,:]
 
-    return Particion(training_idx, test_idx)
+    #nueva version con parametro:
+    for i in range(self.numParticionesSimples):
+        indices = np.random.permutation(datos.shape[0])
+        numTraining = (self.porcentajeParticiones * len(indices)) / 100
+        training_idx, test_idx = indices[:numTraining], indices[numTraining:]
+        self.particiones.append(Particion(training_idx, test_idx))
+
+    return self.particiones
 
     #Comprobar si hay num de particiones .
     #Si es num

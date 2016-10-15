@@ -1,5 +1,8 @@
 
-ASM - particionesSimples
+#=================================================================================#
+TO-DO list
+#=================================================================================#
+DONE - particionesSimples
 
 DONE - ASC - Desviación típica de los errores
 
@@ -20,10 +23,23 @@ ASM - Gaussiana **_**
 
 - Clasifica NB
 	- argmax? Y log
-
-
+#=================================================================================#
+Progreso memoria
+#=================================================================================#
 - Memoria - ypthon Notebook (Conforme se vaya haciendo)
 	1
 	2
 	3
 	4
+
+#=================================================================================#
+* Mejoras si hay tiempo
+#=================================================================================#
+    - corregir el printeo de variables numpy y diferenciar entre
+      continuos (float) y no continuos (int del diccionario) para
+      que quede mas limpio
+
+#=================================================================================#
+ANOTACIONES
+#=================================================================================#
+    - Ahora se pueden printear objetos Particion(x,y) directamente (def __str__)

@@ -10,10 +10,9 @@ class Clasificador(object):
   # Clase abstracta
   __metaclass__ = ABCMeta
   
-  
-
   #Calcula la probabilidad a priori P(nombreColumna=clase)
-  def probAPriori(self, dataset, nombreColumna, clase):
+  @staticmethod
+  def probAPriori(dataset, nombreColumna, clase):
       datos = dataset.datos
       numFilas = datos.shape[0]
       #Obtener el índice de la columna deseada
@@ -24,9 +23,14 @@ class Clasificador(object):
       numOcurrencias = Counter(datos[:,idxColumna])[idClase]          
       return numOcurrencias / numFilas
 
+  @staticmethod
+  def probMaxverosimil(dataset, nombreColumna, atributo, nombreDominio, dominio):
+      #palce holder porque algo falla (estoy haciendo pruebas en una versión local reducida en PyCharm)
+      pass
   #Calcula la Media y desviación típica de los atributos continuos condiconados
-  #a la clase. 
-  def mediaDesviacionAtr(self, dataset, nombreColumna, nombreColumnaClase, clase):
+  #a la clase.
+  @staticmethod
+  def mediaDesviacionAtr(dataset, nombreColumna, nombreColumnaClase, clase):
       datos = dataset.datos
       #Obtener el índice de la columna deseada
       idxColumna =  dataset.nombreAtributos.index(nombreColumna)
@@ -87,36 +91,45 @@ class Clasificador(object):
        
        if particionado.nombreEstrategia == "ValidacionSimple":
            arrayErrores = np.empty(particionado.numParticionesSimples)
-           print "Indices de train: "
-           print particiones.indicesTrain
-           print "Indices de test: "
-           print particiones.indicesTest
-           datosTrain, datosTest = dataset.extraeDatos([particiones.indicesTrain, particiones.indicesTest])
-           print "Datos de train y test: "
-           print "=>DatosTrain:"
-           print datosTrain
-           print "=>DatosTest:"
-           print datosTest
-                     
-           predClass = clasificador.entrenamiento(datosTrain)
-           print "Predicción (Clase mayoritaria): "
-           print predClass
-           pred = clasificador.clasifica(datosTest)
-           print "Predicción: "
-           print pred
-           errores = clasificador.error(datosTest,pred)
-           print "Porcentaje de errores (%): "
-           print errores         
-           
+
+           print "Indices train y test para [" + str(particionado.numParticionesSimples) + "] particiones:"
+           for idx,p in enumerate(particiones):
+               print ">Particion ("+str(idx)+"):"
+               print p
+               datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
+               print ' =>DatosTrain [', idx, ']:'
+               print datosTrain
+               print ' =>DatosTest [', idx, ']:'
+               print datosTest
+
+               # Entrenamiento
+               predClass = clasificador.entrenamiento(datosTrain)
+               print "Predicción (Clase mayoritaria): "
+               print predClass
+               pred = clasificador.clasifica(datosTest)
+               print "Predicción: "
+               print pred
+
+               error = clasificador.error(datosTest, pred)
+               arrayErrores[idx] = error
+               print "Porcentaje de error (%): "
+               print error
+
+               # estadística
+           print arrayErrores
+           print "Media de errores total: "
+           print np.mean(arrayErrores)
+           print "Mediana de errores total: "
+           print np.median(arrayErrores)
+           print "Desviación típica: "
+           print np.std(arrayErrores)
            
        elif particionado.nombreEstrategia == "ValidacionCruzada":
            arrayErrores = np.empty(particionado.numeroParticiones)
            print 'Datos de train y test para [', particionado.numeroParticiones,'] grupos:'
            for idx,p in enumerate(particiones):
-               print "Indices de train: "
-               print p.indicesTrain
-               print "Indices de test: "
-               print p.indicesTest               
+               print 'Particion (',idx,'):'
+               print p
                datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
                print ' =>DatosTrain [',idx,']:'
                print datosTrain

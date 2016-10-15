@@ -27,7 +27,10 @@ print prob
 
 
 #Probabilidades de máxima verosimilitud: P(A7=bb|Class=+) P(A4=u|Class=-)
-
+print "Prob. de máxima verosimilitud para P(A7=bb|Class=+)"
+#prob = clasificador.probMaxVerosimil(dataset, "A7", "bb, "Class", "+")
+print "Prob. de máxima verosimilitud para P(A4=u|Class=-)"
+#prob = clasificador.probMaxVerosimil(dataset, A4", "u", "Class", "-")
 
 
 
