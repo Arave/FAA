@@ -14,8 +14,6 @@ class Clasificador(object):
   #Calcula la probabilidad a priori P(nombreColumna=clase)
   @staticmethod
   def probAPriori(dataset, nombreColumna, clase):
-      ##print "Prob. a priori para P(Class=positive)"
-      ##prob1 = clasificador.probAPriori(dataset, "Class", "positive")
       datos = dataset.datos
       numFilas = datos.shape[0]
       #Obtener el índice de la columna deseada
@@ -26,44 +24,20 @@ class Clasificador(object):
       numOcurrencias = Counter(datos[:,idxColumna])[idClase]          
       return numOcurrencias / numFilas
 
-  """
-  def probMaxVerosimil(dataset, nombreColumna, atributo, nombreDominio, dominio):
-      #=>print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
-      #=>prob3 = clasificador.probMaxVerosimil(dataset, "MLeftSq", "b", "Class", "positive")
-      #palce holder porque algo falla (estoy haciendo pruebas en una versión local reducida en PyCharm)
-      datos = dataset.datos
-      #fetch del indice de 'Class'
-      idxClass = dataset.nombreAtributos.index(nombreDominio)
-      idClase  = dataset.diccionarios[idxClass][dominio]
-      #columna 'Class' en forma de array
-      classColumn = dataset.datos[:,idxClass]
-      #lista con los indices de las rows que hacen match con esa idClase
-      idxMatchClass = [i for i,colValue in enumerate(classColumn) if colValue==idClase]
-
-      idxAtributo = dataset.nombreAtributos.index(nombreColumna)
-      idAtributo = dataset.diccionarios[idxAtributo][atributo]
-      atriColumn = dataset.datos[:,idxAtributo]
-      matchesList = itemgetter(*idxMatchClass)(atriColumn)
-      countfilter = Counter(matchesList)[idAtributo]
-
-      return countfilter/len(idxMatchClass)
-      pass
-  """
-
   @staticmethod
   def probMaxVerosimil(dataset, datos, nombreColumna, atributo, nombreDominio, dominio):
-      # =>print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
-      # =>prob3 = clasificador.probMaxVerosimil(dataset, "MLeftSq", "b", "Class", "positive")
       # fetch del indice de 'Class'
       idxClass = dataset.nombreAtributos.index(nombreDominio)
       idClase = dataset.diccionarios[idxClass][dominio]
       # columna 'Class' en forma de array
+      #VERSION ANTERIOR:classColumn = dataset.datos[:, idxClass]
       classColumn = datos[:, idxClass]
       # lista con los indices de las rows que hacen match con esa idClase
       idxMatchClass = [i for i, colValue in enumerate(classColumn) if colValue == idClase]
 
       idxAtributo = dataset.nombreAtributos.index(nombreColumna)
       idAtributo = dataset.diccionarios[idxAtributo][atributo]
+      #VERSION ANTERIOR:atriColumn = dataset.datos[:,idxAtributo]
       atriColumn = datos[:, idxAtributo]
       matchesList = itemgetter(*idxMatchClass)(atriColumn)
       countfilter = Counter(matchesList)[idAtributo]
@@ -103,7 +77,6 @@ class Clasificador(object):
   
   # Metodos abstractos que se implementan en casa clasificador concreto
   @abstractmethod
-  # TODO: esta funcion deben ser implementadas en cada clasificador concreto
   # datosTrain: matriz numpy con los datos de entrenamiento
   # atributosDiscretos: array bool con la indicatriz de los atributos nominales
   # diccionario: array de diccionarios de la estructura Datos utilizados para la codificacion
@@ -113,14 +86,14 @@ class Clasificador(object):
   
   
   @abstractmethod
-  # TODO: esta funcion deben ser implementadas en cada clasificador concreto
   # devuelve un numpy array con las predicciones
   def clasifica(self,datosTest,atributosDiscretos,diccionario):
     pass
   
   
   # Obtiene el numero de aciertos y errores para calcular la tasa de fallo
-  def error(self,datos,pred):
+  @staticmethod
+  def error(datos,pred):
     # Aqui se compara la prediccion (pred) con las clases reales y se calcula el error   
       numColumnas = datos.shape[1]
       numFilas = datos.shape[0]
@@ -237,8 +210,6 @@ class ClasificadorAPriori(Clasificador):
 
 class ClasificadorNaiveBayes(Clasificador):
 
-
-  # TODO: implementar
   def entrenamiento(self,datostrain,atributosDiscretos,diccionario):
       
      print "entrenamiento Naive"
@@ -251,18 +222,13 @@ class ClasificadorNaiveBayes(Clasificador):
      
      #Calcular la media y std para los atributos continuos => gaussiana
      for idx,atr in enumerate(atributosDiscretos):
-         if(atr == False):
+         if atr == False:
              for clase in clases:
                  media, std = self.mediaDesviacionAtr2(datostrain, diccionario, idx, idxColumnaClase, clase)
                  mediaA.append(media)
                  stdA.append(std)
-     print 'Media: ',mediaA, 'STD: ',stdA,''    
-      
+     print 'Media: ',mediaA, 'STD: ',stdA,''
 
-    
-     
-    
-  # TODO: implementar
   def clasifica(self,datostest,atributosDiscretos,diccionario):
       #placeholder
       return datostest[:,-1]

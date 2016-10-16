@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="375acffe-50e9-427e-8f1b-71a9c41cc26f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Clasificador.py" afterPath="$PROJECT_DIR$/Clasificador.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pruebas.py" afterPath="$PROJECT_DIR$/pruebas.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testApartado3.py" afterPath="$PROJECT_DIR$/testApartado3.py" />
@@ -64,11 +62,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Clasificador.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Clasificador.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Clasificador.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="57" column="33" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
+            <state relative-caret-position="485">
+              <caret line="91" column="2" selection-start-line="91" selection-start-column="2" selection-end-line="91" selection-end-column="2" />
               <folding>
                 <element signature="e#24#90#0" expanded="true" />
               </folding>
@@ -89,8 +87,8 @@
       <file leaf-file-name="pruebas.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pruebas.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+            <state relative-caret-position="161">
+              <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -106,11 +104,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="testApartado3.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testApartado3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="53">
+              <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+              <folding>
+                <element signature="e#109#132#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="testApartado4.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testApartado4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="24" column="45" selection-start-line="24" selection-start-column="45" selection-end-line="24" selection-end-column="45" />
+            <state relative-caret-position="324">
+              <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
               <folding>
                 <element signature="e#109#132#0" expanded="true" />
               </folding>
@@ -123,16 +133,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="81">
               <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testApartado3.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/testApartado3.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="32" column="53" selection-start-line="32" selection-start-column="53" selection-end-line="32" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -160,10 +160,10 @@
         <option value="$PROJECT_DIR$/testValSimple.py" />
         <option value="$PROJECT_DIR$/datos_digitos_1617/pruebas.py" />
         <option value="$PROJECT_DIR$/tareasFAA.txt" />
+        <option value="$PROJECT_DIR$/testApartado4.py" />
         <option value="$PROJECT_DIR$/testApartado3.py" />
         <option value="$PROJECT_DIR$/pruebas.py" />
         <option value="$PROJECT_DIR$/Clasificador.py" />
-        <option value="$PROJECT_DIR$/testApartado4.py" />
       </list>
     </option>
   </component>
@@ -644,7 +644,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="19" column="44" selection-start-line="0" selection-start-column="0" selection-end-line="32" selection-end-column="11" />
-          <folding />
+          <folding>
+            <element signature="e#109#132#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -855,28 +857,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pruebas.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Clasificador.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="57" column="33" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
-          <folding>
-            <element signature="e#24#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testApartado4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="24" column="45" selection-start-line="24" selection-start-column="45" selection-end-line="24" selection-end-column="45" />
+        <state relative-caret-position="324">
+          <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
           <folding>
             <element signature="e#109#132#0" expanded="true" />
           </folding>
@@ -885,9 +869,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testApartado3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="32" column="53" selection-start-line="32" selection-start-column="53" selection-end-line="32" selection-end-column="53" />
+        <state relative-caret-position="53">
+          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+          <folding>
+            <element signature="e#109#132#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pruebas.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Clasificador.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="91" column="2" selection-start-line="91" selection-start-column="2" selection-end-line="91" selection-end-column="2" />
+          <folding>
+            <element signature="e#24#90#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
