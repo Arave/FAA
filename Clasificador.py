@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division #Para divisiones float por defecto
+from operator import itemgetter
 from abc import ABCMeta,abstractmethod
 from collections import Counter
 import numpy as np
@@ -9,10 +10,12 @@ class Clasificador(object):
   
   # Clase abstracta
   __metaclass__ = ABCMeta
-  
+
   #Calcula la probabilidad a priori P(nombreColumna=clase)
   @staticmethod
   def probAPriori(dataset, nombreColumna, clase):
+      ##print "Prob. a priori para P(Class=positive)"
+      ##prob1 = clasificador.probAPriori(dataset, "Class", "positive")
       datos = dataset.datos
       numFilas = datos.shape[0]
       #Obtener el índice de la columna deseada
@@ -24,8 +27,26 @@ class Clasificador(object):
       return numOcurrencias / numFilas
 
   @staticmethod
-  def probMaxverosimil(dataset, nombreColumna, atributo, nombreDominio, dominio):
+  def probMaxVerosimil(dataset, nombreColumna, atributo, nombreDominio, dominio):
+      #=>print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
+      #=>prob3 = clasificador.probMaxVerosimil(dataset, "MLeftSq", "b", "Class", "positive")
       #palce holder porque algo falla (estoy haciendo pruebas en una versión local reducida en PyCharm)
+      datos = dataset.datos
+      #fetch del indice de 'Class'
+      idxClass = dataset.nombreAtributos.index(nombreDominio)
+      idClase  = dataset.diccionarios[idxClass][dominio]
+      #columna 'Class' en forma de array
+      classColumn = dataset.datos[:,idxClass]
+      #lista con los indices de las rows que hacen match con esa idClase
+      idxMatchClass = [i for i,colValue in enumerate(classColumn) if colValue==idClase]
+
+      idxAtributo = dataset.nombreAtributos.index(nombreColumna)
+      idAtributo = dataset.diccionarios[idxAtributo][atributo]
+      atriColumn = dataset.datos[:,idxAtributo]
+      matchesList = itemgetter(*idxMatchClass)(atriColumn)
+      countfilter = Counter(matchesList)[idAtributo]
+
+      return countfilter/len(idxMatchClass)
       pass
   
   #Calcula la Media y desviación típica de los atributos continuos condiconados

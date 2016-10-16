@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="375acffe-50e9-427e-8f1b-71a9c41cc26f" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/P1_v3.iml" afterPath="$PROJECT_DIR$/.idea/P1.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Clasificador.py" afterPath="$PROJECT_DIR$/Clasificador.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EstrategiaParticionado.py" afterPath="$PROJECT_DIR$/EstrategiaParticionado.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tareasFAA.txt" afterPath="$PROJECT_DIR$/tareasFAA.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testApartado3.py" afterPath="$PROJECT_DIR$/testApartado3.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testApartado4.py" afterPath="$PROJECT_DIR$/testApartado4.py" />
     </list>
     <ignored path="P1_v3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,8 +28,8 @@
       <file leaf-file-name="testValSimple.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testValSimple.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+            <state relative-caret-position="188">
+              <caret line="12" column="53" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="53" />
               <folding>
                 <element signature="e#109#132#0" expanded="true" />
               </folding>
@@ -44,11 +37,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="d2.data" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ConjuntosDatosPruebas/d2.data">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="testValCruzada.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testValCruzada.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+            <state relative-caret-position="486">
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding>
                 <element signature="e#109#132#0" expanded="true" />
               </folding>
@@ -59,8 +62,8 @@
       <file leaf-file-name="EstrategiaParticionado.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/EstrategiaParticionado.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+            <state relative-caret-position="-1696">
+              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -68,11 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Clasificador.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Clasificador.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Clasificador.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+            <state relative-caret-position="621">
+              <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
               <folding>
                 <element signature="e#24#90#0" expanded="true" />
               </folding>
@@ -80,21 +83,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testApartado3.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testApartado3.py">
+      <file leaf-file-name="pruebas.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pruebas.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+            <state relative-caret-position="188">
+              <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testApartado4.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testApartado4.py">
+      <file leaf-file-name="tareasFAA.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tareasFAA.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-162">
-              <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="d1.data" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ConjuntosDatosPruebas/d1.data">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testApartado3.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testApartado3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="19" column="44" selection-start-line="0" selection-start-column="0" selection-end-line="32" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -110,39 +133,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tareasFAA.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tareasFAA.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Datos.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Datos.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="838">
-              <caret line="92" column="6" selection-start-line="92" selection-start-column="6" selection-end-line="92" selection-end-column="6" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="d1.data" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ConjuntosDatosPruebas/d1.data">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
-              <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -152,13 +150,15 @@
       <list>
         <option value="$PROJECT_DIR$/Datos.py" />
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/testValSimple.py" />
         <option value="$PROJECT_DIR$/testValCruzada.py" />
         <option value="$PROJECT_DIR$/EstrategiaParticionado.py" />
-        <option value="$PROJECT_DIR$/testApartado3.py" />
         <option value="$PROJECT_DIR$/testApartado4.py" />
-        <option value="$PROJECT_DIR$/tareasFAA.txt" />
+        <option value="$PROJECT_DIR$/testValSimple.py" />
+        <option value="$PROJECT_DIR$/testApartado3.py" />
+        <option value="$PROJECT_DIR$/datos_digitos_1617/pruebas.py" />
+        <option value="$PROJECT_DIR$/pruebas.py" />
         <option value="$PROJECT_DIR$/Clasificador.py" />
+        <option value="$PROJECT_DIR$/tareasFAA.txt" />
       </list>
     </option>
   </component>
@@ -240,7 +240,21 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ConjuntosDatos" />
+              <option name="myItemId" value="datos_digitos_1617" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="P1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="faa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ConjuntosDatosPruebas" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -255,7 +269,7 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="Python.testValSimple">
+  <component name="RunManager" selected="Python.testApartado3">
     <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -303,6 +317,40 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="P1" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testValCruzada.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="testApartado3" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="P1" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testApartado3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="pruebas" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="P1" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pruebas.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -441,16 +489,20 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="3">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.test" />
       <item index="1" class="java.lang.String" itemvalue="Python.testValSimple" />
       <item index="2" class="java.lang.String" itemvalue="Python.testValCruzada" />
+      <item index="3" class="java.lang.String" itemvalue="Python.testApartado3" />
+      <item index="4" class="java.lang.String" itemvalue="Python.pruebas" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Python.testValSimple" />
-        <item index="1" class="java.lang.String" itemvalue="Python.testValCruzada" />
-        <item index="2" class="java.lang.String" itemvalue="Python.test" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.testApartado3" />
+        <item index="1" class="java.lang.String" itemvalue="Python.pruebas" />
+        <item index="2" class="java.lang.String" itemvalue="Python.testValSimple" />
+        <item index="3" class="java.lang.String" itemvalue="Python.testValCruzada" />
+        <item index="4" class="java.lang.String" itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -629,18 +681,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/plantillas/Datos.py" />
     <entry file="file://$PROJECT_DIR$/test.py" />
-    <entry file="file://$PROJECT_DIR$/ConjuntosDatosPruebas/d1.data">
+    <entry file="file://$PROJECT_DIR$/testApartado4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+        <state relative-caret-position="189">
+          <caret line="45" column="38" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Datos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="838">
-          <caret line="92" column="6" selection-start-line="92" selection-start-column="6" selection-end-line="92" selection-end-column="6" />
+        <state relative-caret-position="81">
+          <caret line="3" column="11" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="11" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -649,19 +701,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/EstrategiaParticionado.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+        <state relative-caret-position="-1696">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testApartado4.py">
+    <entry file="file://$PROJECT_DIR$/testValCruzada.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-162">
-          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-          <folding />
+        <state relative-caret-position="486">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="e#109#132#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -673,49 +727,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testValCruzada.py">
+    <entry file="file://$PROJECT_DIR$/datos_digitos_1617/pruebas.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
-          <folding>
-            <element signature="e#109#132#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testValSimple.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-          <folding>
-            <element signature="e#109#132#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tareasFAA.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testApartado3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+        <state relative-caret-position="161">
+          <caret line="19" column="44" selection-start-line="0" selection-start-column="0" selection-end-line="32" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testValSimple.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="12" column="53" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="53" />
+          <folding>
+            <element signature="e#109#132#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ConjuntosDatosPruebas/d2.data">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ConjuntosDatosPruebas/d1.data">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Clasificador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+        <state relative-caret-position="621">
+          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
           <folding>
             <element signature="e#24#90#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pruebas.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tareasFAA.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
