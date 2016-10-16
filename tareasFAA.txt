@@ -8,14 +8,14 @@ DONE - ASC - Desviación típica de los errores
 
 DONE - ASC - prob. Priori (P=clase)
 
-ASM - prob. máx Verosimilitud (D=a|P=clase)
+DONE - prob. máx Verosimilitud (D=a|P=clase)
 
 DONE - ASC - prob. dato (D=a)
 
 DONE - ASC - media y desviación típica de atributo continuo condicionado clase X.
 	ojo, sumar + miniValor correo
 
-ASM - Gaussiana **_**
+IN_PROGRESS - Gaussiana **_**
 
 - Entrenamiento Bayes
 	- Crear la tabla
@@ -35,11 +35,17 @@ Progreso memoria
 #=================================================================================#
 * Mejoras si hay tiempo
 #=================================================================================#
-    - corregir el printeo de variables numpy y diferenciar entre
-      continuos (float) y no continuos (int del diccionario) para
-      que quede mas limpio
+- corregir el printeo de variables numpy y diferenciar entre
+continuos (float) y no continuos (int del diccionario) para
+que quede mas limpio
 
 #=================================================================================#
 ANOTACIONES
 #=================================================================================#
-    - Ahora se pueden printear objetos Particion(x,y) directamente (def __str__)
+- Ahora se pueden printear objetos Particion(x,y) directamente (def __str__)
+
+#=================================================================================#
+Sobre Git
+#=================================================================================#
+- Como apañar conflictos del automerge:
+    https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/
