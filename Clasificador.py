@@ -14,8 +14,6 @@ class Clasificador(object):
   #Calcula la probabilidad a priori P(nombreColumna=clase)
   @staticmethod
   def probAPriori(dataset, nombreColumna, clase):
-      ##print "Prob. a priori para P(Class=positive)"
-      ##prob1 = clasificador.probAPriori(dataset, "Class", "positive")
       datos = dataset.datos
       numFilas = datos.shape[0]
       #Obtener el índice de la columna deseada
@@ -26,30 +24,6 @@ class Clasificador(object):
       numOcurrencias = Counter(datos[:,idxColumna])[idClase]          
       return numOcurrencias / numFilas
 
-  """
-  def probMaxVerosimil(dataset, nombreColumna, atributo, nombreDominio, dominio):
-      #=>print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
-      #=>prob3 = clasificador.probMaxVerosimil(dataset, "MLeftSq", "b", "Class", "positive")
-      #palce holder porque algo falla (estoy haciendo pruebas en una versión local reducida en PyCharm)
-      datos = dataset.datos
-      #fetch del indice de 'Class'
-      idxClass = dataset.nombreAtributos.index(nombreDominio)
-      idClase  = dataset.diccionarios[idxClass][dominio]
-      #columna 'Class' en forma de array
-      classColumn = dataset.datos[:,idxClass]
-      #lista con los indices de las rows que hacen match con esa idClase
-      idxMatchClass = [i for i,colValue in enumerate(classColumn) if colValue==idClase]
-
-      idxAtributo = dataset.nombreAtributos.index(nombreColumna)
-      idAtributo = dataset.diccionarios[idxAtributo][atributo]
-      atriColumn = dataset.datos[:,idxAtributo]
-      matchesList = itemgetter(*idxMatchClass)(atriColumn)
-      countfilter = Counter(matchesList)[idAtributo]
-
-      return countfilter/len(idxMatchClass)
-      pass
-  """
-
   @staticmethod
   def probMaxVerosimil(diccionarios, datos, idxAtributo, atributo, idxClass, dominio):
       # =>print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
@@ -57,11 +31,13 @@ class Clasificador(object):
       # fetch del indice de 'Class'
       idClase = diccionarios[idxClass][dominio]
       # columna 'Class' en forma de array
+      #VERSION ANTERIOR:classColumn = dataset.datos[:, idxClass]
       classColumn = datos[:, idxClass]
       # lista con los indices de las rows que hacen match con esa idClase
       idxMatchClass = [i for i, colValue in enumerate(classColumn) if colValue == idClase]
-      
+
       idAtributo = diccionarios[idxAtributo][atributo]
+      #VERSION ANTERIOR:atriColumn = dataset.datos[:,idxAtributo]
       atriColumn = datos[:, idxAtributo]
       matchesList = itemgetter(*idxMatchClass)(atriColumn)
       countfilter = Counter(matchesList)[idAtributo]
@@ -101,7 +77,6 @@ class Clasificador(object):
   
   # Metodos abstractos que se implementan en casa clasificador concreto
   @abstractmethod
-  # TODO: esta funcion deben ser implementadas en cada clasificador concreto
   # datosTrain: matriz numpy con los datos de entrenamiento
   # atributosDiscretos: array bool con la indicatriz de los atributos nominales
   # diccionario: array de diccionarios de la estructura Datos utilizados para la codificacion
@@ -111,14 +86,14 @@ class Clasificador(object):
   
   
   @abstractmethod
-  # TODO: esta funcion deben ser implementadas en cada clasificador concreto
   # devuelve un numpy array con las predicciones
   def clasifica(self,datosTest,atributosDiscretos,diccionario):
     pass
   
   
   # Obtiene el numero de aciertos y errores para calcular la tasa de fallo
-  def error(self,datos,pred):
+  @staticmethod
+  def error(datos,pred):
     # Aqui se compara la prediccion (pred) con las clases reales y se calcula el error   
       numColumnas = datos.shape[1]
       numFilas = datos.shape[0]
@@ -140,65 +115,40 @@ class Clasificador(object):
     # - Para validacion simple (hold-out): entrenamos el clasificador con la particion de train
     # y obtenemos el error en la particion test      
        particiones = particionado.creaParticiones(dataset.datos)
-
+       arrayErrores = np.empty(particionado.numeroParticiones)
        if particionado.nombreEstrategia == "ValidacionSimple":
-           arrayErrores = np.empty(particionado.numParticionesSimples)
-
-           print "Indices train y test para [" + str(particionado.numParticionesSimples) + "] particiones:"
-           for idx,p in enumerate(particiones):
-               print ">Particion ("+str(idx)+"):"
-               print p
-               datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
-               print ' =>DatosTrain [', idx, ']:'
-               print datosTrain
-               print ' =>DatosTest [', idx, ']:'
-               print datosTest
-
-               # Entrenamiento
-               predClass = clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
-               print "Predicción (Clase mayoritaria): "
-               print predClass
-               pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios)
-               print "Predicción: "
-               print pred
-
-               error = clasificador.error(datosTest, pred)
-               arrayErrores[idx] = error
-               print "Porcentaje de error (%): "
-               print error
-
+           print "Indices train y test para [" + str(particionado.numeroParticiones) + "] particiones:"
        elif particionado.nombreEstrategia == "ValidacionCruzada":
-           arrayErrores = np.empty(particionado.numeroParticiones)
            print 'Datos de train y test para [', particionado.numeroParticiones,'] grupos:'
-           for idx,p in enumerate(particiones):
-               print 'Particion (',idx,'):'
-               print p
-               datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
-               print ' =>DatosTrain [',idx,']:'
-               print datosTrain
-               print ' =>DatosTest [', idx, ']:'
-               print datosTest
-               
-               #Entrenamiento
-               predClass = clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
-               print "Predicción (Clase mayoritaria): "
-               print predClass
-               pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios)
-               print "Predicción: "
-               print pred
-               
-               error = clasificador.error(datosTest,pred)
-               arrayErrores[idx] = error
-               print "Porcentaje de error (%): "
-               print error
        else:
-           print "nombre de estrategia no valido"
+           print "ERR: nombre de estrategia no valido"
            exit(1)
-       # estrategia=ValidacionSimple(10,80) => particionado, arg[0] - numero de particiones. Calcular la media y desv.
-       
-       
+
+       for idx, p in enumerate(particiones):
+           print ">Particion (" + str(idx) + "):"
+           print p
+           datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
+           print ' =>DatosTrain [', idx, ']:'
+           print datosTrain
+           print ' =>DatosTest [', idx, ']:'
+           print datosTest
+
+           # Entrenamiento
+           predClass = clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
+           print "Predicción (Clase mayoritaria): "
+           print predClass
+           pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios)
+           print "Predicción: "
+           print pred
+
+           error = clasificador.error(datosTest, pred)
+           arrayErrores[idx] = error
+           print "Porcentaje de error (%): "
+           print error
+           #estrategia=ValidacionSimple(10,80) => particionado, arg[0] - numero de particiones. Calcular la media y desv.
+
        #estadística
-       print arrayErrores    
+       print arrayErrores
        print "Media de errores total: "
        print np.mean(arrayErrores)
        print "Mediana de errores total: "
@@ -235,6 +185,7 @@ class ClasificadorAPriori(Clasificador):
 
 class ClasificadorNaiveBayes(Clasificador):
 
+
   tablaValores = []
   arrayPriori = []
 
@@ -246,8 +197,6 @@ class ClasificadorNaiveBayes(Clasificador):
      idxColumnaClase = numColumnas - 1
      clases = diccionario[idxColumnaClase]
      
-         
-         
      for i,clase in enumerate(clases):
          #Calcular los a priori
          #probP = probAPriori(....)
@@ -267,12 +216,6 @@ class ClasificadorNaiveBayes(Clasificador):
      print self.tablaValores
 
                  
-                 
-                 
-    
-#     
-    
-  # TODO: implementar
   def clasifica(self,datostest,atributosDiscretos,diccionario):
       #placeholder
       #probMaxV = self.probMaxVerosimil(diccionario, datostrain, idx, atributo, idxColumnaClase, clase)

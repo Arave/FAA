@@ -30,9 +30,8 @@ class EstrategiaParticionado(object):
   
   # Atributos: deben rellenarse adecuadamente para cada estrategia concreta
   nombreEstrategia="null"
-  numeroParticiones=0 #Valdicacion cruzada
+  numeroParticiones=0 #Valdicacion simple, cruzada
   particiones=[] #lista de objetos particion
-  numParticionesSimples=0 #Validacion simple
   porcentajeParticiones=0 #Validacion simple
   
   
@@ -51,7 +50,7 @@ class ValidacionSimple(EstrategiaParticionado):
   def __init__(self, numParticionesSimples, porcentajeParticiones):
       
       EstrategiaParticionado.nombreEstrategia = "ValidacionSimple"
-      EstrategiaParticionado.numParticionesSimples = numParticionesSimples
+      EstrategiaParticionado.numeroParticiones = numParticionesSimples
       EstrategiaParticionado.porcentajeParticiones = porcentajeParticiones
   
   # Crea particiones segun el metodo tradicional de division de los datos segun el porcentaje deseado.
@@ -63,11 +62,8 @@ class ValidacionSimple(EstrategiaParticionado):
     #Porcentajes
     numTraining = (self.porcentajeParticiones * len(indices)) / 100
 
-    training_idx, test_idx = indices[:numTraining], indices[numTraining:]
-    #training, test = datos[training_idx,:], datos[test_idx,:]
-
     #nueva version con parametro:
-    for i in range(self.numParticionesSimples):
+    for i in range(self.numeroParticiones):
         indices = np.random.permutation(datos.shape[0])
         numTraining = (self.porcentajeParticiones * len(indices)) / 100
         training_idx, test_idx = indices[:numTraining], indices[numTraining:]

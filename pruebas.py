@@ -17,17 +17,17 @@ estrategia=ValidacionCruzada(1)
 clasificador=ClasificadorAPriori()
 print "Prob. a priori para P(Class=positive)"
 prob1 = clasificador.probAPriori(dataset,"class","+")
-print prob1
+print round(prob1,4)
 print "Prob. a priori para P(Class=negative)"
 prob2 = clasificador.probAPriori(dataset, "class", "-")
-print prob2
+print round(prob2,4)
 
 
 #Probabilidades de máxima verosimilitud: P(MLeftSq=b|Class=positive) P(TRightSq=x|Class=negative)
 datos = dataset.datos
 print "Prob. de máxima verosimilitud para P(x1=+|class=+)"
 prob3 = clasificador.probMaxVerosimil(dataset, datos, "x1", "+", "class", "+")
-print prob3
+print round(prob3,4)
 print "Prob. de máxima verosimilitud para P(x2=-|class=-)"
 prob4 = clasificador.probMaxVerosimil(dataset, datos,"x2", "-", "class", "-")
-print prob4
+print round(prob4,4)
