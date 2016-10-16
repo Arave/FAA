@@ -24,6 +24,17 @@ class Clasificador(object):
       numOcurrencias = Counter(datos[:,idxColumna])[idClase]          
       return numOcurrencias / numFilas
 
+  #Calcula la probabilidad a priori P(nombreColumna=clase)
+  @staticmethod
+  def probAPriori2(datos, diccionarios, idxColumna, clase):
+
+      numFilas = datos.shape[0]
+      #Obtener el valor del diccionario para esa clase
+      idClase =  diccionarios[idxColumna][clase]
+      #Contar las ocurrencias para ese valor del diccionar en esa columna
+      numOcurrencias = Counter(datos[:,idxColumna])[idClase]          
+      return numOcurrencias / numFilas
+
   @staticmethod
   def probMaxVerosimil(diccionarios, datos, idxAtributo, atributo, idxClass, dominio):
       # =>print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
@@ -72,8 +83,24 @@ class Clasificador(object):
       indices, = np.where(datos[:,idxColumnaClase] == idClase)
       media = np.mean(datos[indices,idxColumna])
       std = np.std(datos[indices,idxColumna]) + 1e-6  #+ 0.000001 
-      return media, std      
+      return media, std
+            
+  #Cuenta el número de repeticiones del atributo dada la clase
+  @staticmethod
+  def contarAtributos(datos, diccionarios, idxColumna, idxColumnaClase,clase):  
       
+      #Obtener el valor del diccionario para esa clase
+      idClase =  diccionarios[idxColumnaClase][clase]
+      clases = diccionarios[idxColumnaClase]     
+      #Lista de índices donde la clase es la que nos pasan
+      indices, = np.where(datos[:,idxColumnaClase] == idClase)
+      #Para el atributo dado recorrer todos sus valore y contarlos
+      arrayNum = []
+      for cl in clases:
+          idCl =  diccionarios[idxColumna][cl]
+          numOcurrencias = Counter(datos[indices,idxColumna])[idCl]
+          arrayNum.append(numOcurrencias)      
+      return arrayNum            
   
   # Metodos abstractos que se implementan en casa clasificador concreto
   @abstractmethod
@@ -134,9 +161,7 @@ class Clasificador(object):
            print datosTest
 
            # Entrenamiento
-           predClass = clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
-           print "Predicción (Clase mayoritaria): "
-           print predClass
+           clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
            pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios)
            print "Predicción: "
            print pred
@@ -188,6 +213,8 @@ class ClasificadorNaiveBayes(Clasificador):
 
   tablaValores = []
   arrayPriori = []
+  arrayMedia = []
+  arrayStd = []
 
   # TODO: implementar
   def entrenamiento(self,datostrain,atributosDiscretos,diccionario):
@@ -197,23 +224,45 @@ class ClasificadorNaiveBayes(Clasificador):
      idxColumnaClase = numColumnas - 1
      clases = diccionario[idxColumnaClase]
      
-     for i,clase in enumerate(clases):
+     tabla = len(atributosDiscretos)*[None]
+     arrayP = []
+     arrayM = []
+     arrayS = []
+     
+     #Recorrer las clases
+     for clase in clases:
          #Calcular los a priori
-         #probP = probAPriori(....)
-         #self.arrayPriori.append(probP) 
-         #Recorrer los atributos
-         for idx,atr in enumerate(atributosDiscretos):
-             if(atr == False): #Continuo         
-                 #Calcular la media y std para los atributos continuos => gaussiana
-                 media, std = self.mediaDesviacionAtr2(datostrain, diccionario, idx, idxColumnaClase, clase)
-                 #gaussiana = gaussiana(media,std)
-                 #self.tablaValores[i].append(gaussiana)
-                 self.tablaValores[i].append(media)
-             else: #nominal/discreto
-                 atributo = diccionario[idx][i]             
-                 
-                 self.tablaValores[i].append(probMaxV)
-     print self.tablaValores
+         probP = self.probAPriori2(datostrain, diccionario, idxColumnaClase, clase)
+         arrayP.append(probP) 
+         #Calcular la media y std para las clases
+         media, std = self.mediaDesviacionAtr2(datostrain, diccionario, idxColumnaClase, idxColumnaClase, clase)
+         arrayM.append(media)
+         arrayS.append(std)
+     
+     #Recorrer los atributos
+     for idx,atr in enumerate(atributosDiscretos):
+         if(atr == True): #nominal/discreto        
+             #contar núm de ocurrencias para cada valor del atributo en cada clase         
+             arrayC = []             
+             for clase in clases:
+                 cont = self.contarAtributos(datostrain, diccionario, idx, idxColumnaClase,clase)
+                 arrayC.append(cont)
+             tabla[idx] = arrayC
+     
+     self.tablaValores = tabla
+     self.arrayPriori = arrayP
+     self.arrayMedia = arrayM
+     self.arrayStd = arrayS
+     
+     print "Tabla de valores"
+     for t in self.tablaValores:
+         print t
+     print "Array a priori"    
+     print self.arrayPriori
+     print "Array media"
+     print self.arrayMedia
+     print "Array STD"
+     print self.arrayStd
 
                  
   def clasifica(self,datostest,atributosDiscretos,diccionario):
