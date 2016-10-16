@@ -48,6 +48,7 @@ class Clasificador(object):
 
       return countfilter/len(idxMatchClass)
       pass
+  
   #Calcula la Media y desviación típica de los atributos continuos condiconados
   #a la clase.
   @staticmethod
@@ -65,6 +66,19 @@ class Clasificador(object):
       media = np.mean(datos[indices,idxColumna])
       std = np.std(datos[indices,idxColumna]) + 1e-6  #+ 0.000001 
       return media, std
+      
+  #Calcula la Media y desviación típica de los atributos continuos condiconados
+  #a la clase.
+  @staticmethod
+  def mediaDesviacionAtr2(datos, diccionarios, idxColumna, idxColumnaClase,clase):  
+      #Obtener el valor del diccionario para esa clase
+      idClase =  diccionarios[idxColumnaClase][clase]
+      
+      #Lista de índices donde la clase es la que nos pasan
+      indices, = np.where(datos[:,idxColumnaClase] == idClase)
+      media = np.mean(datos[indices,idxColumna])
+      std = np.std(datos[indices,idxColumna]) + 1e-6  #+ 0.000001 
+      return media, std      
       
   
   # Metodos abstractos que se implementan en casa clasificador concreto
@@ -108,8 +122,7 @@ class Clasificador(object):
     # - Para validacion simple (hold-out): entrenamos el clasificador con la particion de train
     # y obtenemos el error en la particion test      
        particiones = particionado.creaParticiones(dataset.datos)
-       
-       
+
        if particionado.nombreEstrategia == "ValidacionSimple":
            arrayErrores = np.empty(particionado.numParticionesSimples)
 
@@ -124,10 +137,10 @@ class Clasificador(object):
                print datosTest
 
                # Entrenamiento
-               predClass = clasificador.entrenamiento(datosTrain)
+               predClass = clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
                print "Predicción (Clase mayoritaria): "
                print predClass
-               pred = clasificador.clasifica(datosTest)
+               pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios)
                print "Predicción: "
                print pred
 
@@ -136,15 +149,6 @@ class Clasificador(object):
                print "Porcentaje de error (%): "
                print error
 
-               # estadística
-           print arrayErrores
-           print "Media de errores total: "
-           print np.mean(arrayErrores)
-           print "Mediana de errores total: "
-           print np.median(arrayErrores)
-           print "Desviación típica: "
-           print np.std(arrayErrores)
-           
        elif particionado.nombreEstrategia == "ValidacionCruzada":
            arrayErrores = np.empty(particionado.numeroParticiones)
            print 'Datos de train y test para [', particionado.numeroParticiones,'] grupos:'
@@ -158,10 +162,10 @@ class Clasificador(object):
                print datosTest
                
                #Entrenamiento
-               predClass = clasificador.entrenamiento(datosTrain)
+               predClass = clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
                print "Predicción (Clase mayoritaria): "
                print predClass
-               pred = clasificador.clasifica(datosTest)
+               pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios)
                print "Predicción: "
                print pred
                
@@ -169,20 +173,20 @@ class Clasificador(object):
                arrayErrores[idx] = error
                print "Porcentaje de error (%): "
                print error
-               
-           #estadística
-           print arrayErrores    
-           print "Media de errores total: "
-           print np.mean(arrayErrores)
-           print "Mediana de errores total: "
-           print np.median(arrayErrores)           
-           print "Desviación típica: "
-           print np.std(arrayErrores)     
        else:
            print "nombre de estrategia no valido"
            exit(1)
        # estrategia=ValidacionSimple(10,80) => particionado, arg[0] - numero de particiones. Calcular la media y desv.
-      
+       
+       
+       #estadística
+       print arrayErrores    
+       print "Media de errores total: "
+       print np.mean(arrayErrores)
+       print "Mediana de errores total: "
+       print np.median(arrayErrores)           
+       print "Desviación típica: "
+       print np.std(arrayErrores)  
 
 #############################################################################
 
@@ -213,17 +217,35 @@ class ClasificadorAPriori(Clasificador):
 
 class ClasificadorNaiveBayes(Clasificador):
 
- 
 
   # TODO: implementar
   def entrenamiento(self,datostrain,atributosDiscretos,diccionario):
-    pass
+      
+     print "entrenamiento Naive"
+     numColumnas = datostrain.shape[1]
+     idxColumnaClase = numColumnas - 1
+     clases = diccionario[idxColumnaClase]
+
+     mediaA = []
+     stdA = []
+     
+     #Calcular la media y std para los atributos continuos => gaussiana
+     for idx,atr in enumerate(atributosDiscretos):
+         if(atr == False):
+             for clase in clases:
+                 media, std = self.mediaDesviacionAtr2(datostrain, diccionario, idx, idxColumnaClase, clase)
+                 mediaA.append(media)
+                 stdA.append(std)
+     print 'Media: ',mediaA, 'STD: ',stdA,''    
+      
+
     
      
     
   # TODO: implementar
   def clasifica(self,datostest,atributosDiscretos,diccionario):
-    pass
+      #placeholder
+      return datostest[:,-1]
 
     
     
