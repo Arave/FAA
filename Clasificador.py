@@ -196,6 +196,8 @@ class ClasificadorAPriori(Clasificador):
 
 class ClasificadorNaiveBayes(Clasificador):
 
+  tablaValores = []
+  arrayPriori = []
 
   # TODO: implementar
   def entrenamiento(self,datostrain,atributosDiscretos,diccionario):
@@ -204,20 +206,23 @@ class ClasificadorNaiveBayes(Clasificador):
      numColumnas = datostrain.shape[1]
      idxColumnaClase = numColumnas - 1
      clases = diccionario[idxColumnaClase]
-
-     mediaA = []
-     stdA = []
      
      #Calcular la media y std para los atributos continuos => gaussiana
      for idx,atr in enumerate(atributosDiscretos):
-         if(atr == False):
-             for clase in clases:
+         if(atr == False): #Continuo
+             for i,clase in enumerate(clases):
                  media, std = self.mediaDesviacionAtr2(datostrain, diccionario, idx, idxColumnaClase, clase)
-                 mediaA.append(media)
-                 stdA.append(std)
-     print 'Media: ',mediaA, 'STD: ',stdA,''    
-      
-
+                 #Llamar a la gaussiana
+                 gaussiana = gaussiana(media,std)
+                 self.tablaValores[i].append(gaussiana)
+         else: #nominal/discreto
+             for i,clase in enumerate(clases):
+                 probMaxV = probMaxverosimil(.....)
+                 self.tablaValores[i].append(probMaxV)
+     #Calcular los priori            
+     for i,clase in enumerate(clases):
+         probP = probAPriori(....)
+         self.arrayPriori.append(probP)
     
      
     
