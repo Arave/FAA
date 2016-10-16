@@ -115,65 +115,40 @@ class Clasificador(object):
     # - Para validacion simple (hold-out): entrenamos el clasificador con la particion de train
     # y obtenemos el error en la particion test      
        particiones = particionado.creaParticiones(dataset.datos)
-
+       arrayErrores = np.empty(particionado.numeroParticiones)
        if particionado.nombreEstrategia == "ValidacionSimple":
-           arrayErrores = np.empty(particionado.numParticionesSimples)
-
-           print "Indices train y test para [" + str(particionado.numParticionesSimples) + "] particiones:"
-           for idx,p in enumerate(particiones):
-               print ">Particion ("+str(idx)+"):"
-               print p
-               datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
-               print ' =>DatosTrain [', idx, ']:'
-               print datosTrain
-               print ' =>DatosTest [', idx, ']:'
-               print datosTest
-
-               # Entrenamiento
-               predClass = clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
-               print "Predicción (Clase mayoritaria): "
-               print predClass
-               pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios)
-               print "Predicción: "
-               print pred
-
-               error = clasificador.error(datosTest, pred)
-               arrayErrores[idx] = error
-               print "Porcentaje de error (%): "
-               print error
-
+           print "Indices train y test para [" + str(particionado.numeroParticiones) + "] particiones:"
        elif particionado.nombreEstrategia == "ValidacionCruzada":
-           arrayErrores = np.empty(particionado.numeroParticiones)
            print 'Datos de train y test para [', particionado.numeroParticiones,'] grupos:'
-           for idx,p in enumerate(particiones):
-               print 'Particion (',idx,'):'
-               print p
-               datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
-               print ' =>DatosTrain [',idx,']:'
-               print datosTrain
-               print ' =>DatosTest [', idx, ']:'
-               print datosTest
-               
-               #Entrenamiento
-               predClass = clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
-               print "Predicción (Clase mayoritaria): "
-               print predClass
-               pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios)
-               print "Predicción: "
-               print pred
-               
-               error = clasificador.error(datosTest,pred)
-               arrayErrores[idx] = error
-               print "Porcentaje de error (%): "
-               print error
        else:
-           print "nombre de estrategia no valido"
+           print "ERR: nombre de estrategia no valido"
            exit(1)
-       # estrategia=ValidacionSimple(10,80) => particionado, arg[0] - numero de particiones. Calcular la media y desv.
-       
-       
+
+       for idx, p in enumerate(particiones):
+           print ">Particion (" + str(idx) + "):"
+           print p
+           datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
+           print ' =>DatosTrain [', idx, ']:'
+           print datosTrain
+           print ' =>DatosTest [', idx, ']:'
+           print datosTest
+
+           # Entrenamiento
+           predClass = clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
+           print "Predicción (Clase mayoritaria): "
+           print predClass
+           pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios)
+           print "Predicción: "
+           print pred
+
+           error = clasificador.error(datosTest, pred)
+           arrayErrores[idx] = error
+           print "Porcentaje de error (%): "
+           print error
+           #estrategia=ValidacionSimple(10,80) => particionado, arg[0] - numero de particiones. Calcular la media y desv.
+
        #estadística
-       print arrayErrores    
+       print arrayErrores
        print "Media de errores total: "
        print np.mean(arrayErrores)
        print "Mediana de errores total: "
