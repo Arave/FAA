@@ -51,19 +51,17 @@ class Clasificador(object):
   """
 
   @staticmethod
-  def probMaxVerosimil(dataset, datos, nombreColumna, atributo, nombreDominio, dominio):
+  def probMaxVerosimil(diccionarios, datos, idxAtributo, atributo, idxClass, dominio):
       # =>print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
       # =>prob3 = clasificador.probMaxVerosimil(dataset, "MLeftSq", "b", "Class", "positive")
       # fetch del indice de 'Class'
-      idxClass = dataset.nombreAtributos.index(nombreDominio)
-      idClase = dataset.diccionarios[idxClass][dominio]
+      idClase = diccionarios[idxClass][dominio]
       # columna 'Class' en forma de array
       classColumn = datos[:, idxClass]
       # lista con los indices de las rows que hacen match con esa idClase
       idxMatchClass = [i for i, colValue in enumerate(classColumn) if colValue == idClase]
-
-      idxAtributo = dataset.nombreAtributos.index(nombreColumna)
-      idAtributo = dataset.diccionarios[idxAtributo][atributo]
+      
+      idAtributo = diccionarios[idxAtributo][atributo]
       atriColumn = datos[:, idxAtributo]
       matchesList = itemgetter(*idxMatchClass)(atriColumn)
       countfilter = Counter(matchesList)[idAtributo]
@@ -248,28 +246,37 @@ class ClasificadorNaiveBayes(Clasificador):
      idxColumnaClase = numColumnas - 1
      clases = diccionario[idxColumnaClase]
      
-     #Calcular la media y std para los atributos continuos => gaussiana
-     for idx,atr in enumerate(atributosDiscretos):
-         if(atr == False): #Continuo
-             for i,clase in enumerate(clases):
-                 media, std = self.mediaDesviacionAtr2(datostrain, diccionario, idx, idxColumnaClase, clase)
-                 #Llamar a la gaussiana
-                 gaussiana = gaussiana(media,std)
-                 self.tablaValores[i].append(gaussiana)
-         else: #nominal/discreto
-             for i,clase in enumerate(clases):
-                 probMaxV = probMaxverosimil(.....)
-                 self.tablaValores[i].append(probMaxV)
-     #Calcular los priori            
+         
+         
      for i,clase in enumerate(clases):
-         probP = probAPriori(....)
-         self.arrayPriori.append(probP)
+         #Calcular los a priori
+         #probP = probAPriori(....)
+         #self.arrayPriori.append(probP) 
+         #Recorrer los atributos
+         for idx,atr in enumerate(atributosDiscretos):
+             if(atr == False): #Continuo         
+                 #Calcular la media y std para los atributos continuos => gaussiana
+                 media, std = self.mediaDesviacionAtr2(datostrain, diccionario, idx, idxColumnaClase, clase)
+                 #gaussiana = gaussiana(media,std)
+                 #self.tablaValores[i].append(gaussiana)
+                 self.tablaValores[i].append(media)
+             else: #nominal/discreto
+                 atributo = diccionario[idx][i]             
+                 
+                 self.tablaValores[i].append(probMaxV)
+     print self.tablaValores
+
+                 
+                 
+                 
     
-     
+#     
     
   # TODO: implementar
   def clasifica(self,datostest,atributosDiscretos,diccionario):
       #placeholder
+      #probMaxV = self.probMaxVerosimil(diccionario, datostrain, idx, atributo, idxColumnaClase, clase)
+
       return datostest[:,-1]
 
     
