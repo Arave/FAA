@@ -25,7 +25,7 @@ print "Prob. a priori para P(Class=-)"
 prob = clasificador.probAPriori(dataset, "Class","-")
 print prob
 
-
+datos = dataset.datos
 #Probabilidades de máxima verosimilitud: P(A7=bb|Class=+) P(A4=u|Class=-)
 print "Prob. de máxima verosimilitud para P(A7=bb|Class=+)"
 #prob = clasificador.probMaxVerosimil(dataset, "A7", "bb, "Class", "+")

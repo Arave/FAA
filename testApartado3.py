@@ -25,9 +25,10 @@ print prob2
 
 
 #Probabilidades de máxima verosimilitud: P(MLeftSq=b|Class=positive) P(TRightSq=x|Class=negative)
+datos = dataset.datos
 print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
-prob3 = clasificador.probMaxVerosimil(dataset, "MLeftSq", "b", "Class", "positive")
+prob3 = clasificador.probMaxVerosimil(dataset, datos,"MLeftSq", "b", "Class", "positive")
 print prob3
 print "Prob. de máxima verosimilitud para P(TRightSq=x|Class=negative)"
-prob4 = clasificador.probMaxVerosimil(dataset, "TRightSq", "x", "Class", "negative")
+prob4 = clasificador.probMaxVerosimil(dataset, datos,"TRightSq", "x", "Class", "negative")
 print prob4
