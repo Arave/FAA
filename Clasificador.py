@@ -26,7 +26,7 @@ class Clasificador(object):
       numOcurrencias = Counter(datos[:,idxColumna])[idClase]          
       return numOcurrencias / numFilas
 
-  @staticmethod
+  """
   def probMaxVerosimil(dataset, nombreColumna, atributo, nombreDominio, dominio):
       #=>print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
       #=>prob3 = clasificador.probMaxVerosimil(dataset, "MLeftSq", "b", "Class", "positive")
@@ -48,6 +48,26 @@ class Clasificador(object):
 
       return countfilter/len(idxMatchClass)
       pass
+  """
+
+  @staticmethod
+  def probMaxVerosimil(dataset, datos, nombreColumna, atributo, nombreDominio, dominio):
+      # =>print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
+      # =>prob3 = clasificador.probMaxVerosimil(dataset, "MLeftSq", "b", "Class", "positive")
+      # fetch del indice de 'Class'
+      idxClass = dataset.nombreAtributos.index(nombreDominio)
+      idClase = dataset.diccionarios[idxClass][dominio]
+      # columna 'Class' en forma de array
+      classColumn = datos[:, idxClass]
+      # lista con los indices de las rows que hacen match con esa idClase
+      idxMatchClass = [i for i, colValue in enumerate(classColumn) if colValue == idClase]
+
+      idxAtributo = dataset.nombreAtributos.index(nombreColumna)
+      idAtributo = dataset.diccionarios[idxAtributo][atributo]
+      atriColumn = datos[:, idxAtributo]
+      matchesList = itemgetter(*idxMatchClass)(atriColumn)
+      countfilter = Counter(matchesList)[idAtributo]
+      return countfilter / len(idxMatchClass)
   
   #Calcula la Media y desviación típica de los atributos continuos condiconados
   #a la clase.
