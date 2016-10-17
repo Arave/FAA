@@ -239,10 +239,7 @@ class ClasificadorNaiveBayes(Clasificador):
          #Calcular los a priori
          probP = self.probAPriori2(datostrain, diccionario, idxColumnaClase, clase)
          arrayP.append(probP) 
-         #Calcular la media y std para las clases
-         media, std = self.mediaDesviacionAtr2(datostrain, diccionario, idxColumnaClase, idxColumnaClase, clase)
-         arrayM.append(media)
-         arrayS.append(std)
+
      
      #Recorrer los atributos
      for idx,atr in enumerate(atributosDiscretos):
@@ -250,9 +247,16 @@ class ClasificadorNaiveBayes(Clasificador):
              #contar núm de ocurrencias para cada valor del atributo en cada clase         
              arrayC = []             
              for clase in clases:
+                 #contar atributos => rellenar tabla
                  cont = self.contarAtributos(datostrain, diccionario, idx, idxColumnaClase,clase)
-                 arrayC.append(cont)
+                 arrayC.append(cont)               
              tabla[idx] = arrayC
+         else: #continuo
+             for clase in clases:
+                 #Calcular la media y std para las clases
+                 media, std = self.mediaDesviacionAtr2(datostrain, diccionario, idx, idxColumnaClase, clase)
+                 arrayM.append(media)
+                 arrayS.append(std)
      
      self.tablaValores = tabla
      self.arrayPriori = arrayP
