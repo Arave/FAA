@@ -343,10 +343,14 @@ class ClasificadorNaiveBayes(Clasificador):
                   #for atri in tt => recorrer por clase
                   #hacer el logaritmo de la probabilidad atributo-clase,
                   #que ya va calculada en la tabla normalizada
+                  #...
                   sumatorio += math.log()
               else:  # caso continuos => gaussiana
                   #calcular la probabilidad con normpdf() y añadirlo al sumatorio
+                  #...
                   pass #placeholder
+          #sumar a 'sumatorio' el log la prob. a priori de train y hacer append
+          # ...
           posteriori.append(sumatorio)
       #devolver argmax
       #return max(posteriori)

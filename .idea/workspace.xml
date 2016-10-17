@@ -7,7 +7,6 @@
     <list default="true" id="375acffe-50e9-427e-8f1b-71a9c41cc26f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Clasificador.py" afterPath="$PROJECT_DIR$/Clasificador.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testNaiveBayes.py" afterPath="$PROJECT_DIR$/testNaiveBayes.py" />
     </list>
     <ignored path="P1_v3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -65,7 +64,7 @@
         <entry file="file://$PROJECT_DIR$/Clasificador.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="246">
-              <caret line="342" column="30" selection-start-line="342" selection-start-column="30" selection-end-line="342" selection-end-column="30" />
+              <caret line="345" column="22" selection-start-line="345" selection-start-column="22" selection-end-line="345" selection-end-column="22" />
               <folding>
                 <element signature="e#24#90#0" expanded="true" />
               </folding>
@@ -991,7 +990,7 @@
     <entry file="file://$PROJECT_DIR$/Clasificador.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="246">
-          <caret line="342" column="30" selection-start-line="342" selection-start-column="30" selection-end-line="342" selection-end-column="30" />
+          <caret line="345" column="22" selection-start-line="345" selection-start-column="22" selection-end-line="345" selection-end-column="22" />
           <folding>
             <element signature="e#24#90#0" expanded="true" />
           </folding>
