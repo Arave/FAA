@@ -315,50 +315,46 @@ class ClasificadorNaiveBayes(Clasificador):
 
 #http://naivebayes.blogspot.com.es/2013/05/clasificador-naive-bayes-como-funciona.html
   def clasifica(self,datostest,atributosDiscretos,diccionario):
-      #probMaxV = self.probMaxVerosimil(diccionario, datostrain, idx, atributo, idxColumnaClase, clase)
       posteriori = []
-      sumatorio = 0
       numColumnas = datostest.shape[1]
       idxColumnaClase = numColumnas - 1
       #el orden de 'clases' coincide con el orden de 'self.arrayPriori'
       clases = diccionario[idxColumnaClase]
+      print "_______________________________________________________________________"
       print 'clases en clasifica',clases
-      tabla = len(atributosDiscretos) * [None]
+      print 'datostest:\n',datostest
+      print 'tablaValores:\n',self.tablaValores
 
-      # Construir tabla de probabilidades discretas de test
-      for idx, atr in enumerate(atributosDiscretos):
-          if atr == True:  # nominal/discreto
-              # contar núm de ocurrencias para cada valor del atributo en cada clase
-              arrayC = []
-              for clase in clases:
-                  cont = self.contarAtributos(datostest, diccionario, idx, idxColumnaClase, clase)
-                  arrayC.append(cont)
-              tabla[idx] = arrayC
+      self.tablaValores = self.corregirTabla(self.tablaValores)
+      self.tablaValores = self.normalizarTabla(self.tablaValores)
 
-      tabla = self.corregirTabla(tabla)
-      tabla = self.normalizarTabla(tabla)
+      for tupla in datostest:
+          pred = self.evalua(tupla,clases,atributosDiscretos)
+          posteriori.append(pred)
 
-      #aplicar formula argmax NB para cada clase:
-      #calcular formula NB para cada clase
-      tt = zip(*tabla)
-      for clase in clases:
-          for idx, fila_atri in enumerate(tabla):
-              if atributosDiscretos[idx]:
-                  #for atri in tt => recorrer por clase
-                  #hacer el logaritmo de la probabilidad atributo-clase,
-                  #que ya va calculada en la tabla normalizada
-                  #...
-                  sumatorio += math.log()
-              else:  # caso continuos => gaussiana
-                  #calcular la probabilidad con normpdf() y añadirlo al sumatorio
-                  #...
-                  pass #placeholder
-          #sumar a 'sumatorio' el log la prob. a priori de train y hacer append
-          # ...
-          posteriori.append(sumatorio)
-      #devolver argmax
-      #return max(posteriori)
-      return datostest[:, -1]
+      return posteriori
+
+  def evalua(self, tupla, clases, atributosDiscretos):
+      #bucle 1: recorrer por clase
+      sumatorio = 0
+      pred = None
+      for idx_clase,clase in enumerate(clases):
+          for idx_atri, atri in enumerate(self.tablaValores):
+              if atri is not None:
+                  #sacar valor del atributo de test y pasarlo a indice (int)
+                  value = int(round(tupla[idx_atri]))
+                  #hacer el match con la tabla de valores usandolo como indice
+                  #prob a partir de la tabla
+                  prob = self.tablaValores[idx_atri][idx_clase][value]
+                  if prob is 0:
+                      sumatorio += 0 #simbolico: P(xj|ci)=0
+                  else:
+                      sumatorio += math.log(prob)
+              else:
+                  #prob con gaussiana
+                  pass
+      #sumar la probabilidad de clase por ultimo
+      return pred
 
     
 
