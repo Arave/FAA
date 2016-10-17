@@ -18,3 +18,4 @@ print "Clasificador: clasificador Naive Bayes"
 clasificador = ClasificadorNaiveBayes()
 print "Errores: "
 errores=clasificador.validacion(estrategia,dataset,clasificador)
+

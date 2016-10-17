@@ -4,6 +4,9 @@ from operator import itemgetter
 from abc import ABCMeta,abstractmethod
 from collections import Counter
 import numpy as np
+import copy
+import math
+#import scipy.stats
 
 
 class Clasificador(object):
@@ -130,7 +133,7 @@ class Clasificador(object):
       numAciertos = np.sum(arrayEqual) #Contar los True
       numFallos =  numFilas - numAciertos
       return (numFallos / numFilas) * 100
-    
+
     
   # Realiza una clasificacion utilizando una estrategia de particionado determinada
   @staticmethod
@@ -151,8 +154,11 @@ class Clasificador(object):
            print "ERR: nombre de estrategia no valido"
            exit(1)
 
+       #for each particion: clasificar y sacar los errores de cada evaluación
        for idx, p in enumerate(particiones):
-           print ">Particion (" + str(idx) + "):"
+           print "======================================================"
+           print "PARTICION (" + str(idx) + "):"
+           print "======================================================"
            print p
            datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
            print ' =>DatosTrain [', idx, ']:'
@@ -216,14 +222,13 @@ class ClasificadorNaiveBayes(Clasificador):
   arrayMedia = []
   arrayStd = []
 
-  # TODO: implementar
   def entrenamiento(self,datostrain,atributosDiscretos,diccionario):
       
      print "entrenamiento Naive"
      numColumnas = datostrain.shape[1]
      idxColumnaClase = numColumnas - 1
      clases = diccionario[idxColumnaClase]
-     
+     print 'clases',clases
      tabla = len(atributosDiscretos)*[None]
      arrayP = []
      arrayM = []
@@ -241,7 +246,7 @@ class ClasificadorNaiveBayes(Clasificador):
      
      #Recorrer los atributos
      for idx,atr in enumerate(atributosDiscretos):
-         if(atr == True): #nominal/discreto        
+         if atr == True: #nominal/discreto
              #contar núm de ocurrencias para cada valor del atributo en cada clase         
              arrayC = []             
              for clase in clases:
@@ -257,6 +262,13 @@ class ClasificadorNaiveBayes(Clasificador):
      print "Tabla de valores"
      for t in self.tablaValores:
          print t
+     #print "Tabla de valores corregida"
+     #corregida = self.corregirTabla(self.tablaValores)
+     #for t in corregida:
+     #    print t
+     #print "Tabla corregida^normalizada"
+     #for t in self.normalizarTabla(corregida):
+     #    print t
      print "Array a priori"    
      print self.arrayPriori
      print "Array media"
@@ -264,14 +276,82 @@ class ClasificadorNaiveBayes(Clasificador):
      print "Array STD"
      print self.arrayStd
 
-                 
+  #devuelve una copia de la tabla con la correción de Laplace aplicada
+  @staticmethod
+  def corregirTabla(tablaValores):
+      t_copy = copy.deepcopy(tablaValores)
+      for i_f,fila in enumerate(t_copy):
+          if fila is not None:
+              for i_c,clase in enumerate(fila):
+                  for i_v,value in enumerate(clase):
+                      t_copy[i_f][i_c][i_v] += 1
+      return t_copy
+
+  #devuelve una copia de la tabla normalizada
+  @staticmethod
+  def normalizarTabla(tablaValores):
+      t_copy = copy.deepcopy(tablaValores)
+      for i_f,fila in enumerate(t_copy):
+          if fila is not None:
+              for i_c,clase in enumerate(fila):
+                  for i_v,value in enumerate(clase):
+                      t_copy[i_f][i_c][i_v] = value/sum(clase)
+      return t_copy
+
+  #PDF: densidad de probabilidad de una distribucion normal/gaussiana
+  #(version 'math' en caso de que haya problema de compatibilidad)
+  #uso: f(x|media,varianza)
+  @staticmethod
+  def normpdf(x, mean, sd):
+      var = float(sd) ** 2
+      pi = 3.1415926
+      denom = (2 * pi * var) ** .5
+      num = math.exp(-(float(x) - float(mean)) ** 2 / (2 * var))
+      return num / denom
+
+#http://naivebayes.blogspot.com.es/2013/05/clasificador-naive-bayes-como-funciona.html
   def clasifica(self,datostest,atributosDiscretos,diccionario):
-      #placeholder
       #probMaxV = self.probMaxVerosimil(diccionario, datostrain, idx, atributo, idxColumnaClase, clase)
+      posteriori = []
+      sumatorio = 0
+      numColumnas = datostest.shape[1]
+      idxColumnaClase = numColumnas - 1
+      #el orden de 'clases' coincide con el orden de 'self.arrayPriori'
+      clases = diccionario[idxColumnaClase]
+      print 'clases en clasifica',clases
+      tabla = len(atributosDiscretos) * [None]
 
-      return datostest[:,-1]
+      # Construir tabla de probabilidades discretas de test
+      for idx, atr in enumerate(atributosDiscretos):
+          if atr == True:  # nominal/discreto
+              # contar núm de ocurrencias para cada valor del atributo en cada clase
+              arrayC = []
+              for clase in clases:
+                  cont = self.contarAtributos(datostest, diccionario, idx, idxColumnaClase, clase)
+                  arrayC.append(cont)
+              tabla[idx] = arrayC
 
-    
+      tabla = self.corregirTabla(tabla)
+      tabla = self.normalizarTabla(tabla)
+
+      #aplicar formula argmax NB para cada clase:
+      #calcular formula NB para cada clase
+      tt = zip(*tabla)
+      for clase in clases:
+          for idx, fila_atri in enumerate(tabla):
+              if atributosDiscretos[idx]:
+                  #for atri in tt => recorrer por clase
+                  #hacer el logaritmo de la probabilidad atributo-clase,
+                  #que ya va calculada en la tabla normalizada
+                  sumatorio += math.log()
+              else:  # caso continuos => gaussiana
+                  #calcular la probabilidad con normpdf() y añadirlo al sumatorio
+                  pass #placeholder
+          posteriori.append(sumatorio)
+      #devolver argmax
+      #return max(posteriori)
+      return datostest[:, -1]
+
     
 
 
