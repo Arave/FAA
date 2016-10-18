@@ -351,7 +351,7 @@ class ClasificadorNaiveBayes(Clasificador):
   #evalua una tupla de datosTest y devuelve la clase con mas probabilidad
   def evalua(self, tupla, clases, atributosDiscretos):
       print "===========EVALUA==================="
-      print 'tupla:',tupla
+      print '\ttupla:',tupla
       #bucle 1: recorrer por clase
       arg = []
       #print 'tablaValores train (norm,corregida):\n', self.tablaValores
@@ -368,7 +368,8 @@ class ClasificadorNaiveBayes(Clasificador):
                   #hacer el match con la tabla de valores usandolo como indice
                   #prob a partir de la tabla
                   prob = self.tablaValores[idx_atri][idx_clase][value]
-                  print "P(x"+str(idx_atri)+"="+str(value)+"|clase"+str(idx_clase)+")="+str(prob)
+                  print "\tP(x"+str(idx_atri)+"="+str(value)+"|clase"+str(idx_clase)+")="+str(prob)
+                  print "\tlog(P(x" + str(idx_atri) + "=" + str(value) + "|clase" + str(idx_clase) + ")=" + str(math.log(prob))
                   #print '\tprobDiscreta:',prob
               #caso continuo
               else:
@@ -382,18 +383,21 @@ class ClasificadorNaiveBayes(Clasificador):
                   break
               else:
                   sumatorio += math.log(prob)
+                  print '\tsumatorio=',sumatorio
           if flag_0:
               arg.append(0)
           else:
               probClase = self.arrayPriori[idx_clase]
-              print "P(clase"+str(idx_clase)+")="+str(probClase)
+              print "\tP(clase"+str(idx_clase)+")="+str(probClase)
+              print "\tlog(P(clase"+str(idx_clase)+")="+str(math.log(probClase))
               #print '\tprobClase [',idx_clase,']:', probClase
               if probClase == 0.0:
                   arg.append(0)
               else:
-                  print 'sumatorioFinal:', sumatorio
                   sumatorio += math.log(probClase)
+                  print '\tlog(sumatorio_final + log(P(clase):', sumatorio
               arg.append(math.exp(sumatorio))
+              print '\tProb NP para esa clase, quitando logs=',math.exp(sumatorio)
       #return max(arg)
       index, element = max(enumerate(arg), key=itemgetter(1))
       #print 'index:',index,'element:',element
