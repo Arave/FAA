@@ -9,8 +9,8 @@ from Datos import Datos
 from EstrategiaParticionado import ValidacionSimple
 from Clasificador import ClasificadorNaiveBayes
 
-print "Prueba 2- Fichero de datos d2.data"
-dataset=Datos('./ConjuntosDatosPruebas/d2.data',True)
+print "Prueba 2- Fichero de datos d3.data"
+dataset=Datos('./ConjuntosDatosPruebas/d3.data',True)
 print "Estrategia: validacion simple, numParticiones: 1 porcentaje 80"
 estrategia=ValidacionSimple(1,80)
 #print estrategia.nombreEstrategia

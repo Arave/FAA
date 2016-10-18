@@ -169,9 +169,9 @@ class Clasificador(object):
            #print datosTest
 
            # Entrenamiento
-           print '|||||||||||||||||||||||||||PARTICION ',idx,'|||||||||||||||||||||||||||'
+           """print '|||||||||||||||||||||||||||PARTICION ',idx,'|||||||||||||||||||||||||||'
            print 'datosTrain:\n',datosTrain
-           print 'datosTest:\n', datosTest
+           print 'datosTest:\n', datosTest"""
            clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
            pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios,correcionL)
            #print "Predicción: "
@@ -219,9 +219,9 @@ class ClasificadorAPriori(Clasificador):
 class ClasificadorNaiveBayes(Clasificador):
 
   tablaValores = []
+  tablaMedia = []
+  tablaStd = []  
   arrayPriori = []
-  arrayMedia = []
-  arrayStd = []
 
   def entrenamiento(self,datostrain,atributosDiscretos,diccionario):
       
@@ -230,14 +230,16 @@ class ClasificadorNaiveBayes(Clasificador):
      idxColumnaClase = numColumnas - 1
      clases = diccionario[idxColumnaClase]
      tabla = (len(atributosDiscretos) - 1)*[None] #No guardamos una tabla de clase
+     tablaM = (len(atributosDiscretos) - 1)*[None]
+     tablaS = (len(atributosDiscretos) - 1)*[None]
      arrayP = []
      arrayM = []
      arrayS = []
      
      del self.tablaValores[:] #Limpiar la lista de ejecucciones anteriores
      del self.arrayPriori[:] #Limpiar la lista de ejecucciones anteriores
-     del self.arrayMedia[:] #Limpiar la lista de ejecucciones anteriores
-     del self.arrayStd[:] #Limpiar la lista de ejecucciones anteriores
+     del self.tablaMedia[:] #Limpiar la lista de ejecucciones anteriores
+     del self.tablaStd[:] #Limpiar la lista de ejecucciones anteriores
      
      #Recorrer las clases
      for clase in clases:
@@ -261,13 +263,15 @@ class ClasificadorNaiveBayes(Clasificador):
                  media, std = self.mediaDesviacionAtr2(datostrain, diccionario, idx, idxColumnaClase, clase)
                  arrayM.append(media)
                  arrayS.append(std)
+             tablaM[idx] = arrayM
+             tablaS[idx] = arrayS
      
      self.tablaValores = tabla
      self.arrayPriori = arrayP
-     self.arrayMedia = arrayM
-     self.arrayStd = arrayS
-     print 'tablaValores train plana:\n',self.tablaValores
-     print 'prob. priori de clases:\n', self.arrayPriori
+     self.tablaMedia = tablaM
+     self.tablaStd = tablaS
+     #print 'tablaValores train plana:\n',self.tablaValores
+     #print 'prob. priori de clases:\n', self.arrayPriori
      """
      print "Tabla de valores (None=atributo continuo):"
      for t in self.tablaValores:
@@ -338,10 +342,10 @@ class ClasificadorNaiveBayes(Clasificador):
       #print 'Correción de Laplace:',correcionL
       if correcionL: #en funcion de lo que pases desde validacion(), aplica correcion o no
           self.tablaValores = self.corregirTabla(self.tablaValores)
-          print 'tablaValores train (corregida):\n', self.tablaValores
+          #print 'tablaValores train (corregida):\n', self.tablaValores
       self.tablaValores = self.normalizarTabla(self.tablaValores)
 
-      print 'tablaValores train (norm,corregida):\n',self.tablaValores
+      #print 'tablaValores train (norm,corregida):\n',self.tablaValores
       for tupla in datostest:
           pred = self.evalua(tupla,clases,atributosDiscretos)
           posteriori.append(pred)
@@ -357,7 +361,7 @@ class ClasificadorNaiveBayes(Clasificador):
       #print 'tablaValores train (norm,corregida):\n', self.tablaValores
       for idx_clase,clase in enumerate(clases):
           flag_0 = False
-          sumatorio = 0
+          sumatorio = 0.0
           probClase = self.arrayPriori[idx_clase]
           for idx_atri, atri in enumerate(self.tablaValores):
               #caso discreto
@@ -375,7 +379,7 @@ class ClasificadorNaiveBayes(Clasificador):
               #caso continuo
               else:
                   value = tupla[idx_atri]
-                  prob = self.normpdf(value, self.arrayMedia[idx_clase], self.arrayStd[idx_clase])
+                  prob = self.normpdf(value, self.tablaMedia[idx_atri][idx_clase], self.tablaStd[idx_atri][idx_clase])
                   #print '\tprobContinua:', prob
               #check para descartar el calculo + que no pete con los log
               if (prob == 0.0) or (probClase == 0.0) or flag_0:
@@ -388,6 +392,7 @@ class ClasificadorNaiveBayes(Clasificador):
                   ##print '\tsumatorio=',sumatorio
           if flag_0:
               arg.append(0)
+              #arg.append(sumatorio)
           else:
               probClase = self.arrayPriori[idx_clase]
               #print "\tP(clase"+str(idx_clase)+")="+str(probClase)
