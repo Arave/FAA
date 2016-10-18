@@ -17,5 +17,6 @@ estrategia=ValidacionCruzada(5)
 print "Clasificador: clasificador Naive Bayes"
 clasificador = ClasificadorNaiveBayes()
 print "Errores: "
-errores=clasificador.validacion(estrategia,dataset,clasificador)
+correccionL = True #aplicar correcion de Laplace a la tabla de train o no
+errores=clasificador.validacion(estrategia,dataset,clasificador,correccionL)
 

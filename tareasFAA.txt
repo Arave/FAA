@@ -2,27 +2,16 @@
 #=================================================================================#
 TO-DO list
 #=================================================================================#
-DONE - particionesSimples
+DONE - en general, parte de desarrollo
+URGENTE:
+    - corregir error en entrenamiento()
+    - corregir la version de albert de probMaxVerosimil()
+    - hacer pruebas para conjuntos grandes
+    - los Notebook de los huevos
+MENOS URGENTE:
+    - eliminar printfs de debug
+    - depurar codigo
 
-DONE - ASC - Desviación típica de los errores
-
-DONE - ASC - prob. Priori (P=clase)
-
-DONE - prob. máx Verosimilitud (D=a|P=clase)
-
-DONE - ASC - prob. dato (D=a)
-
-DONE - ASC - media y desviación típica de atributo continuo condicionado clase X.
-	ojo, sumar + miniValor correo
-
-IN_PROGRESS - Gaussiana **_**
-
-- Entrenamiento Bayes
-	- Crear la tabla
-	- Aplicar o no Laplace (Parametro?) 
-
-- Clasifica NB
-	- argmax? Y log
 #=================================================================================#
 Progreso memoria
 #=================================================================================#
@@ -45,7 +34,11 @@ ANOTACIONES
 - Ahora se pueden printear objetos Particion(x,y) directamente (def __str__)
 
 #=================================================================================#
-Sobre Git
+Sobre Git/Programacion/Info util
 #=================================================================================#
 - Como apañar conflictos del automerge:
     https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/
+- Ejemplo practico con tablas de clasificacion NB:
+    http://naivebayes.blogspot.com.es/
+- Sobre manejar logaritmos y probabilidades:
+    http://stats.stackexchange.com/questions/121257/log-probability-vs-product-of-probabilities/121316#121316

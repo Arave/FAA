@@ -1,0 +1,23 @@
+
+EJECUCION:
+print "Prueba 2- Fichero de datos tic-tac-toe.data"
+dataset=Datos('./ConjuntosDatos/tic-tac-toe.data',True)
+print "Estrategia: validacion cruzada, numParticiones: 10"
+estrategia=ValidacionCruzada(10)
+#print estrategia.nombreEstrategia
+print "Clasificador: clasificador Naive Bayes"
+clasificador = ClasificadorNaiveBayes()
+print "Errores: "
+errores=clasificador.validacion(estrategia,dataset,clasificador)
+
+OUTPUT:
+Traceback (most recent call last):
+  File "/home/arave/Documents/REPOS/faa/testNaiveBayes.py", line 20, in <module>
+    errores=clasificador.validacion(estrategia,dataset,clasificador)
+  File "/home/arave/Documents/REPOS/faa/Clasificador.py", line 170, in validacion
+    clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
+  File "/home/arave/Documents/REPOS/faa/Clasificador.py", line 251, in entrenamiento
+    cont = self.contarAtributos(datostrain, diccionario, idx, idxColumnaClase,clase)
+  File "/home/arave/Documents/REPOS/faa/Clasificador.py", line 103, in contarAtributos
+    idCl =  diccionarios[idxColumna][cl]
+KeyError: 'positive'

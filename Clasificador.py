@@ -117,7 +117,7 @@ class Clasificador(object):
   
   @abstractmethod
   # devuelve un numpy array con las predicciones
-  def clasifica(self,datosTest,atributosDiscretos,diccionario):
+  def clasifica(self,datosTest,atributosDiscretos,diccionario,correcion):
     pass
   
   
@@ -137,7 +137,7 @@ class Clasificador(object):
     
   # Realiza una clasificacion utilizando una estrategia de particionado determinada
   @staticmethod
-  def validacion(particionado,dataset,clasificador,seed=None):
+  def validacion(particionado,dataset,clasificador,correcionL,seed=None):
        
     # Creamos las particiones siguiendo la estrategia llamando a particionado.creaParticiones
     # - Para validacion cruzada: en el bucle hasta nv entrenamos el clasificador con la particion de train i
@@ -168,7 +168,7 @@ class Clasificador(object):
 
            # Entrenamiento
            clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
-           pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios)
+           pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios,correcionL)
            print "Predicción: "
            print pred
 
@@ -203,7 +203,7 @@ class ClasificadorAPriori(Clasificador):
       self.mayoritaria = most_common
       return most_common     
     
-  def clasifica(self,datostest,atributosDiscretos=None,diccionario=None):
+  def clasifica(self,datostest,atributosDiscretos=None,diccionario=None,correcion=None):
     # Asignar la clase mayoritaria a todos los datos
       numFilas = datostest.shape[0]
       datos = np.empty(numFilas)
@@ -266,13 +266,6 @@ class ClasificadorNaiveBayes(Clasificador):
      print "Tabla de valores"
      for t in self.tablaValores:
          print t
-     #print "Tabla de valores corregida"
-     #corregida = self.corregirTabla(self.tablaValores)
-     #for t in corregida:
-     #    print t
-     #print "Tabla corregida^normalizada"
-     #for t in self.normalizarTabla(corregida):
-     #    print t
      print "Array a priori"    
      print self.arrayPriori
      print "Array media"
@@ -314,7 +307,7 @@ class ClasificadorNaiveBayes(Clasificador):
       return num / denom
 
 #http://naivebayes.blogspot.com.es/2013/05/clasificador-naive-bayes-como-funciona.html
-  def clasifica(self,datostest,atributosDiscretos,diccionario):
+  def clasifica(self,datostest,atributosDiscretos,diccionario, correcionL):
       posteriori = []
       numColumnas = datostest.shape[1]
       idxColumnaClase = numColumnas - 1
@@ -325,7 +318,9 @@ class ClasificadorNaiveBayes(Clasificador):
       print 'datostest:\n',datostest
       print 'tablaValores:\n',self.tablaValores
 
-      self.tablaValores = self.corregirTabla(self.tablaValores)
+      print 'correcionL:',correcionL
+      if correcionL: #en funcion de lo que pases desde validacion(), aplica correcion o no
+          self.tablaValores = self.corregirTabla(self.tablaValores)
       self.tablaValores = self.normalizarTabla(self.tablaValores)
 
       for tupla in datostest:
@@ -334,27 +329,47 @@ class ClasificadorNaiveBayes(Clasificador):
 
       return posteriori
 
+  #evalua una tupla de datosTest y devuelve la clase con mas probabilidad
   def evalua(self, tupla, clases, atributosDiscretos):
+      print "===========EVALUA==================="
       #bucle 1: recorrer por clase
-      sumatorio = 0
-      pred = None
+      arg = []
       for idx_clase,clase in enumerate(clases):
+          flag_0 = False
+          sumatorio = 0
           for idx_atri, atri in enumerate(self.tablaValores):
-              if atri is not None:
+              #caso discreto
+              prob = 0.0
+              if atributosDiscretos[idx_atri]:
                   #sacar valor del atributo de test y pasarlo a indice (int)
                   value = int(round(tupla[idx_atri]))
                   #hacer el match con la tabla de valores usandolo como indice
                   #prob a partir de la tabla
                   prob = self.tablaValores[idx_atri][idx_clase][value]
-                  if prob is 0:
-                      sumatorio += 0 #simbolico: P(xj|ci)=0
-                  else:
-                      sumatorio += math.log(prob)
+                  print '\tprobDiscreta:',prob
+              #caso continuo
               else:
-                  #prob con gaussiana
-                  pass
-      #sumar la probabilidad de clase por ultimo
-      return pred
+                  value = tupla[idx_atri]
+                  prob = self.normpdf(value, self.arrayMedia[idx_clase], self.arrayStd[idx_clase])
+                  print '\tprobContinua:', prob
+              #check para descartar el calculo + que no pete con los log
+              if (prob == 0.0) or flag_0:
+                  # P(xj|ci)=0
+                  flag_0 = True
+                  break
+              else:
+                  sumatorio += math.log(prob)
+          if flag_0:
+              arg.append(0)
+          else:
+              probClase = self.arrayPriori[idx_clase]
+              print '\tprobClase:', probClase
+              if probClase == 0.0:
+                  arg.append(0)
+              else:
+                  sumatorio += math.log(probClase)
+              arg.append(math.exp(sumatorio))
+      return max(arg)
 
     
 
