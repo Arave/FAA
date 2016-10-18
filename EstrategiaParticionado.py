@@ -63,6 +63,8 @@ class ValidacionSimple(EstrategiaParticionado):
     numTraining = (self.porcentajeParticiones * len(indices)) / 100
 
     #nueva version con parametro:
+    
+    del self.particiones[:] #Limpiar la lista de ejeucciones anteriores
     for i in range(self.numeroParticiones):
         indices = np.random.permutation(datos.shape[0])
         numTraining = (self.porcentajeParticiones * len(indices)) / 100
@@ -87,7 +89,9 @@ class ValidacionCruzada(EstrategiaParticionado):
   # El conjunto de entrenamiento se crea con las nfolds-1 particiones
   # y el de test con la particion restante
   # Esta funcion devuelve una lista de particiones (clase Particion)
+
   def creaParticiones(self,datos,seed=None):   
+    del self.particiones[:] #Limpiar la lista de ejeucciones anteriores
     np.random.seed(seed)
     indices = np.random.permutation(datos.shape[0])  # random perm del indice de filas de datos
     grupos = np.array_split(indices, self.numeroParticiones)

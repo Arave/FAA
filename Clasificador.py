@@ -147,7 +147,7 @@ class Clasificador(object):
     # - Para validacion simple (hold-out): entrenamos el clasificador con la particion de train
     # y obtenemos el error en la particion test
       
-       
+    
        particiones = particionado.creaParticiones(dataset.datos)
        arrayErrores = np.empty(particionado.numeroParticiones)
        if particionado.nombreEstrategia == "ValidacionSimple":
@@ -158,11 +158,12 @@ class Clasificador(object):
            print "ERR: nombre de estrategia no valido"
            exit(1)
 
+       print 'Correción de Laplace:',correcionL    
        #for each particion: clasificar y sacar los errores de cada evaluación
        for idx, p in enumerate(particiones):
-           print "======================================================"
-           print "PARTICION (" + str(idx) + "):"
-           print "======================================================"
+           #print "======================================================"
+           #print "PARTICION (" + str(idx) + "):"
+           #print "======================================================"
            #print p
            datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
            #print ' =>DatosTrain [', idx, ']:'
@@ -173,13 +174,12 @@ class Clasificador(object):
            # Entrenamiento
            clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
            pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios,correcionL)
-           print "Predicción: "
-           print pred
+           #print "Predicción: "
+           #print pred
 
            error = clasificador.error(datosTest, pred)
            arrayErrores[idx] = error
-           print "Porcentaje de error (%): "
-           print error
+           #print "\t Porcentaje de error (%): ",error
            #estrategia=ValidacionSimple(10,80) => particionado, arg[0] - numero de particiones. Calcular la media y desv.
 
        #estadística
@@ -225,7 +225,7 @@ class ClasificadorNaiveBayes(Clasificador):
 
   def entrenamiento(self,datostrain,atributosDiscretos,diccionario):
       
-     print "============= Entrenamiento Naive Bayes ========================"
+     #print "============= Entrenamiento Naive Bayes ========================"
      numColumnas = datostrain.shape[1]
      idxColumnaClase = numColumnas - 1
      clases = diccionario[idxColumnaClase]
@@ -233,6 +233,11 @@ class ClasificadorNaiveBayes(Clasificador):
      arrayP = []
      arrayM = []
      arrayS = []
+     
+     del self.tablaValores[:] #Limpiar la lista de ejecucciones anteriores
+     del self.arrayPriori[:] #Limpiar la lista de ejecucciones anteriores
+     del self.arrayMedia[:] #Limpiar la lista de ejecucciones anteriores
+     del self.arrayStd[:] #Limpiar la lista de ejecucciones anteriores
      
      #Recorrer las clases
      for clase in clases:
@@ -262,12 +267,14 @@ class ClasificadorNaiveBayes(Clasificador):
      self.arrayMedia = arrayM
      self.arrayStd = arrayS
      
+     """
      print "Tabla de valores (None=atributo continuo):"
      for t in self.tablaValores:
          print "\t",t, ""
      print "Array a priori:" ,self.arrayPriori, ""    
      print "Array media:" ,self.arrayMedia, "" 
      print "Array desviación típica (STD):" ,self.arrayStd, ""
+     """
 
   #devuelve una copia de la tabla con la correción de Laplace aplicada
   @staticmethod
@@ -309,12 +316,12 @@ class ClasificadorNaiveBayes(Clasificador):
       idxColumnaClase = numColumnas - 1
       #el orden de 'clases' coincide con el orden de 'self.arrayPriori'
       clases = diccionario[idxColumnaClase]
-      print "================= CLASIFICA ===================================="
+      #print "================= CLASIFICA ===================================="
       #print 'clases en clasifica',clases
       #print 'datostest:\n',datostest
       #print 'tablaValores:\n',self.tablaValores
 
-      print 'Correción de Laplace:',correcionL
+      #print 'Correción de Laplace:',correcionL
       if correcionL: #en funcion de lo que pases desde validacion(), aplica correcion o no
           self.tablaValores = self.corregirTabla(self.tablaValores)
       self.tablaValores = self.normalizarTabla(self.tablaValores)

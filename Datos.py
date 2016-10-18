@@ -13,6 +13,13 @@ class Datos(object):
   diccionarios=[]
   
   def __init__(self, nombreFichero,sup):
+      
+      
+    del self.tipoAtributos[:] #Limpiar la lista de ejecucciones anteriores
+    del self.nombreAtributos[:] #Limpiar la lista de ejecucciones anteriores
+    del self.nominalAtributos[:] #Limpiar la lista de ejecucciones anteriores
+    del self.diccionarios[:] #Limpiar la lista de ejecucciones anteriores      
+      
     self.supervisado = sup
     #print ("Tipo:" + str(self.supervisado))
     f = open(nombreFichero,'r')
