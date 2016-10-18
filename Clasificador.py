@@ -138,9 +138,6 @@ class Clasificador(object):
   # Realiza una clasificacion utilizando una estrategia de particionado determinada
   @staticmethod
   def validacion(particionado,dataset,clasificador,correcionL=False,seed=None):
-      
-
-       
     # Creamos las particiones siguiendo la estrategia llamando a particionado.creaParticiones
     # - Para validacion cruzada: en el bucle hasta nv entrenamos el clasificador con la particion de train i
     # y obtenemos el error en la particion de test i
@@ -172,6 +169,9 @@ class Clasificador(object):
            #print datosTest
 
            # Entrenamiento
+           print '|||||||||||||||||||||||||||PARTICION ',idx,'|||||||||||||||||||||||||||'
+           print 'datosTrain:\n',datosTrain
+           print 'datosTest:\n', datosTest
            clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
            pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios,correcionL)
            #print "Predicción: "
@@ -266,7 +266,8 @@ class ClasificadorNaiveBayes(Clasificador):
      self.arrayPriori = arrayP
      self.arrayMedia = arrayM
      self.arrayStd = arrayS
-     
+     print 'tablaValores train plana:\n',self.tablaValores
+     print 'prob. priori de clases:\n', self.arrayPriori
      """
      print "Tabla de valores (None=atributo continuo):"
      for t in self.tablaValores:
@@ -287,6 +288,14 @@ class ClasificadorNaiveBayes(Clasificador):
                       t_copy[i_f][i_c][i_v] += 1
       return t_copy
 
+  """
+  @staticmethod
+  def nested_change(item, func):
+      if isinstance(item, list):
+          return [nested_change(x, func) for x in item]
+      return func(item)
+  """
+
   #devuelve una copia de la tabla normalizada
   @staticmethod
   def normalizarTabla(tablaValores):
@@ -294,8 +303,13 @@ class ClasificadorNaiveBayes(Clasificador):
       for i_f,fila in enumerate(t_copy):
           if fila is not None:
               for i_c,clase in enumerate(fila):
+                  cst_clase = clase[:]
                   for i_v,value in enumerate(clase):
-                      t_copy[i_f][i_c][i_v] = value/sum(clase)
+                      #print 'clase:', cst_clase
+                      #print 'value:',value
+                      #print 'value/sum(clase):',value/sum(cst_clase)
+                      t_copy[i_f][i_c][i_v] = value/sum(cst_clase)
+                      #print 't_copy[i_f][i_c][i_v]=',t_copy[i_f][i_c][i_v]
       return t_copy
 
   #PDF: densidad de probabilidad de una distribucion normal/gaussiana
@@ -324,8 +338,10 @@ class ClasificadorNaiveBayes(Clasificador):
       #print 'Correción de Laplace:',correcionL
       if correcionL: #en funcion de lo que pases desde validacion(), aplica correcion o no
           self.tablaValores = self.corregirTabla(self.tablaValores)
+          print 'tablaValores train (corregida):\n', self.tablaValores
       self.tablaValores = self.normalizarTabla(self.tablaValores)
 
+      print 'tablaValores train (norm,corregida):\n',self.tablaValores
       for tupla in datostest:
           pred = self.evalua(tupla,clases,atributosDiscretos)
           posteriori.append(pred)
@@ -334,9 +350,11 @@ class ClasificadorNaiveBayes(Clasificador):
 
   #evalua una tupla de datosTest y devuelve la clase con mas probabilidad
   def evalua(self, tupla, clases, atributosDiscretos):
-      #print "===========EVALUA==================="
+      print "===========EVALUA==================="
+      print 'tupla:',tupla
       #bucle 1: recorrer por clase
       arg = []
+      #print 'tablaValores train (norm,corregida):\n', self.tablaValores
       for idx_clase,clase in enumerate(clases):
           flag_0 = False
           sumatorio = 0
@@ -346,9 +364,11 @@ class ClasificadorNaiveBayes(Clasificador):
               if atributosDiscretos[idx_atri]:
                   #sacar valor del atributo de test y pasarlo a indice (int)
                   value = int(round(tupla[idx_atri]))
+                  #print 'value:',value
                   #hacer el match con la tabla de valores usandolo como indice
                   #prob a partir de la tabla
                   prob = self.tablaValores[idx_atri][idx_clase][value]
+                  print "P(x"+str(idx_atri)+"="+str(value)+"|clase"+str(idx_clase)+")="+str(prob)
                   #print '\tprobDiscreta:',prob
               #caso continuo
               else:
@@ -366,15 +386,20 @@ class ClasificadorNaiveBayes(Clasificador):
               arg.append(0)
           else:
               probClase = self.arrayPriori[idx_clase]
+              print "P(clase"+str(idx_clase)+")="+str(probClase)
               #print '\tprobClase [',idx_clase,']:', probClase
               if probClase == 0.0:
                   arg.append(0)
               else:
+                  print 'sumatorioFinal:', sumatorio
                   sumatorio += math.log(probClase)
               arg.append(math.exp(sumatorio))
       #return max(arg)
       index, element = max(enumerate(arg), key=itemgetter(1))
-      return index         
+      #print 'index:',index,'element:',element
+      print 'arg:',arg
+      print 'indice max(arg):',index
+      return index
     
 
 

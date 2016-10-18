@@ -11,6 +11,7 @@ from Clasificador import ClasificadorNaiveBayes
 
 print "Prueba 2- Fichero de datos d3.data"
 dataset=Datos('./ConjuntosDatosPruebas/d3.data',True)
+#dataset=Datos('./ConjuntosDatos/tic-tac-toe.data',True)
 print "Estrategia: validacion cruzada, numParticiones: 5"
 estrategia=ValidacionCruzada(5)
 #print estrategia.nombreEstrategia
