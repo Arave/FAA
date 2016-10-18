@@ -9,15 +9,13 @@ from Datos import Datos
 from EstrategiaParticionado import ValidacionCruzada
 from Clasificador import ClasificadorNaiveBayes
 
-print "Prueba 2- Fichero de datos d3.data"
-dataset=Datos('./ConjuntosDatosPruebas/d3.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 5"
-estrategia=ValidacionCruzada(5)
+
+print "Prueba 2- Fichero de datos tic-tac-toe.data"
+dataset=Datos('./ConjuntosDatos/tic-tac-toe.data',True)
+print "Estrategia: validacion cruzada, numParticiones: 10"
+estrategia=ValidacionCruzada(10)
 #print estrategia.nombreEstrategia
 print "Clasificador: clasificador Naive Bayes"
 clasificador = ClasificadorNaiveBayes()
 print "Errores: "
-correccionL = True #aplicar correcion de Laplace a la tabla de train o no
-errores=clasificador.validacion(estrategia,dataset,clasificador,correccionL)
-
-
+errores=clasificador.validacion(estrategia,dataset,clasificador)

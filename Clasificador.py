@@ -90,11 +90,11 @@ class Clasificador(object):
             
   #Cuenta el número de repeticiones del atributo dada la clase
   @staticmethod
-  def contarAtributos(datos, diccionarios, idxColumna, idxColumnaClase,clase):  
+  def contarAtributos(datos, diccionarios, idxColumna, idxColumnaClase, clase):  
       
       #Obtener el valor del diccionario para esa clase
       idClase =  diccionarios[idxColumnaClase][clase]
-      clases = diccionarios[idxColumnaClase]     
+      clases = diccionarios[idxColumna]     
       #Lista de índices donde la clase es la que nos pasan
       indices, = np.where(datos[:,idxColumnaClase] == idClase)
       #Para el atributo dado recorrer todos sus valore y contarlos
@@ -137,13 +137,17 @@ class Clasificador(object):
     
   # Realiza una clasificacion utilizando una estrategia de particionado determinada
   @staticmethod
-  def validacion(particionado,dataset,clasificador,correcionL,seed=None):
+  def validacion(particionado,dataset,clasificador,correcionL=False,seed=None):
+      
+
        
     # Creamos las particiones siguiendo la estrategia llamando a particionado.creaParticiones
     # - Para validacion cruzada: en el bucle hasta nv entrenamos el clasificador con la particion de train i
     # y obtenemos el error en la particion de test i
     # - Para validacion simple (hold-out): entrenamos el clasificador con la particion de train
-    # y obtenemos el error en la particion test      
+    # y obtenemos el error en la particion test
+      
+       
        particiones = particionado.creaParticiones(dataset.datos)
        arrayErrores = np.empty(particionado.numeroParticiones)
        if particionado.nombreEstrategia == "ValidacionSimple":
@@ -159,12 +163,12 @@ class Clasificador(object):
            print "======================================================"
            print "PARTICION (" + str(idx) + "):"
            print "======================================================"
-           print p
+           #print p
            datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
-           print ' =>DatosTrain [', idx, ']:'
-           print datosTrain
-           print ' =>DatosTest [', idx, ']:'
-           print datosTest
+           #print ' =>DatosTrain [', idx, ']:'
+           #print datosTrain
+           #print ' =>DatosTest [', idx, ']:'
+           #print datosTest
 
            # Entrenamiento
            clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
@@ -179,13 +183,11 @@ class Clasificador(object):
            #estrategia=ValidacionSimple(10,80) => particionado, arg[0] - numero de particiones. Calcular la media y desv.
 
        #estadística
-       print arrayErrores
-       print "Media de errores total: "
-       print np.mean(arrayErrores)
-       print "Mediana de errores total: "
-       print np.median(arrayErrores)           
-       print "Desviación típica: "
-       print np.std(arrayErrores)  
+       print "=================RESULTADO===================="  
+       print "Array de % de errores obtenidos:" ,arrayErrores, ""
+       print "Media de errores total:" ,np.mean(arrayErrores), "%"
+       print "Mediana de errores total:" ,np.median(arrayErrores), "%"
+       print "Desviación típica:" ,np.std(arrayErrores), "%"
 
 #############################################################################
 
@@ -216,7 +218,6 @@ class ClasificadorAPriori(Clasificador):
 
 class ClasificadorNaiveBayes(Clasificador):
 
-
   tablaValores = []
   arrayPriori = []
   arrayMedia = []
@@ -224,12 +225,11 @@ class ClasificadorNaiveBayes(Clasificador):
 
   def entrenamiento(self,datostrain,atributosDiscretos,diccionario):
       
-     print "entrenamiento Naive"
+     print "============= Entrenamiento Naive Bayes ========================"
      numColumnas = datostrain.shape[1]
      idxColumnaClase = numColumnas - 1
      clases = diccionario[idxColumnaClase]
-     print 'clases',clases
-     tabla = len(atributosDiscretos)*[None]
+     tabla = (len(atributosDiscretos) - 1)*[None] #No guardamos una tabla de clase
      arrayP = []
      arrayM = []
      arrayS = []
@@ -239,16 +239,15 @@ class ClasificadorNaiveBayes(Clasificador):
          #Calcular los a priori
          probP = self.probAPriori2(datostrain, diccionario, idxColumnaClase, clase)
          arrayP.append(probP) 
-
-     
-     #Recorrer los atributos
-     for idx,atr in enumerate(atributosDiscretos):
-         if atr == True: #nominal/discreto
+   
+     #Recorrer los atributos excepto el último (Clase)
+     for idx,atr in enumerate(atributosDiscretos[:-1]):
+         if atr == True: #nominal/discreto            
              #contar núm de ocurrencias para cada valor del atributo en cada clase         
-             arrayC = []             
+             arrayC = []
              for clase in clases:
                  #contar atributos => rellenar tabla
-                 cont = self.contarAtributos(datostrain, diccionario, idx, idxColumnaClase,clase)
+                 cont = self.contarAtributos(datostrain, diccionario, idx, idxColumnaClase, clase)
                  arrayC.append(cont)               
              tabla[idx] = arrayC
          else: #continuo
@@ -263,15 +262,12 @@ class ClasificadorNaiveBayes(Clasificador):
      self.arrayMedia = arrayM
      self.arrayStd = arrayS
      
-     print "Tabla de valores"
+     print "Tabla de valores (None=atributo continuo):"
      for t in self.tablaValores:
-         print t
-     print "Array a priori"    
-     print self.arrayPriori
-     print "Array media"
-     print self.arrayMedia
-     print "Array STD"
-     print self.arrayStd
+         print "\t",t, ""
+     print "Array a priori:" ,self.arrayPriori, ""    
+     print "Array media:" ,self.arrayMedia, "" 
+     print "Array desviación típica (STD):" ,self.arrayStd, ""
 
   #devuelve una copia de la tabla con la correción de Laplace aplicada
   @staticmethod
@@ -313,12 +309,12 @@ class ClasificadorNaiveBayes(Clasificador):
       idxColumnaClase = numColumnas - 1
       #el orden de 'clases' coincide con el orden de 'self.arrayPriori'
       clases = diccionario[idxColumnaClase]
-      print "_______________________________________________________________________"
-      print 'clases en clasifica',clases
-      print 'datostest:\n',datostest
-      print 'tablaValores:\n',self.tablaValores
+      print "================= CLASIFICA ===================================="
+      #print 'clases en clasifica',clases
+      #print 'datostest:\n',datostest
+      #print 'tablaValores:\n',self.tablaValores
 
-      print 'correcionL:',correcionL
+      print 'Correción de Laplace:',correcionL
       if correcionL: #en funcion de lo que pases desde validacion(), aplica correcion o no
           self.tablaValores = self.corregirTabla(self.tablaValores)
       self.tablaValores = self.normalizarTabla(self.tablaValores)
@@ -331,7 +327,7 @@ class ClasificadorNaiveBayes(Clasificador):
 
   #evalua una tupla de datosTest y devuelve la clase con mas probabilidad
   def evalua(self, tupla, clases, atributosDiscretos):
-      print "===========EVALUA==================="
+      #print "===========EVALUA==================="
       #bucle 1: recorrer por clase
       arg = []
       for idx_clase,clase in enumerate(clases):
@@ -346,12 +342,12 @@ class ClasificadorNaiveBayes(Clasificador):
                   #hacer el match con la tabla de valores usandolo como indice
                   #prob a partir de la tabla
                   prob = self.tablaValores[idx_atri][idx_clase][value]
-                  print '\tprobDiscreta:',prob
+                  #print '\tprobDiscreta:',prob
               #caso continuo
               else:
                   value = tupla[idx_atri]
                   prob = self.normpdf(value, self.arrayMedia[idx_clase], self.arrayStd[idx_clase])
-                  print '\tprobContinua:', prob
+                  #print '\tprobContinua:', prob
               #check para descartar el calculo + que no pete con los log
               if (prob == 0.0) or flag_0:
                   # P(xj|ci)=0
@@ -363,14 +359,15 @@ class ClasificadorNaiveBayes(Clasificador):
               arg.append(0)
           else:
               probClase = self.arrayPriori[idx_clase]
-              print '\tprobClase:', probClase
+              #print '\tprobClase [',idx_clase,']:', probClase
               if probClase == 0.0:
                   arg.append(0)
               else:
                   sumatorio += math.log(probClase)
               arg.append(math.exp(sumatorio))
-      return max(arg)
-
+      #return max(arg)
+      index, element = max(enumerate(arg), key=itemgetter(1))
+      return index         
     
 
 
