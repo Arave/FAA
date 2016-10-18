@@ -350,14 +350,15 @@ class ClasificadorNaiveBayes(Clasificador):
 
   #evalua una tupla de datosTest y devuelve la clase con mas probabilidad
   def evalua(self, tupla, clases, atributosDiscretos):
-      print "===========EVALUA==================="
-      print '\ttupla:',tupla
+      ##print "===========EVALUA==================="
+      ##print '\ttupla:',tupla
       #bucle 1: recorrer por clase
       arg = []
       #print 'tablaValores train (norm,corregida):\n', self.tablaValores
       for idx_clase,clase in enumerate(clases):
           flag_0 = False
           sumatorio = 0
+          probClase = self.arrayPriori[idx_clase]
           for idx_atri, atri in enumerate(self.tablaValores):
               #caso discreto
               prob = 0.0
@@ -368,8 +369,8 @@ class ClasificadorNaiveBayes(Clasificador):
                   #hacer el match con la tabla de valores usandolo como indice
                   #prob a partir de la tabla
                   prob = self.tablaValores[idx_atri][idx_clase][value]
-                  print "\tP(x"+str(idx_atri)+"="+str(value)+"|clase"+str(idx_clase)+")="+str(prob)
-                  print "\tlog(P(x" + str(idx_atri) + "=" + str(value) + "|clase" + str(idx_clase) + ")=" + str(math.log(prob))
+                  ##print "\tP(x"+str(idx_atri)+"="+str(value)+"|clase"+str(idx_clase)+")="+str(prob)
+                  ##print "\tlog(P(x" + str(idx_atri) + "=" + str(value) + "|clase" + str(idx_clase) + ")=" + str(math.log(prob))
                   #print '\tprobDiscreta:',prob
               #caso continuo
               else:
@@ -377,32 +378,33 @@ class ClasificadorNaiveBayes(Clasificador):
                   prob = self.normpdf(value, self.arrayMedia[idx_clase], self.arrayStd[idx_clase])
                   #print '\tprobContinua:', prob
               #check para descartar el calculo + que no pete con los log
-              if (prob == 0.0) or flag_0:
+              if (prob == 0.0) or (probClase == 0.0) or flag_0:
                   # P(xj|ci)=0
                   flag_0 = True
                   break
               else:
                   sumatorio += math.log(prob)
-                  print '\tsumatorio=',sumatorio
+                  sumatorio += math.log(probClase)
+                  ##print '\tsumatorio=',sumatorio
           if flag_0:
               arg.append(0)
           else:
               probClase = self.arrayPriori[idx_clase]
-              print "\tP(clase"+str(idx_clase)+")="+str(probClase)
-              print "\tlog(P(clase"+str(idx_clase)+")="+str(math.log(probClase))
+              #print "\tP(clase"+str(idx_clase)+")="+str(probClase)
+              #print "\tlog(P(clase"+str(idx_clase)+")="+str(math.log(probClase))
               #print '\tprobClase [',idx_clase,']:', probClase
               if probClase == 0.0:
                   arg.append(0)
-              else:
-                  sumatorio += math.log(probClase)
-                  print '\tlog(sumatorio_final + log(P(clase):', sumatorio
-              arg.append(math.exp(sumatorio))
-              print '\tProb NP para esa clase, quitando logs=',math.exp(sumatorio)
+               #else:
+                  #sumatorio += math.log(probClase)
+                  ##print '\tlog(sumatorio_final + log(P(clase):', sumatorio
+              arg.append(sumatorio)
+              #print '\tProb NP para esa clase, quitando logs=',math.exp(sumatorio)
       #return max(arg)
       index, element = max(enumerate(arg), key=itemgetter(1))
       #print 'index:',index,'element:',element
-      print 'arg:',arg
-      print 'indice max(arg):',index
+      #print 'arg:',arg
+      #print 'indice max(arg):',index
       return index
     
 
