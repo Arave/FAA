@@ -56,6 +56,25 @@ class Clasificador(object):
       matchesList = itemgetter(*idxMatchClass)(atriColumn)
       countfilter = Counter(matchesList)[idAtributo]
       return countfilter / len(idxMatchClass)
+
+  @staticmethod
+  def probMaxVerosimilLaplace(diccionarios, datos, idxAtributo, atributo, idxClass, dominio):
+      # =>print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
+      # =>prob3 = clasificador.probMaxVerosimil(dataset, "MLeftSq", "b", "Class", "positive")
+      # fetch del indice de 'Class'
+      idClase = diccionarios[idxClass][dominio]
+      # columna 'Class' en forma de array
+      #VERSION ANTERIOR:classColumn = dataset.datos[:, idxClass]
+      classColumn = datos[:, idxClass]
+      # lista con los indices de las rows que hacen match con esa idClase
+      idxMatchClass = [i for i, colValue in enumerate(classColumn) if colValue == idClase]
+
+      idAtributo = diccionarios[idxAtributo][atributo]
+      #VERSION ANTERIOR:atriColumn = dataset.datos[:,idxAtributo]
+      atriColumn = datos[:, idxAtributo]
+      matchesList = itemgetter(*idxMatchClass)(atriColumn)
+      countfilter = Counter(matchesList)[idAtributo]
+      return countfilter / len(idxMatchClass)
   
   #Calcula la Media y desviación típica de los atributos continuos condiconados
   #a la clase.
@@ -163,7 +182,17 @@ class Clasificador(object):
                prob = Clasificador.probAPriori2(datosTrain, dataset.diccionarios, idxColumna, "negative")
                print "Prob. a priori para P(Class=negative)",prob
 
-               return                
+               idxAtributo =  dataset.nombreAtributos.index("MLeftSq")
+               idxClass =  dataset.nombreAtributos.index("Class") 
+               prob = Clasificador.probMaxVerosimil(dataset.diccionarios, datosTrain, idxAtributo, "b", idxClass, "positive")
+               print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)",prob                
+               return
+
+
+               idxAtributo =  dataset.nombreAtributos.index("TRightSq")
+               idxClass =  dataset.nombreAtributos.index("Class") 
+               prob = Clasificador.probMaxVerosimil(dataset.diccionarios, datosTrain, idxAtributo, "x", idxClass, "negative")
+               print "Prob. de máxima verosimilitud para P(TRightSq=x|Class=negative)",prob                
                
                #clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
                #pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios,correcionL)
