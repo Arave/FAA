@@ -134,6 +134,41 @@ class Clasificador(object):
       numFallos =  numFilas - numAciertos
       return (numFallos / numFilas) * 100
 
+  # Realiza una clasificacion utilizando una estrategia de particionado determinada. 
+  # para los apartados
+  @staticmethod
+  def validacionApartado(particionado,dataset,clasificador,correcionL,numApartado):
+       
+       particiones = particionado.creaParticiones(dataset.datos)
+       arrayErrores = np.empty(particionado.numeroParticiones)
+       if particionado.nombreEstrategia == "ValidacionSimple":
+           print "Indices train y test para [" + str(particionado.numeroParticiones) + "] particiones:"
+       elif particionado.nombreEstrategia == "ValidacionCruzada":
+           print 'Datos de train y test para [', particionado.numeroParticiones,'] grupos:'
+       else:
+           print "ERR: nombre de estrategia no valido"
+           exit(1)
+
+       print 'Correción de Laplace:',correcionL
+       print 'Apartado num:',numApartado
+       #for each particion: clasificar y sacar los errores de cada evaluación
+       for idx, p in enumerate(particiones):
+           if numApartado == 3:
+               datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
+               #Prob. a priori
+               idxColumna =  dataset.nombreAtributos.index("Class")               
+               prob = Clasificador.probAPriori2(datosTrain, dataset.diccionarios, idxColumna, "positive")
+               print "Prob. a priori para P(Class=positive)",prob
+
+               prob = Clasificador.probAPriori2(datosTrain, dataset.diccionarios, idxColumna, "negative")
+               print "Prob. a priori para P(Class=negative)",prob
+
+               return                
+               
+               #clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
+               #pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios,correcionL)
+
+
     
   # Realiza una clasificacion utilizando una estrategia de particionado determinada
   @staticmethod

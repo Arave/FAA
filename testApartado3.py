@@ -12,10 +12,20 @@ from Clasificador import ClasificadorAPriori
 
 print "Apartado 3 de la memoria- Fichero de datos tic-tac-toe.data"
 dataset=Datos('./ConjuntosDatos/tic-tac-toe.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 1"
-estrategia=ValidacionCruzada(1)
+print "Estrategia: validacion cruzada, numParticiones: 10"
+estrategia=ValidacionCruzada(10)
 clasificador=ClasificadorAPriori()
 
+laplace = False
+errores=clasificador.validacionApartado(estrategia,dataset,clasificador,laplace,3)
+
+
+
+
+
+
+
+"""
 #Probabilidades a priori: P(Class=positive) y P(Class=negative)
 print "Prob. a priori para P(Class=positive)"
 prob1 = clasificador.probAPriori(dataset,"Class","positive")
@@ -33,3 +43,4 @@ print round(prob3,4)
 print "Prob. de máxima verosimilitud para P(TRightSq=x|Class=negative)"
 prob4 = clasificador.probMaxVerosimil(dataset, datos,"TRightSq", "x", "Class", "negative")
 print round(prob4,4)
+"""
