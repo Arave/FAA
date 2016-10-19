@@ -6,6 +6,7 @@ from collections import Counter
 import numpy as np
 import copy
 import math
+import operator
 #import scipy.stats
 
 
@@ -124,9 +125,10 @@ class Clasificador(object):
       indices, = np.where(datos[:,idxColumnaClase] == idClase)
       #Para el atributo dado recorrer todos sus valore y contarlos
       arrayNum = []
-      for cl in clases:
-          idCl =  diccionarios[idxColumna][cl]
-          numOcurrencias = Counter(datos[indices,idxColumna])[idCl]
+      sorted_x = sorted(clases.items(), key=operator.itemgetter(1))
+      for key,value in sorted_x:
+          #idCl =  diccionarios[idxColumna][cl]
+          numOcurrencias = Counter(datos[indices,idxColumna])[value]
           arrayNum.append(numOcurrencias)      
       return arrayNum            
   
@@ -341,6 +343,7 @@ class ClasificadorNaiveBayes(Clasificador):
      numColumnas = datostrain.shape[1]
      idxColumnaClase = numColumnas - 1
      clases = diccionario[idxColumnaClase]
+     sorted_x = sorted(clases.items(), key=operator.itemgetter(1))
      tabla = (len(atributosDiscretos) - 1)*[None] #No guardamos una tabla de clase
      tablaM = (len(atributosDiscretos) - 1)*[None]
      tablaS = (len(atributosDiscretos) - 1)*[None]
@@ -354,9 +357,10 @@ class ClasificadorNaiveBayes(Clasificador):
      del self.tablaStd[:] #Limpiar la lista de ejecucciones anteriores
      
      #Recorrer las clases
-     for clase in clases:
+     #for key, value in sorted(mydict.iteritems(), key=lambda (k,v): (v,k)):
+     for key, value in sorted_x:      
          #Calcular los a priori
-         probP = self.probAPriori2(datostrain, diccionario, idxColumnaClase, clase)
+         probP = self.probAPriori2(datostrain, diccionario, idxColumnaClase, key)
          arrayP.append(probP) 
    
      #Recorrer los atributos excepto el último (Clase)
@@ -364,15 +368,15 @@ class ClasificadorNaiveBayes(Clasificador):
          if atr == True: #nominal/discreto            
              #contar núm de ocurrencias para cada valor del atributo en cada clase         
              arrayC = []
-             for clase in clases:
+             for key, value in sorted_x:
                  #contar atributos => rellenar tabla
-                 cont = self.contarAtributos(datostrain, diccionario, idx, idxColumnaClase, clase)
+                 cont = self.contarAtributos(datostrain, diccionario, idx, idxColumnaClase, key)
                  arrayC.append(cont)               
              tabla[idx] = arrayC
          else: #continuo
-             for clase in clases:
+             for key, value in sorted_x:
                  #Calcular la media y std para las clases
-                 media, std = self.mediaDesviacionAtr2(datostrain, diccionario, idx, idxColumnaClase, clase)
+                 media, std = self.mediaDesviacionAtr2(datostrain, diccionario, idx, idxColumnaClase, key)
                  arrayM.append(media)
                  arrayS.append(std)
              tablaM[idx] = arrayM
@@ -438,6 +442,7 @@ class ClasificadorNaiveBayes(Clasificador):
       idxColumnaClase = numColumnas - 1
       #el orden de 'clases' coincide con el orden de 'self.arrayPriori'
       clases = diccionario[idxColumnaClase]
+      sorted_x = sorted(clases.items(), key=operator.itemgetter(1))
       #print "================= CLASIFICA ===================================="
       #print 'clases en clasifica',clases
       #print 'datostest:\n',datostest
@@ -455,6 +460,18 @@ class ClasificadorNaiveBayes(Clasificador):
           posteriori.append(pred)
 
       return posteriori
+
+  #evalua una tupla de datosTest y devuelve la clase con mas probabilidad
+  def evalua2(self, tupla, clases, atributosDiscretos):
+      ##print "===========EVALUA==================="
+      ##print '\ttupla:',tupla
+      #bucle 1: recorrer por clase      
+      arg = []
+      #print 'tablaValores train (norm,corregida):\n', self.tablaValores        
+      
+          
+          
+          
 
   #evalua una tupla de datosTest y devuelve la clase con mas probabilidad
   def evalua(self, tupla, clases, atributosDiscretos):
