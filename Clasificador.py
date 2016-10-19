@@ -292,14 +292,6 @@ class ClasificadorNaiveBayes(Clasificador):
                       t_copy[i_f][i_c][i_v] += 1
       return t_copy
 
-  """
-  @staticmethod
-  def nested_change(item, func):
-      if isinstance(item, list):
-          return [nested_change(x, func) for x in item]
-      return func(item)
-  """
-
   #devuelve una copia de la tabla normalizada
   @staticmethod
   def normalizarTabla(tablaValores):
