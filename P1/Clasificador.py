@@ -442,7 +442,7 @@ class ClasificadorNaiveBayes(Clasificador):
       idxColumnaClase = numColumnas - 1
       #el orden de 'clases' coincide con el orden de 'self.arrayPriori'
       clases = diccionario[idxColumnaClase]
-      sorted_x = sorted(clases.items(), key=operator.itemgetter(1))
+      sorted_clases = sorted(clases.items(), key=operator.itemgetter(1))
       #print "================= CLASIFICA ===================================="
       #print 'clases en clasifica',clases
       #print 'datostest:\n',datostest
@@ -456,31 +456,19 @@ class ClasificadorNaiveBayes(Clasificador):
 
       #print 'tablaValores train (norm,corregida):\n',self.tablaValores
       for tupla in datostest:
-          pred = self.evalua(tupla,clases,atributosDiscretos)
+          pred = self.evalua(tupla,sorted_clases,atributosDiscretos)
           posteriori.append(pred)
 
       return posteriori
 
   #evalua una tupla de datosTest y devuelve la clase con mas probabilidad
-  def evalua2(self, tupla, clases, atributosDiscretos):
-      ##print "===========EVALUA==================="
-      ##print '\ttupla:',tupla
-      #bucle 1: recorrer por clase      
-      arg = []
-      #print 'tablaValores train (norm,corregida):\n', self.tablaValores        
-      
-          
-          
-          
-
-  #evalua una tupla de datosTest y devuelve la clase con mas probabilidad
-  def evalua(self, tupla, clases, atributosDiscretos):
+  def evalua(self, tupla, sorted_clases, atributosDiscretos):
       ##print "===========EVALUA==================="
       ##print '\ttupla:',tupla
       #bucle 1: recorrer por clase
       arg = []
       #print 'tablaValores train (norm,corregida):\n', self.tablaValores
-      for idx_clase,clase in enumerate(clases):
+      for clase,idx_clase in sorted_clases:   #key=clase, value=idx_clase 
           flag_0 = False
           sumatorio = 0.0
           probClase = self.arrayPriori[idx_clase]
@@ -503,15 +491,19 @@ class ClasificadorNaiveBayes(Clasificador):
                   prob = self.normpdf(value, self.tablaMedia[idx_atri][idx_clase], self.tablaStd[idx_atri][idx_clase])
                   #print '\tprobContinua:', prob
               #check para descartar el calculo + que no pete con los log
-              if (prob == 0.0) or (probClase == 0.0) or flag_0:
+              if (prob == 0.0) or (probClase == 0.0) or (flag_0 == True):
                   # P(xj|ci)=0
-                  flag_0 = True
-                  break
+                  #flag_0 = True
+                  #break
+                  if probClase != 0.0:
+                      sumatorio += math.log(probClase)
+                  if prob != 0.0:
+                      sumatorio += math.log(prob)
               else:
                   sumatorio += math.log(prob)
                   sumatorio += math.log(probClase)
                   ##print '\tsumatorio=',sumatorio
-          if flag_0:
+          if (flag_0 == True):
               arg.append(0)
               #arg.append(sumatorio)
           else:
