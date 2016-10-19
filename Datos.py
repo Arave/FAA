@@ -84,10 +84,14 @@ class Datos(object):
         if self.nominalAtributos[idx]:
             #transposed[idx] = [self.diccionarios[idx][x] for x in atribute]
             for i in range(data_lines):
-                self.datos[i][idx] = [self.diccionarios[idx][x] for x in atribute][i]
+                da = [self.diccionarios[idx][x] for x in atribute][i]
+                if da != '?': #no falta el atributo
+                    self.datos[i][idx] = da
         else:
             for i in range(data_lines):
-                self.datos[i][idx] = transposed[idx][i]
+                da = transposed[idx][i]
+                if da != '?': #no falta el atributo
+                    self.datos[i][idx] = da                
             
     #solo para el printeo. En la estructura se mantiene el float completo
     float_formatter = lambda x: "%.3f" % x
