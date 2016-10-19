@@ -73,8 +73,14 @@ class Clasificador(object):
       #VERSION ANTERIOR:atriColumn = dataset.datos[:,idxAtributo]
       atriColumn = datos[:, idxAtributo]
       matchesList = itemgetter(*idxMatchClass)(atriColumn)
+      
       countfilter = Counter(matchesList)[idAtributo]
-      return countfilter / len(idxMatchClass)
+      #LAPLACe
+      #Numero de valores posibles del del atributo
+      dic = diccionarios[idxAtributo]
+      countfilter = countfilter + 1
+      total = len(idxMatchClass) + len(dic)
+      return countfilter / total
   
   #Calcula la Media y desviación típica de los atributos continuos condiconados
   #a la clase.
@@ -156,10 +162,10 @@ class Clasificador(object):
   # Realiza una clasificacion utilizando una estrategia de particionado determinada. 
   # para los apartados
   @staticmethod
-  def validacionApartado(particionado,dataset,clasificador,correcionL,numApartado):
+  def validacionApartado(particionado,dataset,clasificador,numApartado):
        
        particiones = particionado.creaParticiones(dataset.datos)
-       arrayErrores = np.empty(particionado.numeroParticiones)
+       
        if particionado.nombreEstrategia == "ValidacionSimple":
            print "Indices train y test para [" + str(particionado.numeroParticiones) + "] particiones:"
        elif particionado.nombreEstrategia == "ValidacionCruzada":
@@ -168,7 +174,6 @@ class Clasificador(object):
            print "ERR: nombre de estrategia no valido"
            exit(1)
 
-       print 'Correción de Laplace:',correcionL
        print 'Apartado num:',numApartado
        #for each particion: clasificar y sacar los errores de cada evaluación
        for idx, p in enumerate(particiones):
@@ -186,17 +191,60 @@ class Clasificador(object):
                idxClass =  dataset.nombreAtributos.index("Class") 
                prob = Clasificador.probMaxVerosimil(dataset.diccionarios, datosTrain, idxAtributo, "b", idxClass, "positive")
                print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)",prob                
-               return
-
+               
 
                idxAtributo =  dataset.nombreAtributos.index("TRightSq")
                idxClass =  dataset.nombreAtributos.index("Class") 
                prob = Clasificador.probMaxVerosimil(dataset.diccionarios, datosTrain, idxAtributo, "x", idxClass, "negative")
                print "Prob. de máxima verosimilitud para P(TRightSq=x|Class=negative)",prob                
-               
-               #clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
-               #pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios,correcionL)
 
+
+               idxAtributo =  dataset.nombreAtributos.index("MLeftSq")
+               idxClass =  dataset.nombreAtributos.index("Class") 
+               prob = Clasificador.probMaxVerosimilLaplace(dataset.diccionarios, datosTrain, idxAtributo, "b", idxClass, "positive")
+               print "Prob. de máxima verosimilitud con corrección de Laplace para P(MLeftSq=b|Class=positive)",prob                
+               
+
+               idxAtributo =  dataset.nombreAtributos.index("TRightSq")
+               idxClass =  dataset.nombreAtributos.index("Class") 
+               prob = Clasificador.probMaxVerosimilLaplace(dataset.diccionarios, datosTrain, idxAtributo, "x", idxClass, "negative")
+               print "Prob. de máxima verosimilitud con corrección de Laplace para P(TRightSq=x|Class=negative)",prob                 
+               
+               return
+               
+           elif numApartado == 4:
+               datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
+               #Prob. a priori
+               idxClase =  dataset.nombreAtributos.index("Class")               
+               prob = Clasificador.probAPriori2(datosTrain, dataset.diccionarios, idxClase, "+")
+               print "Prob. a priori para P(Class=positive)",prob
+
+               prob = Clasificador.probAPriori2(datosTrain, dataset.diccionarios, idxClase, "-")
+               print "Prob. a priori para P(Class=negative)",prob
+               
+               idxAtributo =  dataset.nombreAtributos.index("A7")
+               prob = Clasificador.probMaxVerosimil(dataset.diccionarios, datosTrain, idxAtributo, "bb", idxClase, "+")
+               print "Prob. de máxima verosimilitud para P(A7=bb|Class=+)",prob
+               
+               idxAtributo =  dataset.nombreAtributos.index("A4")
+               prob = Clasificador.probMaxVerosimil(dataset.diccionarios, datosTrain, idxAtributo, "u", idxClase, "-")
+               print "Prob. de máxima verosimilitud para P(A4=u|Class=-)",prob
+               
+               idxAtributo =  dataset.nombreAtributos.index("A2")
+               media,std = Clasificador.mediaDesviacionAtr2(datosTrain, dataset.diccionarios, idxAtributo, idxClase, "+") 
+               print "Media (",media,") y desviación típica (",std,") del atributo A2 condicionado a clase +"    
+
+               idxAtributo =  dataset.nombreAtributos.index("A14")
+               media,std = Clasificador.mediaDesviacionAtr2(datosTrain, dataset.diccionarios, idxAtributo, idxClase, "+") 
+               print "Media (",media,") y desviación típica (",std,") del atributo A14 condicionado a clase +"
+
+               idxAtributo =  dataset.nombreAtributos.index("A15")
+               media,std = Clasificador.mediaDesviacionAtr2(datosTrain, dataset.diccionarios, idxAtributo, idxClase, "+") 
+               print "Media (",media,") y desviación típica (",std,") del atributo A15 condicionado a clase +"                
+               return
+           else:
+               print "Número de apartado (",numApartado,") incorrecto. Por favor introduzca 3 o 4"
+               return
 
     
   # Realiza una clasificacion utilizando una estrategia de particionado determinada
