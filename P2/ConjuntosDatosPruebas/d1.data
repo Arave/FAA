@@ -1,0 +1,8 @@
+5
+x1,x2,class
+Nominal,Nominal,Nominal
++,+,-
+-,-,-
+-,+,+
++,-,+
++,+,-
