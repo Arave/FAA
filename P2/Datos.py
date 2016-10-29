@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import division #Para divisiones float por defecto
 import numpy as np
 import sys
 
@@ -11,6 +14,10 @@ class Datos(object):
   datos=np.array(())
   # Lista de diccionarios. Uno por cada atributo.
   diccionarios=[]
+  #Lista de medias de los atributos continuos
+  arrayM=[]
+  #lista de desviaciones típicas (STDs) de los atributos continúos
+  arrayS=[]
   
   def __init__(self, nombreFichero,sup):
       
@@ -111,8 +118,28 @@ class Datos(object):
     training, test = self.datos[idx[0],:], self.datos[idx[1],:]  
     return training, test
 
-
+    #calculará las medias y desviaciones típicas de cada atributo continuo a partir de los datos de entrenamiento
   def calcularMediasDesv(self,datostrain):
-      pass
+       
+     del self.arrayM[:] #Limpiar la lista de ejecucciones anteriores
+     del self.arrayS[:] #Limpiar la lista de ejecucciones anteriores  
+     #Recorrer los atributos excepto el último (Clase)
+     for idxColumna,atr in enumerate(self.nominalAtributos[:-1]):
+         if atr == False:  #continuo
+             #Calcular la media y std para las clases
+             media = np.mean(datostrain[:,idxColumna])
+             std = np.std(datostrain[:,idxColumna]) + 1e-6  #+ 0.000001     
+             self.arrayM.append(media)
+             self.arrayS.append(std)
+
   def normalizarDatos(self,datos):
-      pass
+     #Recorrer los atributos excepto el último (Clase)
+     for idxColumna,atr in enumerate(self.nominalAtributos[:-1]):
+         if atr == False:  #continuo
+             #Restarle la media y dividirlo por la std
+             for idxFila,dat in enumerate(datos[:,idxColumna]):
+                 datos[idxFila][idxColumna] = (datos[idxFila][idxColumna] - self.arrayM[idxColumna] ) / self.arrayS[idxColumna]
+  
+  
+  
+  

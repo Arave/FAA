@@ -17,11 +17,12 @@ dataset=Datos('./ConjuntosDatos/example3.data',True)
 print "Estrategia: validacion cruzada, numParticiones: 10"
 estrategia=ValidacionCruzada(10)
 print "Clasificador: clasificador a Priori"
-clasificador = ClasificadorAPriori()
+clasificador = ClasificadorNaiveBayes()
 print "Ejecucción: "
 laplace = False
+normalizar = True
 print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace)
+errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
 print "\n"
 
 

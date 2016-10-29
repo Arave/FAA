@@ -280,13 +280,15 @@ class Clasificador(object):
            
            #Normalizar las datos si flag normalizacion = True
            if normalizacion == True:
-               #normalizar train            
-
                #Obtener media y std para cada atributo
-                media, std = dataset.calcularMediasDesv(datosTrain)
-                dataset.normalizarDatos(datosTrain)
-                media, std = dataset.calcularMediasDesv(datosTest)
-                dataset.normalizarDatos(datosTest)
+               #print 'Datos train sin normalizar' , datosTrain                
+               dataset.calcularMediasDesv(datosTrain)
+               dataset.normalizarDatos(datosTrain)
+               #print 'Datos train normalizados' , datosTrain
+               #print 'Datos test sin normalizar' ,datosTest 
+               dataset.calcularMediasDesv(datosTest)
+               dataset.normalizarDatos(datosTest)
+               #print 'Datos test normalizados' ,datosTest 
 
            
            
