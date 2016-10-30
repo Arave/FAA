@@ -130,8 +130,9 @@ class Clasificador(object):
           #idCl =  diccionarios[idxColumna][cl]
           numOcurrencias = Counter(datos[indices,idxColumna])[value]
           arrayNum.append(numOcurrencias)      
-      return arrayNum            
-  
+      return arrayNum     
+
+
   # Metodos abstractos que se implementan en casa clasificador concreto
   @abstractmethod
   # datosTrain: matriz numpy con los datos de entrenamiento
@@ -269,7 +270,8 @@ class Clasificador(object):
            print "ERR: nombre de estrategia no valido"
            exit(1)
 
-       print 'Correción de Laplace:',correcionL    
+       print 'Correción de Laplace:',correcionL
+       print 'Normalizar:',normalizacion 
        #for each particion: clasificar y sacar los errores de cada evaluación
        for idx, p in enumerate(particiones):
            #print "======================================================"
@@ -308,6 +310,7 @@ class Clasificador(object):
 
            error = clasificador.error(datosTest, pred)
            arrayErrores[idx] = error
+          
            #print "\t Porcentaje de error (%): ",error
            #estrategia=ValidacionSimple(10,80) => particionado, arg[0] - numero de particiones. Calcular la media y desv.
 
@@ -320,26 +323,67 @@ class Clasificador(object):
 
 
 ##############################################################################
-class ClasificadorVecinosProximos(Clasificador):
-  
-  mayoritaria=0
 
+
+class ClasificadorVecinosProximos(Clasificador):
+    
+  datostrain = None
+  k = 0    
+  
+  def __init__(self, k):
+    self.k= k
+  
+  #Calcula la distancia ecluidea  
+  @staticmethod  
+  def distanciaEuclidea(instance1, instance2, length):
+    	distance = 0
+    	for x in range(length):
+    		distance += pow((instance1[x] - instance2[x]), 2)
+    	return math.sqrt(distance)  
+  
+  #Función que devuelve los K vecinos más cercanos/similares para una fila de Test
+  #llamada testInstance   
+  @staticmethod   
+  def getVecinos(datostrain, testInstance, k):
+	distancias = []
+	length = len(testInstance)-1
+	for x in range(len(datostrain)):
+		dist = ClasificadorVecinosProximos.distanciaEuclidea(testInstance, datostrain[x], length)
+		distancias.append((datostrain[x], dist))
+	distancias.sort(key=operator.itemgetter(1))
+	vecinos = []
+	for x in range(k):
+		vecinos.append(distancias[x][0])
+	return vecinos
+
+  #Obtiene la clase mayoría si cada Vecino vota la suya (dice cual es más 
+  #probable) 
+  @staticmethod 
+  def getResultado(vecinos):
+	classVotes = {}
+	for x in range(len(vecinos)):
+		response = vecinos[x][-1]
+		if response in classVotes:
+			classVotes[response] += 1
+		else:
+			classVotes[response] = 1
+	sortedVotes = sorted(classVotes.iteritems(), key=operator.itemgetter(1), reverse=True)
+	return sortedVotes[0][0]
+ 
   def entrenamiento(self,datostrain,atributosDiscretos=None,diccionario=None):
-    # Obtener la clase mayoritaria de los datos
-      numColumnas = datostrain.shape[1]
-      most_common,num_most_common = Counter(datostrain[:,numColumnas-1]).most_common(1)[0]        
-      #print most_common
-      #print num_most_common
-      
-      self.mayoritaria = most_common
-      return most_common     
+      self.datostrain = datostrain
     
   def clasifica(self,datostest,atributosDiscretos=None,diccionario=None,correcion=None):
-    # Asignar la clase mayoritaria a todos los datos
-      numFilas = datostest.shape[0]
-      datos = np.empty(numFilas)
-      datos.fill(self.mayoritaria)
-      return datos
+    
+    numFilas = datostest.shape[0]
+    predicciones = []    
+    
+    #Recorrer los datos del test
+    for x in range(numFilas):
+      vecinos = self.getVecinos(self.datostrain, datostest[x], self.k)
+      resultado = self.getResultado(vecinos)
+      predicciones.append(resultado)
+    return predicciones
 
 
 

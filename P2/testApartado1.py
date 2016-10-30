@@ -10,7 +10,7 @@ from EstrategiaParticionado import ValidacionCruzada
 from Clasificador import ClasificadorNaiveBayes
 from Clasificador import ClasificadorAPriori
 
-print "Practica 2 Apartado 1 de la memoria"
+print "Practica 2 Apartado 2 de la memoria"
 
 print "\nFichero de datos: tic-tac-toe.data"
 dataset=Datos('./ConjuntosDatos/tic-tac-toe.data',True)
