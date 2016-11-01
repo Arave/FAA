@@ -39,7 +39,9 @@ class EstrategiaParticionado(object):
   @abstractmethod
   def creaParticiones(self,datos,seed=None):
     pass
-  
+
+  def getStratname(self):
+      return self.nombreEstrategia
 
 #####################################################################################################
 
@@ -77,7 +79,6 @@ class ValidacionSimple(EstrategiaParticionado):
     #Si es num
     #Crear particiones simples
     #np.split(datos, self.numeroParticiones)
-       
 #####################################################################################################      
 class ValidacionCruzada(EstrategiaParticionado):
 
