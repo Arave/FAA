@@ -7,6 +7,7 @@ import numpy as np
 import copy
 import math
 import operator
+import scipy.stats
 #import scipy.stats
 
 
@@ -294,10 +295,10 @@ class Clasificador(object):
 
            
            
-           #print ' =>DatosTrain [', idx, ']:'
-           #print datosTrain
-           #print ' =>DatosTest [', idx, ']:'
-           #print datosTest
+           """print ' =>DatosTrain [', idx, ']:'
+           print datosTrain
+           print ' =>DatosTest [', idx, ']:'
+           print datosTest"""
 
            # Entrenamiento
            """print '|||||||||||||||||||||||||||PARTICION ',idx,'|||||||||||||||||||||||||||'
@@ -468,6 +469,9 @@ class ClasificadorNaiveBayes(Clasificador):
      self.arrayPriori = arrayP
      self.tablaMedia = tablaM
      self.tablaStd = tablaS
+     #print "sorted_x", sorted_x
+     #print "tablaM", tablaM
+     #print "tablaS", tablaS
      #print 'tablaValores train plana:\n',self.tablaValores
      #print 'prob. priori de clases:\n', self.arrayPriori
      """
@@ -551,13 +555,12 @@ class ClasificadorNaiveBayes(Clasificador):
       arg = []
       #print 'tablaValores train (norm,corregida):\n', self.tablaValores
       for clase,idx_clase in sorted_clases:   #key=clase, value=idx_clase 
-          flag_0 = False
           sumatorio = 0.0
+          probClase = 0.0 
           probClase = self.arrayPriori[idx_clase]
           for idx_atri, atri in enumerate(self.tablaValores):
-              #caso discreto
               prob = 0.0
-              if atributosDiscretos[idx_atri]:
+              if atributosDiscretos[idx_atri]: #caso discreto
                   #sacar valor del atributo de test y pasarlo a indice (int)
                   value = int(round(tupla[idx_atri]))
                   #print 'value:',value
@@ -566,40 +569,18 @@ class ClasificadorNaiveBayes(Clasificador):
                   prob = self.tablaValores[idx_atri][idx_clase][value]
                   ##print "\tP(x"+str(idx_atri)+"="+str(value)+"|clase"+str(idx_clase)+")="+str(prob)
                   ##print "\tlog(P(x" + str(idx_atri) + "=" + str(value) + "|clase" + str(idx_clase) + ")=" + str(math.log(prob))
-                  #print '\tprobDiscreta:',prob
-              #caso continuo
-              else:
+                  #print '\tprobDiscreta:',prob   
+              else: #caso continuo
                   value = tupla[idx_atri]
                   prob = self.normpdf(value, self.tablaMedia[idx_atri][idx_clase], self.tablaStd[idx_atri][idx_clase])
-                  #print '\tprobContinua:', prob
+                  #prob = scipy.stats.norm(self.tablaMedia[idx_atri][idx_clase], self.tablaStd[idx_atri][idx_clase]).pdf(value)
               #check para descartar el calculo + que no pete con los log
-              if (prob == 0.0) or (probClase == 0.0) or (flag_0 == True):
-                  # P(xj|ci)=0
-                  #flag_0 = True
-                  #break
-                  if probClase != 0.0:
-                      sumatorio += math.log(probClase)
-                  if prob != 0.0:
-                      sumatorio += math.log(prob)
-              else:
-                  sumatorio += math.log(prob)
+              if prob != 0.0:
+                 sumatorio += math.log(prob)
+          if probClase != 0.0:
                   sumatorio += math.log(probClase)
-                  ##print '\tsumatorio=',sumatorio
-          if (flag_0 == True):
-              arg.append(0)
-              #arg.append(sumatorio)
-          else:
-              probClase = self.arrayPriori[idx_clase]
-              #print "\tP(clase"+str(idx_clase)+")="+str(probClase)
-              #print "\tlog(P(clase"+str(idx_clase)+")="+str(math.log(probClase))
-              #print '\tprobClase [',idx_clase,']:', probClase
-              if probClase == 0.0:
-                  arg.append(0)
-               #else:
-                  #sumatorio += math.log(probClase)
-                  ##print '\tlog(sumatorio_final + log(P(clase):', sumatorio
-              arg.append(sumatorio)
-              #print '\tProb NP para esa clase, quitando logs=',math.exp(sumatorio)
+          arg.append(sumatorio)
+          #print '\tProb NP para esa clase',idx_clase,', quitando logs=',math.exp(sumatorio)
       #return max(arg)
       index, element = max(enumerate(arg), key=itemgetter(1))
       #print 'index:',index,'element:',element

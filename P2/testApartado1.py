@@ -90,7 +90,7 @@ def runScikit(fichero_datos, cls, cls_brief, strat, cv, supervisado, laplace):
     """
     return
 
-print "Practica 2 Apartado 2 de la memoria"
+print "Practica 2 Apartado 1 de la memoria"
 
 pruebasMatices()
 
