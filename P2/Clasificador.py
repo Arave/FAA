@@ -327,64 +327,63 @@ class Clasificador(object):
 
 
 class ClasificadorVecinosProximos(Clasificador):
-  datostrain = None
-  k = 0    
-  
-  def __init__(self, k):
-    self.k= k
-  
-  #Calcula la distancia ecluidea  
-  @staticmethod  
-  def distanciaEuclidea(instance1, instance2, length):
+    datostrain = None
+    k = 0
+
+    def __init__(self, k):
+        self.k = k
+
+    # Calcula la distancia ecluidea
+    @staticmethod
+    def distanciaEuclidea(instance1, instance2, length):
         distance = 0
-        for x in range(length):
+        for x in xrange(length):
             distance += pow((instance1[x] - instance2[x]), 2)
         return math.sqrt(distance)
-  
-  #Función que devuelve los K vecinos más cercanos/similares para una fila de Test
-  #llamada testInstance   
-  @staticmethod
-  def getVecinos(datostrain, testInstance, k):
-    distancias = []
-    length = len(testInstance)-1
-    for x in range(len(datostrain)):
-        dist = ClasificadorVecinosProximos.distanciaEuclidea(testInstance, datostrain[x], length)
-        distancias.append((datostrain[x], dist))
-    distancias.sort(key=operator.itemgetter(1))
-    vecinos = []
-    for x in range(k):
-        vecinos.append(distancias[x][0])
-    return vecinos
 
-  #Obtiene la clase mayoría si cada Vecino vota la suya (dice cual es más 
-  #probable) 
-  @staticmethod
-  def getResultado(vecinos):
-    classVotes = {}
-    for x in range(len(vecinos)):
-        response = vecinos[x][-1]
-        if response in classVotes:
-            classVotes[response] += 1
-        else:
-            classVotes[response] = 1
-    sortedVotes = sorted(classVotes.iteritems(), key=operator.itemgetter(1), reverse=True)
-    return sortedVotes[0][0]
- 
-  def entrenamiento(self,datostrain,atributosDiscretos=None,diccionario=None):
-    self.datostrain = datostrain
-    
-  def clasifica(self,datostest,atributosDiscretos=None,diccionario=None,correcion=None):
-    
-    numFilas = datostest.shape[0]
-    predicciones = []    
-    
-    #Recorrer los datos del test
-    for x in range(numFilas):
-      vecinos = self.getVecinos(self.datostrain, datostest[x], self.k)
-      resultado = self.getResultado(vecinos)
-      predicciones.append(resultado)
-    return predicciones
+    # Función que devuelve los K vecinos más cercanos/similares para una fila de Test
+    # llamada testInstance
+    @staticmethod
+    def getVecinos(datostrain, testInstance, k):
+        distancias = []
+        length = len(testInstance) - 1
+        for x in xrange(len(datostrain)):
+            dist = ClasificadorVecinosProximos.distanciaEuclidea(testInstance, datostrain[x], length)
+            distancias.append((datostrain[x], dist))
+        distancias.sort(key=operator.itemgetter(1))
+        vecinos = []
+        for x in xrange(k):
+            vecinos.append(distancias[x][0])
+        return vecinos
 
+    # Obtiene la clase mayoría si cada Vecino vota la suya (dice cual es más
+    # probable)
+    @staticmethod
+    def getResultado(vecinos):
+        classVotes = {}
+        for x in xrange(len(vecinos)):
+            response = vecinos[x][-1]
+            if response in classVotes:
+                classVotes[response] += 1
+            else:
+                classVotes[response] = 1
+        sortedVotes = sorted(classVotes.iteritems(), key=operator.itemgetter(1), reverse=True)
+        return sortedVotes[0][0]
+
+    def entrenamiento(self, datostrain, atributosDiscretos=None, diccionario=None):
+        self.datostrain = datostrain
+
+    def clasifica(self, datostest, atributosDiscretos=None, diccionario=None, correcion=None):
+
+        numFilas = datostest.shape[0]
+        predicciones = []
+
+        # Recorrer los datos del test
+        for x in xrange(numFilas):
+            vecinos = self.getVecinos(self.datostrain, datostest[x], self.k)
+            resultado = self.getResultado(vecinos)
+            predicciones.append(resultado)
+        return predicciones
 
 
 #############################################################################
@@ -471,7 +470,7 @@ class ClasificadorNaiveBayes(Clasificador):
      self.tablaStd = tablaS
      #print "sorted_x", sorted_x
      #print "tablaM", tablaM
-     #print "tablaS", tablaS
+     #print "t  ablaS", tablaS
      #print 'tablaValores train plana:\n',self.tablaValores
      #print 'prob. priori de clases:\n', self.arrayPriori
      """
