@@ -3,11 +3,13 @@ from __future__ import division #Para divisiones float por defecto
 from operator import itemgetter
 from abc import ABCMeta,abstractmethod
 from collections import Counter
+from scipy.special import expit
 import numpy as np
 import copy
 import math
 import operator
 import scipy.stats
+
 #import scipy.stats
 
 
@@ -321,7 +323,38 @@ class Clasificador(object):
        print "Media de errores total:" ,np.mean(arrayErrores), "%"
        print "Mediana de errores total:" ,np.median(arrayErrores), "%"
        print "Desviación típica:" ,np.std(arrayErrores), "%"
+##############################################################################
 
+
+class ClasificadorRegresionLogistica(Clasificador):
+    datostrain = None
+    nEpocas = 0
+
+    def __init__(self, nEpocas):
+        self.nEpocas = nEpocas
+        
+    def entrenamiento(self, datostrain, atributosDiscretos=None, diccionario=None):
+        self.datostrain = datostrain
+
+    def clasifica(self, datostest, atributosDiscretos=None, diccionario=None, correcion=None):
+        numFilas = datostest.shape[0]
+        numColumnas = datostest.shape[1]
+        #generar un vector W, con valores aleatorios entre -0.5 y 0.5
+        vectorW = np.random.uniform(low=-0.5, high=0.5, size=(numColumnas - 1,))
+        #para ie=1 -> nEpocas
+        for ie in self.nEpocas:
+            #para i=1 -> n
+            for i in numFilas:
+                #Calcular Sigmoidal i ==> P(C1|vectorXi)  - Posteriori
+                sigmoI = expit()
+        
+
+    
+    
+    
+    
+    
+    
 
 ##############################################################################
 
