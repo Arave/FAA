@@ -329,24 +329,65 @@ class Clasificador(object):
 class ClasificadorRegresionLogistica(Clasificador):
     datostrain = None
     nEpocas = 0
+    cteAprendizaje = 0
+    vectorW = 0
 
-    def __init__(self, nEpocas):
+    def __init__(self, nEpocas, cteAprendizaje):
         self.nEpocas = nEpocas
+        self.cteAprendizaje = cteAprendizaje
         
     def entrenamiento(self, datostrain, atributosDiscretos=None, diccionario=None):
-        self.datostrain = datostrain
+        numFilas = datostrain.shape[0]
+        numColumnas = datostrain.shape[1]
+
+        #generar un vector W, con valores aleatorios entre -0.5 y 0.5 para
+        #numColumnas - 1 + 1 (X0)
+        vectorW = np.random.uniform(low=-0.5, high=0.5, size=(numColumnas,))
+        #para ie=1 -> nEpocas
+        for ie in xrange(self.nEpocas):
+            #para i=1 -> N
+            for i in xrange(numFilas):
+                #Calcular Sigmoidal i (Sig(vectorWt * vectorXi)) === P(C1|vectorXi)  - Posteriori
+                #Primero calculamos la vectorWt * vectorXi
+                instanceTrain = np.insert(datostrain[i], 0, 1) #Añadir 1 al inicio
+                #Multiplicar los elementos del array
+                sumatorio = 0
+                for m in xrange(numColumnas):
+                    sumatorio += vectorW[m] * instanceTrain[m]
+                """print 'vectorW', vectorW
+                print 'instanceTrain', instanceTrain[:-1]
+                print 'mult', sumatorio"""
+                #Calcular la sigmoidal
+                sig = expit(sumatorio)
+                #Calcular el nuevo vectorW
+                #vectorW = vectorW - cteAprendizaje(sig - Ti) * (vectorXi)
+                vectorW = vectorW - (self.cteAprendizaje*(sig - (1 - instanceTrain[-1])))* instanceTrain[:-1]
+        self.vectorW = vectorW 
+
 
     def clasifica(self, datostest, atributosDiscretos=None, diccionario=None, correcion=None):
         numFilas = datostest.shape[0]
         numColumnas = datostest.shape[1]
-        #generar un vector W, con valores aleatorios entre -0.5 y 0.5
-        vectorW = np.random.uniform(low=-0.5, high=0.5, size=(numColumnas - 1,))
-        #para ie=1 -> nEpocas
-        for ie in self.nEpocas:
-            #para i=1 -> n
-            for i in numFilas:
-                #Calcular Sigmoidal i ==> P(C1|vectorXi)  - Posteriori
-                sigmoI = expit()
+        predicciones = []
+
+        for i in xrange(numFilas):
+            #Calcular Sigmoidal i (Sig(vectorWt * vectorXi)) === P(C1|vectorXi)  - Posteriori
+            #Primero calculamos la vectorWt * vectorXi
+            instanceTrain = np.insert(datostest[i], 0, 1) #Añadir 1 al inicio
+            #Multiplicar los elementos del array
+            sumatorio = 0
+            for m in xrange(numColumnas):
+                sumatorio += self.vectorW[m] * instanceTrain[m]
+            #Calcular la sigmoidal
+            sig = expit(sumatorio)
+            #Comprobar a que clase pertenece
+            if (sig > 0.5):
+                predicciones.append(0)
+            else:
+                predicciones.append(1)
+        return predicciones    
+            
+
         
 
     
@@ -361,12 +402,14 @@ class ClasificadorRegresionLogistica(Clasificador):
 
 class ClasificadorVecinosProximos(Clasificador):
     datostrain = None
-    k = 0
+    k = 0 #numero de vecinos
 
     def __init__(self, k):
         self.k = k
 
-    # Calcula la distancia ecluidea
+    # Calcula la distancia ecluidea entre 2 instancias de tam length. Es decir, 
+    #la raiz cuadrada de la suma de las diferencias(resta) entre 2 arrays de 
+    #números (Instance 1 y 2).
     @staticmethod
     def distanciaEuclidea(instance1, instance2, length):
         distance = 0
@@ -375,16 +418,19 @@ class ClasificadorVecinosProximos(Clasificador):
         return math.sqrt(distance)
 
     # Función que devuelve los K vecinos más cercanos/similares para una fila de Test
-    # llamada testInstance
+    # llamada testInstance respecto a datosTrain. 
     @staticmethod
     def getVecinos(datostrain, testInstance, k):
         distancias = []
-        length = len(testInstance) - 1
+        length = len(testInstance) - 1 #La última es la clase
+        #Recorrer todos las filas de entrenamiento para allar las distancias
         for x in xrange(len(datostrain)):
+            #Calcular la distancia ecluidea del Test respecto a la la fila X del conjunto train. 
             dist = ClasificadorVecinosProximos.distanciaEuclidea(testInstance, datostrain[x], length)
             distancias.append((datostrain[x], dist))
-        distancias.sort(key=operator.itemgetter(1))
-        vecinos = []
+        distancias.sort(key=operator.itemgetter(1)) #Ordenar las distancias de menos a mayor
+        vecinos = [] #Vecinos más cercanos
+        #Hasta el num. de vecinos, ir añadiendo las menores distancias
         for x in xrange(k):
             vecinos.append(distancias[x][0])
         return vecinos
@@ -393,30 +439,36 @@ class ClasificadorVecinosProximos(Clasificador):
     # probable)
     @staticmethod
     def getResultado(vecinos):
-        classVotes = {}
+        classVotes = {} #Diccionario con las clases y los votos 
+        #Reccorrer para todos los vecinos y obtener la clase que vota cada uno
         for x in xrange(len(vecinos)):
             response = vecinos[x][-1]
-            if response in classVotes:
+            if response in classVotes: #Si ya existe la clase sumarle 1 al "contador"
                 classVotes[response] += 1
-            else:
+            else: #No existe esa clase, inicializarla a 1, ese voto. 
                 classVotes[response] = 1
+        #Ordenar los votos de mayor a menor (reverse=True)
         sortedVotes = sorted(classVotes.iteritems(), key=operator.itemgetter(1), reverse=True)
-        return sortedVotes[0][0]
+        return sortedVotes[0][0] #Devolver la clase mayoritaria
 
     def entrenamiento(self, datostrain, atributosDiscretos=None, diccionario=None):
-        self.datostrain = datostrain
+        #Guardar los datos de train para usarlos en test al calcular distancias
+        self.datostrain = datostrain  
+        
 
     def clasifica(self, datostest, atributosDiscretos=None, diccionario=None, correcion=None):
-
         numFilas = datostest.shape[0]
         predicciones = []
 
-        # Recorrer los datos del test
+        # Recorrer los datos(filas) del test
         for x in xrange(numFilas):
+            #Obtener los vecinos para la fila X delos datos del test
             vecinos = self.getVecinos(self.datostrain, datostest[x], self.k)
+            #Obtener la clase mayoritaria para esa fila
             resultado = self.getResultado(vecinos)
+            #Añadirla al array de predicciones
             predicciones.append(resultado)
-        return predicciones
+        return predicciones #devolver el array de predicciones
 
 
 #############################################################################
