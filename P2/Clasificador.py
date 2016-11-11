@@ -381,7 +381,7 @@ class ClasificadorRegresionLogistica(Clasificador):
             #Calcular la sigmoidal
             sig = expit(sumatorio)
             #Comprobar a que clase pertenece
-            if (sig > 0.5):
+            if sig > 0.5:
                 predicciones.append(0)
             else:
                 predicciones.append(1)

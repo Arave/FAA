@@ -5,117 +5,54 @@ Created on Mon Sep 26 19:51:02 2016
 @author: Albert Soler, Alfonso Sebares
 """
 
-from Datos import Datos
+from Main import Main
 from EstrategiaParticionado import ValidacionCruzada
 from Clasificador import ClasificadorRegresionLogistica
 
 print "Practica 2 test apartado 3"
 nEpocas = 1
 cteAprendizaje = 1
+clasificador = ClasificadorRegresionLogistica(nEpocas, cteAprendizaje)
 
 #Fichero 1 - example3.data
-print "\nFichero de datos: example3.data"
+#==================================================example3=================================================#
+data_file = 'example3.data'
+about = "clasificador Regresion Logistica"
+clf_id = "LogisticRegression"
+
+Main.run(data_file, clasificador, about, ValidacionCruzada(10), 10, True, False, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False)
+
+#normalizar=True
+about = "clasificador Regresion Logistica, normalizar"
+Main.run(data_file, clasificador, about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True)
+
+#==================================================example4=================================================#
+data_file = 'example4.data'
+about = "clasificador Regresion Logistica"
+
+Main.run(data_file, clasificador, about, ValidacionCruzada(10), 10, True, False, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False)
+
+#normalizar=True
+about = "clasificador Regresion Logistica, normalizar"
+Main.run(data_file, clasificador, about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True)
+
+#==================================================wdbc=================================================#
+data_file = 'wdbc.data'
+
+Main.run(data_file, clasificador, about, ValidacionCruzada(10), 10, True, False, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False)
+
+#normalizar=True
+about = "clasificador Regresion Logistica, normalizar"
+Main.run(data_file, clasificador, about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True)
+
+#==================================================wine=================================================#
 
 
-print "Laplace = False, normalizar = False"
-laplace = False
-normalizar = False
+#=================================================digits================================================#
 
-dataset=Datos('./ConjuntosDatos/example3.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorRegresionLogistica(nEpocas, cteAprendizaje)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "\n\nLaplace = False, normalizar = True"
-laplace = False
-normalizar = True
-
-dataset=Datos('./ConjuntosDatos/example3.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorRegresionLogistica(nEpocas, cteAprendizaje)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-
-print "\n"
-
-#Fichero 2 - example 4
-
-print "\n"
-print "***********************************************************************"
-print "\n\nFichero de datos: example4.data"
-print "Laplace = False, normalizar = False"
-laplace = False
-normalizar = False
-
-dataset=Datos('./ConjuntosDatos/example4.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorRegresionLogistica(nEpocas, cteAprendizaje)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-
-
-print "\n\nLaplace = False, normalizar = True"
-laplace = False
-normalizar = True
-
-dataset=Datos('./ConjuntosDatos/example4.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorRegresionLogistica(nEpocas, cteAprendizaje)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-
-
-
-#Fichero 3 - wdbc
-
-print "\n"
-print "***********************************************************************"
-print "\n\nFichero de datos: wdbc.data"
-print "Laplace = False, normalizar = False"
-laplace = False
-normalizar = False
-
-dataset=Datos('./ConjuntosDatos/wdbc.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorRegresionLogistica(nEpocas, cteAprendizaje)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-
-print "\n\nLaplace = False, normalizar = True"
-laplace = False
-normalizar = True
-
-dataset=Datos('./ConjuntosDatos/wdbc.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorRegresionLogistica(nEpocas, cteAprendizaje)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"

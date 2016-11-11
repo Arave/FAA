@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8c68819-73f8-4082-ba82-d0a7a199a123" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/P2.iml" afterPath="$PROJECT_DIR$/.idea/P2.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Clasificador.py" afterPath="$PROJECT_DIR$/Clasificador.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testApartado1.py" afterPath="$PROJECT_DIR$/testApartado1.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testApartado2.py" afterPath="$PROJECT_DIR$/testApartado2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testApartado3.py" afterPath="$PROJECT_DIR$/testApartado3.py" />
     </list>
     <ignored path="P2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -22,18 +28,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="Datos.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Datos.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2160">
-              <caret line="82" column="51" selection-start-line="82" selection-start-column="51" selection-end-line="82" selection-end-column="51" />
-              <folding>
-                <element signature="e#25#91#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="testVecinos.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testVecinos.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -46,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Clasificador.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Clasificador.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Clasificador.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="574" column="38" selection-start-line="574" selection-start-column="38" selection-end-line="574" selection-end-column="38" />
+            <state relative-caret-position="317">
+              <caret line="290" column="35" selection-start-line="290" selection-start-column="35" selection-end-line="290" selection-end-column="35" />
               <folding>
                 <element signature="e#24#90#0" expanded="true" />
               </folding>
@@ -58,13 +52,59 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Datos.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Datos.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="251">
+              <caret line="129" column="35" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="testApartado1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testApartado1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state relative-caret-position="-813">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
               <folding>
-                <element signature="e#109#142#0" expanded="true" />
+                <element signature="e#109#130#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testApartado2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testApartado2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-4563">
+              <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+              <folding>
+                <element signature="e#109#130#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testApartado3.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testApartado3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="621">
+              <caret line="23" column="76" selection-start-line="23" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding>
+                <element signature="e#109#130#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-999">
+              <caret line="50" column="31" selection-start-line="50" selection-start-column="31" selection-end-line="50" selection-end-column="31" />
+              <folding>
+                <element signature="e#1#59#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -85,16 +125,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2970">
               <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testApartado2.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testApartado2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -128,17 +158,22 @@
         <option value="$PROJECT_DIR$/scikit-learnNaive.py" />
         <option value="$PROJECT_DIR$/EstrategiaParticionado.py" />
         <option value="$PROJECT_DIR$/pruebas.py" />
-        <option value="$PROJECT_DIR$/testApartado1.py" />
-        <option value="$PROJECT_DIR$/Clasificador.py" />
+        <option value="$PROJECT_DIR$/wrap.py" />
+        <option value="$PROJECT_DIR$/__init__.py" />
+        <option value="$PROJECT_DIR$/Envoltorio.py" />
+        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/testApartado2.py" />
+        <option value="$PROJECT_DIR$/Clasificador.py" />
+        <option value="$PROJECT_DIR$/testApartado1.py" />
+        <option value="$PROJECT_DIR$/testApartado3.py" />
+        <option value="$PROJECT_DIR$/Main.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2" />
-    <option name="y" value="25" />
+    <option name="x" value="1918" />
     <option name="width" value="1924" />
-    <option name="height" value="1057" />
+    <option name="height" value="1082" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -184,6 +219,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -202,24 +238,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="P2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="P2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ConjuntosDatos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -234,24 +255,7 @@
       </console-settings>
     </option>
   </component>
-  <component name="RunManager" selected="Python.testApartado2">
-    <configuration default="false" name="testVecinos" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="P2" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testVecinos.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.testApartado3">
     <configuration default="false" name="scikit-learnNaive" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -316,6 +320,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="P2" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testApartado2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="testApartado3" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="P2" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testApartado3.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -455,19 +476,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.testVecinos" />
-      <item index="1" class="java.lang.String" itemvalue="Python.scikit-learnNaive" />
-      <item index="2" class="java.lang.String" itemvalue="Python.testApartado1" />
-      <item index="3" class="java.lang.String" itemvalue="Python.pruebas" />
-      <item index="4" class="java.lang.String" itemvalue="Python.testApartado2" />
+      <item index="0" class="java.lang.String" itemvalue="Python.scikit-learnNaive" />
+      <item index="1" class="java.lang.String" itemvalue="Python.testApartado1" />
+      <item index="2" class="java.lang.String" itemvalue="Python.pruebas" />
+      <item index="3" class="java.lang.String" itemvalue="Python.testApartado2" />
+      <item index="4" class="java.lang.String" itemvalue="Python.testApartado3" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.testApartado2" />
-        <item index="1" class="java.lang.String" itemvalue="Python.testApartado1" />
-        <item index="2" class="java.lang.String" itemvalue="Python.pruebas" />
-        <item index="3" class="java.lang.String" itemvalue="Python.scikit-learnNaive" />
-        <item index="4" class="java.lang.String" itemvalue="Python.testVecinos" />
+        <item index="0" class="java.lang.String" itemvalue="Python.testApartado3" />
+        <item index="1" class="java.lang.String" itemvalue="Python.testApartado2" />
+        <item index="2" class="java.lang.String" itemvalue="Python.testApartado1" />
+        <item index="3" class="java.lang.String" itemvalue="Python.pruebas" />
+        <item index="4" class="java.lang.String" itemvalue="Python.scikit-learnNaive" />
       </list>
     </recent_temporary>
   </component>
@@ -485,15 +506,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2" y="25" width="1924" height="1057" extended-state="6" />
+    <frame x="1918" y="0" width="1924" height="1082" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14822657" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32897604" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41564247" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22875817" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -520,18 +541,33 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="8" />
+      <option name="time" value="10" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/testApartado2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+          <folding>
+            <element signature="e#109#130#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EstrategiaParticionado.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2268">
+          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Datos.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2214">
           <caret line="82" column="51" selection-start-line="82" selection-start-column="51" selection-end-line="82" selection-end-column="51" />
-          <folding>
-            <element signature="e#25#91#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -560,7 +596,7 @@
         <state relative-caret-position="432">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
-            <element signature="e#109#142#0" expanded="true" />
+            <element signature="e#109#130#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -585,7 +621,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#109#130#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -601,9 +639,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2160">
           <caret line="82" column="51" selection-start-line="82" selection-start-column="51" selection-end-line="82" selection-end-column="51" />
-          <folding>
-            <element signature="e#25#91#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -632,7 +667,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#109#142#0" expanded="true" />
+            <element signature="e#109#130#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -657,7 +692,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#109#130#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -673,9 +710,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#91#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -684,7 +718,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#109#142#0" expanded="true" />
+            <element signature="e#109#130#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -714,9 +748,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#91#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -725,7 +756,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#109#142#0" expanded="true" />
+            <element signature="e#109#130#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -783,16 +814,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scikit-learnNaive.py" />
-    <entry file="file://$PROJECT_DIR$/Datos.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2160">
-          <caret line="82" column="51" selection-start-line="82" selection-start-column="51" selection-end-line="82" selection-end-column="51" />
-          <folding>
-            <element signature="e#25#91#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testVecinos.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
@@ -800,6 +821,44 @@
           <folding>
             <element signature="e#109#132#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ConjuntosDatos/wine_proc.data">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="5" column="71" selection-start-line="5" selection-start-column="71" selection-end-line="5" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pruebas.py" />
+    <entry file="file://$PROJECT_DIR$/ConjuntosDatos/digits.data">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="1" column="547" selection-start-line="1" selection-start-column="547" selection-end-line="1" selection-end-column="547" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ConjuntosDatos/tic-tac-toe.data">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/utils/validation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3078">
+          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -819,62 +878,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/utils/validation.py">
+    <entry file="file://$PROJECT_DIR$/Clasificador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3078">
-          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ConjuntosDatos/wine_proc.data">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="5" column="71" selection-start-line="5" selection-start-column="71" selection-end-line="5" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pruebas.py" />
-    <entry file="file://$PROJECT_DIR$/testApartado1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="317">
+          <caret line="290" column="35" selection-start-line="290" selection-start-column="35" selection-end-line="290" selection-end-column="35" />
           <folding>
-            <element signature="e#109#142#0" expanded="true" />
+            <element signature="e#24#90#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ConjuntosDatos/digits.data">
+    <entry file="file://$PROJECT_DIR$/Datos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="1" column="547" selection-start-line="1" selection-start-column="547" selection-end-line="1" selection-end-column="547" />
+        <state relative-caret-position="251">
+          <caret line="129" column="35" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ConjuntosDatos/tic-tac-toe.data">
+    <entry file="file://$PROJECT_DIR$/testApartado3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="621">
+          <caret line="23" column="76" selection-start-line="23" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="e#109#130#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testApartado2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
-          <folding />
+        <state relative-caret-position="-4563">
+          <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+          <folding>
+            <element signature="e#109#130#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Clasificador.py">
+    <entry file="file://$PROJECT_DIR$/testApartado1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="574" column="38" selection-start-line="574" selection-start-column="38" selection-end-line="574" selection-end-column="38" />
+        <state relative-caret-position="-813">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
           <folding>
-            <element signature="e#24#90#0" expanded="true" />
+            <element signature="e#109#130#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-999">
+          <caret line="50" column="31" selection-start-line="50" selection-start-column="31" selection-end-line="50" selection-end-column="31" />
+          <folding>
+            <element signature="e#1#59#0" expanded="true" />
           </folding>
         </state>
       </provider>

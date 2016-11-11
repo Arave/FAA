@@ -5,515 +5,265 @@ Created on Mon Sep 26 19:51:02 2016
 @author: Albert Soler, Alfonso Sebares
 """
 
-from Datos import Datos
+from Main import Main
 from EstrategiaParticionado import ValidacionCruzada
 from Clasificador import ClasificadorVecinosProximos
 
 print "Practica 2 test apartado 2"
 
-
-# Fichero 1 example3.data
-
-print "\nFichero de datos: example3.data"
-print "Laplace = False, normalizar = False"
-laplace = False
-normalizar = False
-
-dataset=Datos('./ConjuntosDatos/example3.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorVecinosProximos(1)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-
-print "Clasificador: clasificador a Vecinos próximos k=3"
-clasificador = ClasificadorVecinosProximos(3)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=5"
-clasificador = ClasificadorVecinosProximos(5)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=11"
-clasificador = ClasificadorVecinosProximos(11)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=21"
-clasificador = ClasificadorVecinosProximos(21)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=51"
-clasificador = ClasificadorVecinosProximos(51)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "\n\nLaplace = False, normalizar = True"
-laplace = False
-normalizar = True
-
-dataset=Datos('./ConjuntosDatos/example3.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorVecinosProximos(1)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-
-print "Clasificador: clasificador a Vecinos próximos k=3"
-clasificador = ClasificadorVecinosProximos(3)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=5"
-clasificador = ClasificadorVecinosProximos(5)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=11"
-clasificador = ClasificadorVecinosProximos(11)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=21"
-clasificador = ClasificadorVecinosProximos(21)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=51"
-clasificador = ClasificadorVecinosProximos(51)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-
-#Fichero 2 - example 4
-
-print "\n"
-print "***********************************************************************"
-print "\n\nFichero de datos: example4.data"
-print "Laplace = False, normalizar = False"
-laplace = False
-normalizar = False
-
-dataset=Datos('./ConjuntosDatos/example4.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorVecinosProximos(1)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-
-print "Clasificador: clasificador a Vecinos próximos k=3"
-clasificador = ClasificadorVecinosProximos(3)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=5"
-clasificador = ClasificadorVecinosProximos(5)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=11"
-clasificador = ClasificadorVecinosProximos(11)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=21"
-clasificador = ClasificadorVecinosProximos(21)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=51"
-clasificador = ClasificadorVecinosProximos(51)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "\n\nLaplace = False, normalizar = True"
-laplace = False
-normalizar = True
-
-dataset=Datos('./ConjuntosDatos/example4.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorVecinosProximos(1)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-
-print "Clasificador: clasificador a Vecinos próximos k=3"
-clasificador = ClasificadorVecinosProximos(3)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=5"
-clasificador = ClasificadorVecinosProximos(5)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=11"
-clasificador = ClasificadorVecinosProximos(11)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=21"
-clasificador = ClasificadorVecinosProximos(21)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=51"
-clasificador = ClasificadorVecinosProximos(51)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-
-#Fichero 3 - wine_proc
-
-print "\n"
-print "***********************************************************************"
-print "\n\nFichero de datos: wine_proc.data"
-print "Laplace = False, normalizar = False"
-laplace = False
-normalizar = False
-
-dataset=Datos('./ConjuntosDatos/wine_proc.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorVecinosProximos(1)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-
-print "Clasificador: clasificador a Vecinos próximos k=3"
-clasificador = ClasificadorVecinosProximos(3)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=5"
-clasificador = ClasificadorVecinosProximos(5)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=11"
-clasificador = ClasificadorVecinosProximos(11)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=21"
-clasificador = ClasificadorVecinosProximos(21)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=51"
-clasificador = ClasificadorVecinosProximos(51)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "\n\nLaplace = False, normalizar = True"
-laplace = False
-normalizar = True
-
-dataset=Datos('./ConjuntosDatos/wine_proc.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorVecinosProximos(1)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-
-print "Clasificador: clasificador a Vecinos próximos k=3"
-clasificador = ClasificadorVecinosProximos(3)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=5"
-clasificador = ClasificadorVecinosProximos(5)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=11"
-clasificador = ClasificadorVecinosProximos(11)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=21"
-clasificador = ClasificadorVecinosProximos(21)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=51"
-clasificador = ClasificadorVecinosProximos(51)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-
-
-
-#Fichero 4 - wdbc
-
-print "\n"
-print "***********************************************************************"
-print "\n\nFichero de datos: wdbc.data"
-print "Laplace = False, normalizar = False"
-laplace = False
-normalizar = False
-
-dataset=Datos('./ConjuntosDatos/wdbc.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorVecinosProximos(1)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=3"
-clasificador = ClasificadorVecinosProximos(3)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=5"
-clasificador = ClasificadorVecinosProximos(5)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=11"
-clasificador = ClasificadorVecinosProximos(11)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=21"
-clasificador = ClasificadorVecinosProximos(21)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=51"
-clasificador = ClasificadorVecinosProximos(51)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "\n\nLaplace = False, normalizar = True"
-laplace = False
-normalizar = True
-
-dataset=Datos('./ConjuntosDatos/wdbc.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorVecinosProximos(1)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=3"
-clasificador = ClasificadorVecinosProximos(3)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=5"
-clasificador = ClasificadorVecinosProximos(5)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=11"
-clasificador = ClasificadorVecinosProximos(11)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=21"
-clasificador = ClasificadorVecinosProximos(21)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=51"
-clasificador = ClasificadorVecinosProximos(51)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-
-
-
-#Fichero 5 - digits
-
-print "\n"
-print "***********************************************************************"
-print "\n\nFichero de datos: digits.data"
-print "Laplace = False, normalizar = False"
-laplace = False
-normalizar = False
-
-dataset=Datos('./ConjuntosDatos/digits.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorVecinosProximos(1)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=3"
-clasificador = ClasificadorVecinosProximos(3)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=5"
-clasificador = ClasificadorVecinosProximos(5)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=11"
-clasificador = ClasificadorVecinosProximos(11)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=21"
-clasificador = ClasificadorVecinosProximos(21)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-print "Clasificador: clasificador a Vecinos próximos k=51"
-clasificador = ClasificadorVecinosProximos(51)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "\n\nLaplace = False, normalizar = True"
-laplace = False
-normalizar = True
-
-dataset=Datos('./ConjuntosDatos/digits.data',True)
-print "Estrategia: validacion cruzada, numParticiones: 10"
-estrategia=ValidacionCruzada(10)
-print "Clasificador: clasificador a Vecinos próximos k=1"
-clasificador = ClasificadorVecinosProximos(1)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=3"
-clasificador = ClasificadorVecinosProximos(3)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=5"
-clasificador = ClasificadorVecinosProximos(5)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=11"
-clasificador = ClasificadorVecinosProximos(11)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=21"
-clasificador = ClasificadorVecinosProximos(21)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
-
-print "Clasificador: clasificador a Vecinos próximos k=51"
-clasificador = ClasificadorVecinosProximos(51)
-print "Ejecucción: "
-print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
-print "\n"
+#==================================================example3=================================================#
+data_file = 'example3.data'
+about = "clasificador a Vecinos próximos k=1"
+clf_id = "KNeighborsClassifier"
+Main.run(data_file, ClasificadorVecinosProximos(1), about, ValidacionCruzada(10), 10, True, False, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 1)
+
+about = "clasificador a Vecinos próximos k=3"
+Main.run(data_file, ClasificadorVecinosProximos(3), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 3)
+
+about = "clasificador a Vecinos próximos k=5"
+Main.run(data_file, ClasificadorVecinosProximos(5), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 5)
+
+about = "clasificador a Vecinos próximos k=11"
+Main.run(data_file, ClasificadorVecinosProximos(11), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 11)
+
+about = "clasificador a Vecinos próximos k=21"
+Main.run(data_file, ClasificadorVecinosProximos(21), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 21)
+
+about = "clasificador a Vecinos próximos k=51"
+Main.run(data_file, ClasificadorVecinosProximos(51), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 51)
+
+#normalizar=True
+about = "clasificador a Vecinos próximos k=1, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(1), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 1)
+
+about = "clasificador a Vecinos próximos k=3, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(3), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 3)
+
+about = "clasificador a Vecinos próximos k=5, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(5), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 5)
+
+about = "clasificador a Vecinos próximos k=11, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(11), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 11)
+
+about = "clasificador a Vecinos próximos k=21, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(21), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 21)
+
+about = "clasificador a Vecinos próximos k=51, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(51), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 51)
+
+#==================================================example4=================================================#
+data_file = 'example4.data'
+about = "clasificador a Vecinos próximos k=1"
+Main.run(data_file, ClasificadorVecinosProximos(1), about, ValidacionCruzada(10), 10, True, False, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 1)
+
+about = "clasificador a Vecinos próximos k=3"
+Main.run(data_file, ClasificadorVecinosProximos(3), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 3)
+
+about = "clasificador a Vecinos próximos k=5"
+Main.run(data_file, ClasificadorVecinosProximos(5), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 5)
+
+about = "clasificador a Vecinos próximos k=11"
+Main.run(data_file, ClasificadorVecinosProximos(11), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 11)
+
+about = "clasificador a Vecinos próximos k=21"
+Main.run(data_file, ClasificadorVecinosProximos(21), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 21)
+
+about = "clasificador a Vecinos próximos k=51"
+Main.run(data_file, ClasificadorVecinosProximos(51), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 51)
+
+#normalizar=True
+about = "clasificador a Vecinos próximos k=1, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(1), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 1)
+
+about = "clasificador a Vecinos próximos k=3, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(3), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 3)
+
+about = "clasificador a Vecinos próximos k=5, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(5), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 5)
+
+about = "clasificador a Vecinos próximos k=11, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(11), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 11)
+
+about = "clasificador a Vecinos próximos k=21, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(21), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 21)
+
+about = "clasificador a Vecinos próximos k=51, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(51), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 51)
+
+#==================================================wine_proc=================================================#
+data_file = 'wine_proc.data'
+about = "clasificador a Vecinos próximos k=1"
+Main.run(data_file, ClasificadorVecinosProximos(1), about, ValidacionCruzada(10), 10, True, False, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 1)
+
+about = "clasificador a Vecinos próximos k=3"
+Main.run(data_file, ClasificadorVecinosProximos(3), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 3)
+
+about = "clasificador a Vecinos próximos k=5"
+Main.run(data_file, ClasificadorVecinosProximos(5), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 5)
+
+about = "clasificador a Vecinos próximos k=11"
+Main.run(data_file, ClasificadorVecinosProximos(11), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 11)
+
+about = "clasificador a Vecinos próximos k=21"
+Main.run(data_file, ClasificadorVecinosProximos(21), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 21)
+
+about = "clasificador a Vecinos próximos k=51"
+Main.run(data_file, ClasificadorVecinosProximos(51), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 51)
+
+#normalizar=True
+about = "clasificador a Vecinos próximos k=1, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(1), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 1)
+
+about = "clasificador a Vecinos próximos k=3, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(3), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 3)
+
+about = "clasificador a Vecinos próximos k=5, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(5), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 5)
+
+about = "clasificador a Vecinos próximos k=11, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(11), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 11)
+
+about = "clasificador a Vecinos próximos k=21, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(21), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 21)
+
+about = "clasificador a Vecinos próximos k=51, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(51), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 51)
+
+
+#==================================================wdbc=================================================#
+data_file = 'wdbc.data'
+about = "clasificador a Vecinos próximos k=1"
+Main.run(data_file, ClasificadorVecinosProximos(1), about, ValidacionCruzada(10), 10, True, False, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 1)
+
+about = "clasificador a Vecinos próximos k=3"
+Main.run(data_file, ClasificadorVecinosProximos(3), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 3)
+
+about = "clasificador a Vecinos próximos k=5"
+Main.run(data_file, ClasificadorVecinosProximos(5), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 5)
+
+about = "clasificador a Vecinos próximos k=11"
+Main.run(data_file, ClasificadorVecinosProximos(11), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 11)
+
+about = "clasificador a Vecinos próximos k=21"
+Main.run(data_file, ClasificadorVecinosProximos(21), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 21)
+
+about = "clasificador a Vecinos próximos k=51"
+Main.run(data_file, ClasificadorVecinosProximos(51), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 51)
+
+#normalizar=True
+about = "clasificador a Vecinos próximos k=1, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(1), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 1)
+
+about = "clasificador a Vecinos próximos k=3, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(3), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 3)
+
+about = "clasificador a Vecinos próximos k=5, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(5), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 5)
+
+about = "clasificador a Vecinos próximos k=11, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(11), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 11)
+
+about = "clasificador a Vecinos próximos k=21, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(21), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 21)
+
+about = "clasificador a Vecinos próximos k=51, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(51), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 51)
+
+#==================================================digits=================================================#
+data_file='digits.data'
+about = "clasificador a Vecinos próximos k=1"
+Main.run(data_file, ClasificadorVecinosProximos(1), about, ValidacionCruzada(10), 10, True, False, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 1)
+
+about = "clasificador a Vecinos próximos k=3"
+Main.run(data_file, ClasificadorVecinosProximos(3), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 3)
+
+about = "clasificador a Vecinos próximos k=5"
+Main.run(data_file, ClasificadorVecinosProximos(5), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 5)
+
+about = "clasificador a Vecinos próximos k=11"
+Main.run(data_file, ClasificadorVecinosProximos(11), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 11)
+
+about = "clasificador a Vecinos próximos k=21"
+Main.run(data_file, ClasificadorVecinosProximos(21), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 21)
+
+about = "clasificador a Vecinos próximos k=51"
+Main.run(data_file, ClasificadorVecinosProximos(51), about, ValidacionCruzada(10), 10, True, False, False)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False, 51)
+
+#normalizar=True
+about = "clasificador a Vecinos próximos k=1, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(1), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 1)
+
+about = "clasificador a Vecinos próximos k=3, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(3), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 3)
+
+about = "clasificador a Vecinos próximos k=5, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(5), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 5)
+
+about = "clasificador a Vecinos próximos k=11, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(11), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 11)
+
+about = "clasificador a Vecinos próximos k=21, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(21), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 21)
+
+about = "clasificador a Vecinos próximos k=51, normalizar"
+Main.run(data_file, ClasificadorVecinosProximos(51), about, ValidacionCruzada(10), 10, True, False, True)
+Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 51)
