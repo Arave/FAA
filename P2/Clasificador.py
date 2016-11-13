@@ -17,8 +17,19 @@ import scipy.stats
 class Clasificador(object):
   
   # Clase abstracta
-  __metaclass__ = ABCMeta
+  #__metaclass__ = ABCMeta
+  def clasifica(self,datosTest,atributosDiscretos,diccionario, correcion=None):
+      scores = self.score(datosTest,atributosDiscretos,diccionario, correcion)
+      return np.argmax(scores,axis=1)
 
+  # devuelve una matriz numpy con el score para cada clase y dato
+  def score(self,datosTest,atributosDiscretos,diccionario, correcion=None): 
+      scores = np.zeros((len(datosTest),len(diccionario[-1])))
+      preds = map(lambda x: int(x), self.clasifica(datosTest,atributosDiscretos,diccionario, correcion))
+      scores[range(datosTest.shape[0]),preds] = 1.0
+      return scores
+                  
+                  
   #Calcula la probabilidad a priori P(nombreColumna=clase)
   @staticmethod
   def probAPriori(dataset, nombreColumna, clase):
@@ -135,22 +146,6 @@ class Clasificador(object):
           numOcurrencias = Counter(datos[indices,idxColumna])[value]
           arrayNum.append(numOcurrencias)      
       return arrayNum     
-
-
-  # Metodos abstractos que se implementan en casa clasificador concreto
-  @abstractmethod
-  # datosTrain: matriz numpy con los datos de entrenamiento
-  # atributosDiscretos: array bool con la indicatriz de los atributos nominales
-  # diccionario: array de diccionarios de la estructura Datos utilizados para la codificacion
-  # de variables discretas
-  def entrenamiento(self,datosTrain,atributosDiscretos,diccionario):
-    pass
-  
-  
-  @abstractmethod
-  # devuelve un numpy array con las predicciones
-  def clasifica(self,datosTest,atributosDiscretos,diccionario,correcion):
-    pass
   
   
   # Obtiene el numero de aciertos y errores para calcular la tasa de fallo
@@ -327,7 +322,7 @@ class Clasificador(object):
 
        if isinstance(clasificador, ClasificadorVecinosProximos) or isinstance(clasificador, ClasificadorRegresionLogistica):
            ii = particiones[-1].indicesTrain
-           # clasificador = ClasificadorVecinosProximos(1)
+           #clasificador = ClasificadorVecinosProximos(1)
            plotModel(dataset.datos[ii, 0], dataset.datos[ii, 1], dataset.datos[ii, -1] != 0, clasificador, "Frontera")
 ##############################################################################
 
@@ -358,8 +353,9 @@ class ClasificadorRegresionLogistica(Clasificador):
                 instanceTrain = np.insert(datostrain[i], 0, 1) #Añadir 1 al inicio
                 #Multiplicar los elementos del array
                 sumatorio = 0
-                for m in xrange(numColumnas):
-                    sumatorio += vectorW[m] * instanceTrain[m]
+                sumatorio = np.dot(vectorW, instanceTrain[:-1])
+                """for m in xrange(numColumnas):
+                    sumatorio += vectorW[m] * instanceTrain[m]"""
                 """print 'vectorW', vectorW
                 print 'instanceTrain', instanceTrain[:-1]
                 print 'mult', sumatorio"""
@@ -368,40 +364,36 @@ class ClasificadorRegresionLogistica(Clasificador):
                 #Calcular el nuevo vectorW
                 #vectorW = vectorW - cteAprendizaje(sig - Ti) * (vectorXi)
                 vectorW = vectorW - (self.cteAprendizaje*(sig - (1 - instanceTrain[-1])))* instanceTrain[:-1]
+        #self.vectorW = np.linalg.norm(vectorW)
         self.vectorW = vectorW 
 
-
-    def clasifica(self, datostest, atributosDiscretos=None, diccionario=None, correcion=None):
-        numFilas = datostest.shape[0]
-        numColumnas = datostest.shape[1]
-        predicciones = []
+        
+    def score(self,datosTest,atributosDiscretos,diccionario, correcion=None): 
+        numFilas = datosTest.shape[0]
+        numColumnas = datosTest.shape[1]
+        #predicciones = []
+        ret = np.zeros(shape=(numFilas,2))
 
         for i in xrange(numFilas):
             #Calcular Sigmoidal i (Sig(vectorWt * vectorXi)) === P(C1|vectorXi)  - Posteriori
             #Primero calculamos la vectorWt * vectorXi
-            instanceTrain = np.insert(datostest[i], 0, 1) #Añadir 1 al inicio
+            instanceTrain = np.insert(datosTest[i], 0, 1) #Añadir 1 al inicio
             #Multiplicar los elementos del array
-            sumatorio = 0
+            sumatorio = 0        
+            #sumatorio = np.dot(self.vectorW, instanceTrain[:-1])
             for m in xrange(numColumnas):
                 sumatorio += self.vectorW[m] * instanceTrain[m]
             #Calcular la sigmoidal
             sig = expit(sumatorio)
-            #Comprobar a que clase pertenece
+            ret[i][0] = sig  
+            ret[i][1] = 1 - sig 
+            """#Comprobar a que clase pertenece
             if sig > 0.5:
                 predicciones.append(0)
             else:
-                predicciones.append(1)
-        return predicciones    
+                predicciones.append(1)"""
+        return ret    
             
-
-        
-
-    
-    
-    
-    
-    
-    
 
 ##############################################################################
 
