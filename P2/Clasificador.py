@@ -4,6 +4,7 @@ from operator import itemgetter
 from abc import ABCMeta,abstractmethod
 from collections import Counter
 from scipy.special import expit
+from plotModel import plotModel
 import numpy as np
 import copy
 import math
@@ -274,7 +275,10 @@ class Clasificador(object):
            exit(1)
 
        print 'Correción de Laplace:',correcionL
-       print 'Normalizar:',normalizacion 
+       print 'Normalizar:',normalizacion
+
+
+
        #for each particion: clasificar y sacar los errores de cada evaluación
        for idx, p in enumerate(particiones):
            #print "======================================================"
@@ -282,30 +286,28 @@ class Clasificador(object):
            #print "======================================================"
            #print p
            datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
-           
+
            #Normalizar las datos si flag normalizacion = True
            if normalizacion == True:
                #Obtener media y std para cada atributo
-               #print 'Datos train sin normalizar' , datosTrain                
+               #print 'Datos train sin normalizar' , datosTrain
+               #print '\nbefore:\n', datosTrain
                dataset.calcularMediasDesv(datosTrain)
                dataset.normalizarDatos(datosTrain)
+               #print '\nafter:\n', datosTrain
                #print 'Datos train normalizados' , datosTrain
                #print 'Datos test sin normalizar' ,datosTest 
                dataset.calcularMediasDesv(datosTest)
                dataset.normalizarDatos(datosTest)
                #print 'Datos test normalizados' ,datosTest 
 
-           
-           
            """print ' =>DatosTrain [', idx, ']:'
            print datosTrain
            print ' =>DatosTest [', idx, ']:'
            print datosTest"""
+           # plots
 
            # Entrenamiento
-           """print '|||||||||||||||||||||||||||PARTICION ',idx,'|||||||||||||||||||||||||||'
-           print 'datosTrain:\n',datosTrain
-           print 'datosTest:\n', datosTest"""
            clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
            pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios,correcionL)
            #print "Predicción: "
@@ -316,13 +318,17 @@ class Clasificador(object):
           
            #print "\t Porcentaje de error (%): ",error
            #estrategia=ValidacionSimple(10,80) => particionado, arg[0] - numero de particiones. Calcular la media y desv.
-
        #estadística
        print "=================RESULTADO===================="  
        print "Array de % de errores obtenidos:" ,arrayErrores, ""
        print "Media de errores total:" ,np.mean(arrayErrores), "%"
        print "Mediana de errores total:" ,np.median(arrayErrores), "%"
        print "Desviación típica:" ,np.std(arrayErrores), "%"
+
+       if isinstance(clasificador, ClasificadorVecinosProximos) or isinstance(clasificador, ClasificadorRegresionLogistica):
+           ii = particiones[-1].indicesTrain
+           # clasificador = ClasificadorVecinosProximos(1)
+           plotModel(dataset.datos[ii, 0], dataset.datos[ii, 1], dataset.datos[ii, -1] != 0, clasificador, "Frontera")
 ##############################################################################
 
 

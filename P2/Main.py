@@ -3,6 +3,7 @@ from sklearn import neighbors, linear_model, preprocessing
 from sklearn.dummy import DummyClassifier
 from sklearn.naive_bayes import GaussianNB, MultinomialNB
 from sklearn.model_selection import cross_val_score
+from sklearn.pipeline import make_pipeline
 
 from Datos import Datos
 
@@ -66,6 +67,7 @@ class Main(object):
         x = dataset.datos[:, :-1]
         y = dataset.datos[:, -1]
         clf = None
+        pre_clf = None
         if cls == "MultinomialNB":
             if laplace:
                 alpha = 1.0
@@ -82,14 +84,21 @@ class Main(object):
         elif cls == "Prior":
             clf = DummyClassifier(strategy='prior')
         elif cls == "KNeighborsClassifier":
-            clf = neighbors.KNeighborsClassifier(n_neighbors=k)
+            if normalizar:
+                clf = make_pipeline(preprocessing.StandardScaler(),neighbors.KNeighborsClassifier(n_neighbors=k))
+            else:
+                clf = neighbors.KNeighborsClassifier(n_neighbors=k)
         elif cls == "LogisticRegression":
             if multiclass: #ojo C=1.0 por defecto (1-100000): regularizacion
-                clf = linear_model.LogisticRegression(solver='newton-cg')  # L2 only
+                pre_clf = linear_model.LogisticRegression(solver='newton-cg')  # L2 only
                 # clf = linear_model.LogisticRegression(solver='sag')        #L2 only, large dataset, may req preproc
                 # clf = linear_model.LogisticRegression(solver='lbfgs')      #L2 only
             else:
-                clf = linear_model.LogisticRegression(solver='liblinear')
+                pre_clf = linear_model.LogisticRegression(solver='liblinear')
+            if normalizar:
+                clf = make_pipeline(preprocessing.StandardScaler(), pre_clf)
+            else:
+                clf = pre_clf
         else:
             print "ERR: Clasificador no valido"
             return
