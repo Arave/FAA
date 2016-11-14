@@ -17,7 +17,7 @@ DONE- normalizacion scikit learn
 DONE- multiclase scikit learn
 DONE- plots (output a carpeta 'PlotsGenerados')
 DONE- multiclase de regresion logistica
-DONE- multiclase scikit-elarn
+DONE- multiclase scikit-learn
 WORKING- analisis de resultados
 WORKING- Ipython notebook
 - revisar resultados tras los cambios del domingo a implementacion score/clasifica

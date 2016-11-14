@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e8c68819-73f8-4082-ba82-d0a7a199a123" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Clasificador.py" afterPath="$PROJECT_DIR$/Clasificador.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Datos.py" afterPath="$PROJECT_DIR$/Datos.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main.py" afterPath="$PROJECT_DIR$/Main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plotModel.py" afterPath="$PROJECT_DIR$/plotModel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testApartado1.py" afterPath="$PROJECT_DIR$/testApartado1.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testApartado2.py" afterPath="$PROJECT_DIR$/testApartado2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testApartado3.py" afterPath="$PROJECT_DIR$/testApartado3.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TODO.py" afterPath="$PROJECT_DIR$/TODO.py" />
     </list>
     <ignored path="P2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TODO.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TODO.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TODO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+            <state relative-caret-position="270">
+              <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -121,7 +115,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Notebook-Pactica2.ipynb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Notebook-Pactica2.ipynb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Notebook-Pactica2.ipynb">
           <provider selected="true" editor-type-id="ipnb-editor">
             <state>
@@ -153,7 +147,6 @@
         <option value="$PROJECT_DIR$/Envoltorio.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/Main.py" />
-        <option value="$PROJECT_DIR$/TODO.py" />
         <option value="$PROJECT_DIR$/testApartado3.py" />
         <option value="$PROJECT_DIR$/testApartado1.py" />
         <option value="$PROJECT_DIR$/testApartado2.py" />
@@ -161,6 +154,7 @@
         <option value="$PROJECT_DIR$/Datos.py" />
         <option value="$PROJECT_DIR$/plotModel.py" />
         <option value="$PROJECT_DIR$/Notebook-Pactica2.ipynb" />
+        <option value="$PROJECT_DIR$/TODO.py" />
       </list>
     </option>
   </component>
@@ -790,14 +784,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TODO.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testApartado3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -860,6 +846,14 @@
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
           <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TODO.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
