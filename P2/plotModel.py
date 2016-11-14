@@ -2,10 +2,13 @@ import Clasificador
 from matplotlib.colors import ListedColormap
 import numpy as np
 import matplotlib.pyplot as plt
+#from datetime import datetime
 
 # Autor Luis Lago y Manuel Sanchez Montanes
 # Modificada por Gonzalo
-def plotModel(x,y,clase,clf,title):
+
+
+def plotModel(x,y,clase,clf,title, plotName):
     x_min, x_max = x.min() - .2, x.max() + .2
     y_min, y_max = y.min() - .2, y.max() + .2
 
@@ -15,14 +18,14 @@ def plotModel(x,y,clase,clf,title):
 
     xx, yy = np.meshgrid(np.arange(x_min, x_max, hx), np.arange(y_min, y_max, hy))
 
-    if isinstance(clf, Clasificador.Clasificador):	
-        z = clf.clasifica(np.c_[xx.ravel(), yy.ravel()], [False, False, True], None)   
+    if isinstance(clf, Clasificador.Clasificador):
+        z = clf.clasifica(np.c_[xx.ravel(), yy.ravel()], [False, False, True], None)
     elif hasattr(clf, "decision_function"):
         z = clf.decision_function(np.c_[xx.ravel(), yy.ravel()])
     else:
         z = clf.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
 
-    
+
     z = z.reshape(xx.shape)
     cm = plt.cm.RdBu
     cm_bright = ListedColormap(['#FF0000', '#0000FF'])
@@ -35,11 +38,12 @@ def plotModel(x,y,clase,clf,title):
         plt.scatter(x[clase==1], y[clase==1], c='#0000FF')
     else:
         plt.plot(x,y,'g', linewidth=3)
-        
+
     plt.gca().set_xlim(xx.min(), xx.max())
     plt.gca().set_ylim(yy.min(), yy.max())
     plt.grid(True)
     plt.xlabel("X")
     plt.ylabel("Y")
     plt.title(title)
-    
+
+    plt.savefig(plotName)

@@ -30,7 +30,7 @@ class Datos(object):
     self.supervisado = sup
     #print ("Tipo:" + str(self.supervisado))
     f = open(nombreFichero,'r')
-    line_list = f.readlines();
+    line_list = f.readlines()
     line_list[:] = [x.replace('\n', '').replace('\r', '') for x in line_list]
 
     #Lineas de datos efectivas
@@ -55,7 +55,7 @@ class Datos(object):
             raise ValueError('ERR:mismatch en numero de nombres y tipos.', tipo, idx, 1)
     except ValueError as err:
         if err.args[3] == 0:
-            print(err.args[0] + "Leido:" + err.args[1] + ". Index:" + str(err.args[2]))
+            print err.args[0], "Leido:", err.args[1], ". Index:" + str(err.args[2])
         else:
             print(err.args[0])
         sys.exit(-1)
@@ -139,7 +139,4 @@ class Datos(object):
              #Restarle la media y dividirlo por la std
              for idxFila,dat in enumerate(datos[:,idxColumna]):
                  datos[idxFila][idxColumna] = (datos[idxFila][idxColumna] - self.arrayM[idxColumna] ) / self.arrayS[idxColumna]
-  
-  
-  
   

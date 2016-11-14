@@ -1,4 +1,3 @@
-
 from sklearn import neighbors, linear_model, preprocessing
 from sklearn.dummy import DummyClassifier
 from sklearn.naive_bayes import GaussianNB, MultinomialNB
@@ -49,7 +48,8 @@ class Main(object):
         print "Clasificador: ", cls_brief
         print "Ejecucion: "
         print "________________________________________________________________"
-        errores = cls.validacion(strat, dataset, cls, laplace, normalizar)
+        plotName = 'PlotsGenerados/' + fichero_datos + '-' + cls_brief + '-' + 'normalizar=' + str(normalizar) + '.png'
+        errores = cls.validacion(strat, dataset, cls, laplace, normalizar, plotName=plotName)
         print "\n"
         return errores
 
@@ -62,7 +62,7 @@ class Main(object):
     # Doc general sobre regresion logisitca:
     #   http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
     @staticmethod
-    def runScikit(fichero_datos, cls, cls_brief, strat, cv, supervisado, laplace, normalizar=False, k=None, multiclass=False):
+    def runScikit(fichero_datos, cls, cls_brief, strat, cv, supervisado, laplace, normalizar=False, k=None):
         dataset = Datos('./ConjuntosDatos/' + fichero_datos, supervisado)
         x = dataset.datos[:, :-1]
         y = dataset.datos[:, -1]
@@ -89,13 +89,17 @@ class Main(object):
             else:
                 clf = neighbors.KNeighborsClassifier(n_neighbors=k)
         elif cls == "LogisticRegression":
-            if multiclass: #ojo C=1.0 por defecto (1-100000): regularizacion
-                pre_clf = linear_model.LogisticRegression(solver='newton-cg')  # L2 only
-                # clf = linear_model.LogisticRegression(solver='sag')        #L2 only, large dataset, may req preproc
-                # clf = linear_model.LogisticRegression(solver='lbfgs')      #L2 only
-            else:
-                pre_clf = linear_model.LogisticRegression(solver='liblinear')
+            pre_clf = linear_model.LogisticRegression(solver='liblinear')
             if normalizar:
+                clf = make_pipeline(preprocessing.StandardScaler(), pre_clf)
+            else:
+                clf = pre_clf
+        elif cls == "LRMulticlass":
+            #pre_clf = linear_model.LogisticRegression(solver='newton-cg')  # L2 only
+            #pre_clf = linear_model.LogisticRegression(solver='sag')        #L2 only, large dataset, may req preproc
+            pre_clf = linear_model.LogisticRegression(solver='lbfgs')       #L2 only
+            if normalizar:
+                #pre_clf = linear_model.LogisticRegression(solver='sag', max_iter=1500)
                 clf = make_pipeline(preprocessing.StandardScaler(), pre_clf)
             else:
                 clf = pre_clf
@@ -112,8 +116,3 @@ class Main(object):
         print "Desviacion tipica:", 100-scores.std(), "%"
         """
         return
-
-
-
-
-

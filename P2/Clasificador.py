@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
 from __future__ import division #Para divisiones float por defecto
 from operator import itemgetter
-from abc import ABCMeta,abstractmethod
 from collections import Counter
 from scipy.special import expit
 from plotModel import plotModel
+from copy import copy,deepcopy
 import numpy as np
-import copy
 import math
 import operator
-import scipy.stats
 
 #import scipy.stats
 
 
 class Clasificador(object):
-  
   # Clase abstracta
   #__metaclass__ = ABCMeta
+  plotCount = 0
+
   def clasifica(self,datosTest,atributosDiscretos,diccionario, correcion=None):
       scores = self.score(datosTest,atributosDiscretos,diccionario, correcion)
       return np.argmax(scores,axis=1)
@@ -251,7 +250,7 @@ class Clasificador(object):
     
   # Realiza una clasificacion utilizando una estrategia de particionado determinada
   @staticmethod
-  def validacion(particionado,dataset,clasificador,correcionL=False,normalizacion=False,seed=None):
+  def validacion(particionado,dataset,clasificador,correcionL=False,normalizacion=False,seed=None, plotName=None):
     # Creamos las particiones siguiendo la estrategia llamando a particionado.creaParticiones
     # - Para validacion cruzada: en el bucle hasta nv entrenamos el clasificador con la particion de train i
     # y obtenemos el error en la particion de test i
@@ -300,7 +299,6 @@ class Clasificador(object):
            print datosTrain
            print ' =>DatosTest [', idx, ']:'
            print datosTest"""
-           # plots
 
            # Entrenamiento
            clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
@@ -323,7 +321,8 @@ class Clasificador(object):
        if isinstance(clasificador, ClasificadorVecinosProximos) or isinstance(clasificador, ClasificadorRegresionLogistica):
            ii = particiones[-1].indicesTrain
            #clasificador = ClasificadorVecinosProximos(1)
-           plotModel(dataset.datos[ii, 0], dataset.datos[ii, 1], dataset.datos[ii, -1] != 0, clasificador, "Frontera")
+           print plotName
+           plotModel(dataset.datos[ii, 0], dataset.datos[ii, 1], dataset.datos[ii, -1] != 0, clasificador, "Frontera", plotName)
 ##############################################################################
 
 
@@ -604,7 +603,7 @@ class ClasificadorNaiveBayes(Clasificador):
       return num / denom
 
 #http://naivebayes.blogspot.com.es/2013/05/clasificador-naive-bayes-como-funciona.html
-  def clasifica(self,datostest,atributosDiscretos,diccionario, correcionL):
+  def clasifica(self,datostest,atributosDiscretos,diccionario, correcionL=False):
       posteriori = []
       numColumnas = datostest.shape[1]
       idxColumnaClase = numColumnas - 1
@@ -670,8 +669,36 @@ class ClasificadorNaiveBayes(Clasificador):
       #print 'indice max(arg):',index
       return index
 
+##############################################################################
+class ClasificadorMulticlase(Clasificador):
+    def __init__(self, clasificadorbase):
+        self.clasificadorbase = clasificadorbase
+        self.clasificadores = []
 
+    def entrenamiento(self, datostrain, atributosDiscretos, diccionario):
+        # se van diferentes labels en funcion de la estrategia multiclase
+        n_classes = len(diccionario[-1])
+        self.clasificadores = []
+        ovadiccionario = deepcopy(diccionario)
+        ovadiccionario[-1] = {'-': 0, '+': 1}
 
+        for i in range(n_classes):
+            new_y = np.zeros((datostrain.shape[0], 1))
+            new_y[datostrain[:, -1] == i, :] = 1
+            self.clasificadores.append(deepcopy(self.clasificadorbase))
+            self.clasificadores[i].entrenamiento(np.append(datostrain[:, :-1], new_y, axis=1), atributosDiscretos, ovadiccionario)
 
+    def clasifica(self, datostest, atributosDiscretos, diccionario, correccion=False):
 
+        scores = np.zeros((datostest.shape[0], len(self.clasificadores)))
+        ovadiccionario = deepcopy(diccionario)
+        ovadiccionario[-1] = {'-': 0, '+': 1}
+
+        # evaluar el score para cada clasificador one-versus-all
+        for i, c in enumerate(self.clasificadores):
+            scores[:, i] = c.score(datostest, atributosDiscretos, ovadiccionario)[:, 1]
+
+        # se predice como aquella clase con mas confianza
+        preds = np.argmax(scores, axis=1)
+        return preds
   
