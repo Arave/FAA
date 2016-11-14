@@ -28,125 +28,7 @@ class Clasificador(object):
       preds = map(lambda x: int(x), self.clasifica(datosTest,atributosDiscretos,diccionario, correcion))
       scores[range(datosTest.shape[0]),preds] = 1.0
       return scores
-                  
-                  
-  #Calcula la probabilidad a priori P(nombreColumna=clase)
-  @staticmethod
-  def probAPriori(dataset, nombreColumna, clase):
-      datos = dataset.datos
-      numFilas = datos.shape[0]
-      #Obtener el índice de la columna deseada
-      idxColumna =  dataset.nombreAtributos.index(nombreColumna)
-      #Obtener el valor del diccionario para esa clase
-      idClase =  dataset.diccionarios[idxColumna][clase]
-      #Contar las ocurrencias para ese valor del diccionar en esa columna
-      numOcurrencias = Counter(datos[:,idxColumna])[idClase]          
-      return numOcurrencias / numFilas
 
-  #Calcula la probabilidad a priori P(nombreColumna=clase)
-  @staticmethod
-  def probAPriori2(datos, diccionarios, idxColumna, clase):
-
-      numFilas = datos.shape[0]
-      #Obtener el valor del diccionario para esa clase
-      idClase =  diccionarios[idxColumna][clase]
-      #Contar las ocurrencias para ese valor del diccionar en esa columna
-      numOcurrencias = Counter(datos[:,idxColumna])[idClase]          
-      return numOcurrencias / numFilas
-
-  @staticmethod
-  def probMaxVerosimil(diccionarios, datos, idxAtributo, atributo, idxClass, dominio):
-      # =>print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
-      # =>prob3 = clasificador.probMaxVerosimil(dataset, "MLeftSq", "b", "Class", "positive")
-      # fetch del indice de 'Class'
-      idClase = diccionarios[idxClass][dominio]
-      # columna 'Class' en forma de array
-      #VERSION ANTERIOR:classColumn = dataset.datos[:, idxClass]
-      classColumn = datos[:, idxClass]
-      # lista con los indices de las rows que hacen match con esa idClase
-      idxMatchClass = [i for i, colValue in enumerate(classColumn) if colValue == idClase]
-
-      idAtributo = diccionarios[idxAtributo][atributo]
-      #VERSION ANTERIOR:atriColumn = dataset.datos[:,idxAtributo]
-      atriColumn = datos[:, idxAtributo]
-      matchesList = itemgetter(*idxMatchClass)(atriColumn)
-      countfilter = Counter(matchesList)[idAtributo]
-      return countfilter / len(idxMatchClass)
-
-  @staticmethod
-  def probMaxVerosimilLaplace(diccionarios, datos, idxAtributo, atributo, idxClass, dominio):
-      # =>print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
-      # =>prob3 = clasificador.probMaxVerosimil(dataset, "MLeftSq", "b", "Class", "positive")
-      # fetch del indice de 'Class'
-      idClase = diccionarios[idxClass][dominio]
-      # columna 'Class' en forma de array
-      #VERSION ANTERIOR:classColumn = dataset.datos[:, idxClass]
-      classColumn = datos[:, idxClass]
-      # lista con los indices de las rows que hacen match con esa idClase
-      idxMatchClass = [i for i, colValue in enumerate(classColumn) if colValue == idClase]
-
-      idAtributo = diccionarios[idxAtributo][atributo]
-      #VERSION ANTERIOR:atriColumn = dataset.datos[:,idxAtributo]
-      atriColumn = datos[:, idxAtributo]
-      matchesList = itemgetter(*idxMatchClass)(atriColumn)
-      
-      countfilter = Counter(matchesList)[idAtributo]
-      #LAPLACe
-      #Numero de valores posibles del del atributo
-      dic = diccionarios[idxAtributo]
-      countfilter = countfilter + 1
-      total = len(idxMatchClass) + len(dic)
-      return countfilter / total
-  
-  #Calcula la Media y desviación típica de los atributos continuos condiconados
-  #a la clase.
-  @staticmethod
-  def mediaDesviacionAtr(dataset, nombreColumna, nombreColumnaClase, clase):
-      datos = dataset.datos
-      #Obtener el índice de la columna deseada
-      idxColumna =  dataset.nombreAtributos.index(nombreColumna)
-      #Obtener el índice de la columna de clase
-      idxColumnaClase =  dataset.nombreAtributos.index(nombreColumnaClase)      
-      #Obtener el valor del diccionario para esa clase
-      idClase =  dataset.diccionarios[idxColumnaClase][clase]
-      
-      #Lista de índices donde la clase es la que nos pasan
-      indices, = np.where(datos[:,idxColumnaClase] == idClase)
-      media = np.mean(datos[indices,idxColumna])
-      std = np.std(datos[indices,idxColumna]) + 1e-6  #+ 0.000001 
-      return media, std
-      
-  #Calcula la Media y desviación típica de los atributos continuos condiconados
-  #a la clase.
-  @staticmethod
-  def mediaDesviacionAtr2(datos, diccionarios, idxColumna, idxColumnaClase,clase):  
-      #Obtener el valor del diccionario para esa clase
-      idClase =  diccionarios[idxColumnaClase][clase]
-      
-      #Lista de índices donde la clase es la que nos pasan
-      indices, = np.where(datos[:,idxColumnaClase] == idClase)
-      media = np.mean(datos[indices,idxColumna])
-      std = np.std(datos[indices,idxColumna]) + 1e-6  #+ 0.000001 
-      return media, std
-            
-  #Cuenta el número de repeticiones del atributo dada la clase
-  @staticmethod
-  def contarAtributos(datos, diccionarios, idxColumna, idxColumnaClase, clase):  
-      
-      #Obtener el valor del diccionario para esa clase
-      idClase =  diccionarios[idxColumnaClase][clase]
-      clases = diccionarios[idxColumna]     
-      #Lista de índices donde la clase es la que nos pasan
-      indices, = np.where(datos[:,idxColumnaClase] == idClase)
-      #Para el atributo dado recorrer todos sus valore y contarlos
-      arrayNum = []
-      sorted_x = sorted(clases.items(), key=operator.itemgetter(1))
-      for key,value in sorted_x:
-          #idCl =  diccionarios[idxColumna][cl]
-          numOcurrencias = Counter(datos[indices,idxColumna])[value]
-          arrayNum.append(numOcurrencias)      
-      return arrayNum     
-  
   
   # Obtiene el numero de aciertos y errores para calcular la tasa de fallo
   @staticmethod
@@ -160,94 +42,6 @@ class Clasificador(object):
       numAciertos = np.sum(arrayEqual) #Contar los True
       numFallos =  numFilas - numAciertos
       return (numFallos / numFilas) * 100
-
-  # Realiza una clasificacion utilizando una estrategia de particionado determinada. 
-  # para los apartados
-  @staticmethod
-  def validacionApartado(particionado,dataset,clasificador,numApartado):
-       
-       particiones = particionado.creaParticiones(dataset.datos)
-       
-       if particionado.nombreEstrategia == "ValidacionSimple":
-           print "Indices train y test para [" + str(particionado.numeroParticiones) + "] particiones:"
-       elif particionado.nombreEstrategia == "ValidacionCruzada":
-           print 'Datos de train y test para [', particionado.numeroParticiones,'] grupos:'
-       else:
-           print "ERR: nombre de estrategia no valido"
-           exit(1)
-
-       print 'Apartado num:',numApartado
-       #for each particion: clasificar y sacar los errores de cada evaluación
-       for idx, p in enumerate(particiones):
-           if numApartado == 3:
-               datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
-               #Prob. a priori
-               idxColumna =  dataset.nombreAtributos.index("Class")               
-               prob = Clasificador.probAPriori2(datosTrain, dataset.diccionarios, idxColumna, "positive")
-               print "Prob. a priori para P(Class=positive)",prob
-
-               prob = Clasificador.probAPriori2(datosTrain, dataset.diccionarios, idxColumna, "negative")
-               print "Prob. a priori para P(Class=negative)",prob
-
-               idxAtributo =  dataset.nombreAtributos.index("MLeftSq")
-               idxClass =  dataset.nombreAtributos.index("Class") 
-               prob = Clasificador.probMaxVerosimil(dataset.diccionarios, datosTrain, idxAtributo, "b", idxClass, "positive")
-               print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)",prob                
-               
-
-               idxAtributo =  dataset.nombreAtributos.index("TRightSq")
-               idxClass =  dataset.nombreAtributos.index("Class") 
-               prob = Clasificador.probMaxVerosimil(dataset.diccionarios, datosTrain, idxAtributo, "x", idxClass, "negative")
-               print "Prob. de máxima verosimilitud para P(TRightSq=x|Class=negative)",prob                
-
-
-               idxAtributo =  dataset.nombreAtributos.index("MLeftSq")
-               idxClass =  dataset.nombreAtributos.index("Class") 
-               prob = Clasificador.probMaxVerosimilLaplace(dataset.diccionarios, datosTrain, idxAtributo, "b", idxClass, "positive")
-               print "Prob. de máxima verosimilitud con corrección de Laplace para P(MLeftSq=b|Class=positive)",prob                
-               
-
-               idxAtributo =  dataset.nombreAtributos.index("TRightSq")
-               idxClass =  dataset.nombreAtributos.index("Class") 
-               prob = Clasificador.probMaxVerosimilLaplace(dataset.diccionarios, datosTrain, idxAtributo, "x", idxClass, "negative")
-               print "Prob. de máxima verosimilitud con corrección de Laplace para P(TRightSq=x|Class=negative)",prob                 
-               
-               return
-               
-           elif numApartado == 4:
-               datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
-               #Prob. a priori
-               idxClase =  dataset.nombreAtributos.index("Class")               
-               prob = Clasificador.probAPriori2(datosTrain, dataset.diccionarios, idxClase, "+")
-               print "Prob. a priori para P(Class=positive)",prob
-
-               prob = Clasificador.probAPriori2(datosTrain, dataset.diccionarios, idxClase, "-")
-               print "Prob. a priori para P(Class=negative)",prob
-               
-               idxAtributo =  dataset.nombreAtributos.index("A7")
-               prob = Clasificador.probMaxVerosimil(dataset.diccionarios, datosTrain, idxAtributo, "bb", idxClase, "+")
-               print "Prob. de máxima verosimilitud para P(A7=bb|Class=+)",prob
-               
-               idxAtributo =  dataset.nombreAtributos.index("A4")
-               prob = Clasificador.probMaxVerosimil(dataset.diccionarios, datosTrain, idxAtributo, "u", idxClase, "-")
-               print "Prob. de máxima verosimilitud para P(A4=u|Class=-)",prob
-               
-               idxAtributo =  dataset.nombreAtributos.index("A2")
-               media,std = Clasificador.mediaDesviacionAtr2(datosTrain, dataset.diccionarios, idxAtributo, idxClase, "+") 
-               print "Media (",media,") y desviación típica (",std,") del atributo A2 condicionado a clase +"    
-
-               idxAtributo =  dataset.nombreAtributos.index("A14")
-               media,std = Clasificador.mediaDesviacionAtr2(datosTrain, dataset.diccionarios, idxAtributo, idxClase, "+") 
-               print "Media (",media,") y desviación típica (",std,") del atributo A14 condicionado a clase +"
-
-               idxAtributo =  dataset.nombreAtributos.index("A15")
-               media,std = Clasificador.mediaDesviacionAtr2(datosTrain, dataset.diccionarios, idxAtributo, idxClase, "+") 
-               print "Media (",media,") y desviación típica (",std,") del atributo A15 condicionado a clase +"                
-               return
-           else:
-               print "Número de apartado (",numApartado,") incorrecto. Por favor introduzca 3 o 4"
-               return
-
     
   # Realiza una clasificacion utilizando una estrategia de particionado determinada
   @staticmethod
@@ -525,7 +319,7 @@ class ClasificadorNaiveBayes(Clasificador):
      #for key, value in sorted(mydict.iteritems(), key=lambda (k,v): (v,k)):
      for key, value in sorted_x:      
          #Calcular los a priori
-         probP = self.probAPriori2(datostrain, diccionario, idxColumnaClase, key)
+         probP = self.probAPriori(datostrain, diccionario, idxColumnaClase, key)
          arrayP.append(probP) 
    
      #Recorrer los atributos excepto el último (Clase)
@@ -541,7 +335,7 @@ class ClasificadorNaiveBayes(Clasificador):
          else: #continuo
              for key, value in sorted_x:
                  #Calcular la media y std para las clases
-                 media, std = self.mediaDesviacionAtr2(datostrain, diccionario, idx, idxColumnaClase, key)
+                 media, std = self.mediaDesviacionAtr(datostrain, diccionario, idx, idxColumnaClase, key)
                  arrayM.append(media)
                  arrayS.append(std)
              tablaM[idx] = arrayM
@@ -669,6 +463,185 @@ class ClasificadorNaiveBayes(Clasificador):
       #print 'arg:',arg
       #print 'indice max(arg):',index
       return index
+
+  # Calcula la probabilidad a priori P(nombreColumna=clase)
+  @staticmethod
+  def probAPriori(datos, diccionarios, idxColumna, clase):
+
+      numFilas = datos.shape[0]
+      # Obtener el valor del diccionario para esa clase
+      idClase = diccionarios[idxColumna][clase]
+      # Contar las ocurrencias para ese valor del diccionar en esa columna
+      numOcurrencias = Counter(datos[:, idxColumna])[idClase]
+      return numOcurrencias / numFilas
+
+  @staticmethod
+  def probMaxVerosimil(diccionarios, datos, idxAtributo, atributo, idxClass, dominio):
+      # =>print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
+      # =>prob3 = clasificador.probMaxVerosimil(dataset, "MLeftSq", "b", "Class", "positive")
+      # fetch del indice de 'Class'
+      idClase = diccionarios[idxClass][dominio]
+      # columna 'Class' en forma de array
+      # VERSION ANTERIOR:classColumn = dataset.datos[:, idxClass]
+      classColumn = datos[:, idxClass]
+      # lista con los indices de las rows que hacen match con esa idClase
+      idxMatchClass = [i for i, colValue in enumerate(classColumn) if colValue == idClase]
+
+      idAtributo = diccionarios[idxAtributo][atributo]
+      # VERSION ANTERIOR:atriColumn = dataset.datos[:,idxAtributo]
+      atriColumn = datos[:, idxAtributo]
+      matchesList = itemgetter(*idxMatchClass)(atriColumn)
+      countfilter = Counter(matchesList)[idAtributo]
+      return countfilter / len(idxMatchClass)
+
+  @staticmethod
+  def probMaxVerosimilLaplace(diccionarios, datos, idxAtributo, atributo, idxClass, dominio):
+      # =>print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)"
+      # =>prob3 = clasificador.probMaxVerosimil(dataset, "MLeftSq", "b", "Class", "positive")
+      # fetch del indice de 'Class'
+      idClase = diccionarios[idxClass][dominio]
+      # columna 'Class' en forma de array
+      # VERSION ANTERIOR:classColumn = dataset.datos[:, idxClass]
+      classColumn = datos[:, idxClass]
+      # lista con los indices de las rows que hacen match con esa idClase
+      idxMatchClass = [i for i, colValue in enumerate(classColumn) if colValue == idClase]
+
+      idAtributo = diccionarios[idxAtributo][atributo]
+      # VERSION ANTERIOR:atriColumn = dataset.datos[:,idxAtributo]
+      atriColumn = datos[:, idxAtributo]
+      matchesList = itemgetter(*idxMatchClass)(atriColumn)
+
+      countfilter = Counter(matchesList)[idAtributo]
+      # LAPLACe
+      # Numero de valores posibles del del atributo
+      dic = diccionarios[idxAtributo]
+      countfilter += 1
+      total = len(idxMatchClass) + len(dic)
+      return countfilter / total
+
+  # Calcula la Media y desviación típica de los atributos continuos condiconados
+  # a la clase.
+  @staticmethod
+  def mediaDesviacionAtr(datos, diccionarios, idxColumna, idxColumnaClase, clase):
+      # Obtener el valor del diccionario para esa clase
+      idClase = diccionarios[idxColumnaClase][clase]
+
+      # Lista de índices donde la clase es la que nos pasan
+      indices, = np.where(datos[:, idxColumnaClase] == idClase)
+      media = np.mean(datos[indices, idxColumna])
+      std = np.std(datos[indices, idxColumna]) + 1e-6  # + 0.000001
+      return media, std
+
+  # Cuenta el número de repeticiones del atributo dada la clase
+  @staticmethod
+  def contarAtributos(datos, diccionarios, idxColumna, idxColumnaClase, clase):
+
+      # Obtener el valor del diccionario para esa clase
+      idClase = diccionarios[idxColumnaClase][clase]
+      clases = diccionarios[idxColumna]
+      # Lista de índices donde la clase es la que nos pasan
+      indices, = np.where(datos[:, idxColumnaClase] == idClase)
+      # Para el atributo dado recorrer todos sus valore y contarlos
+      arrayNum = []
+      sorted_x = sorted(clases.items(), key=operator.itemgetter(1))
+      for key, value in sorted_x:
+          # idCl =  diccionarios[idxColumna][cl]
+          numOcurrencias = Counter(datos[indices, idxColumna])[value]
+          arrayNum.append(numOcurrencias)
+      return arrayNum
+
+      # Realiza una clasificacion utilizando una estrategia de particionado determinada.
+      # para los apartados
+  @staticmethod
+  def validacionApartado(particionado, dataset, clasificador, numApartado):
+
+      particiones = particionado.creaParticiones(dataset.datos)
+
+      if particionado.nombreEstrategia == "ValidacionSimple":
+          print "Indices train y test para [" + str(particionado.numeroParticiones) + "] particiones:"
+      elif particionado.nombreEstrategia == "ValidacionCruzada":
+          print 'Datos de train y test para [', particionado.numeroParticiones, '] grupos:'
+      else:
+          print "ERR: nombre de estrategia no valido"
+          exit(1)
+
+      print 'Apartado num:', numApartado
+      # for each particion: clasificar y sacar los errores de cada evaluación
+      for idx, p in enumerate(particiones):
+          if numApartado == 3:
+              datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
+              # Prob. a priori
+              idxColumna = dataset.nombreAtributos.index("Class")
+              prob = ClasificadorNaiveBayes.probAPriori(datosTrain, dataset.diccionarios, idxColumna, "positive")
+              print "Prob. a priori para P(Class=positive)", prob
+
+              prob = ClasificadorNaiveBayes.probAPriori(datosTrain, dataset.diccionarios, idxColumna, "negative")
+              print "Prob. a priori para P(Class=negative)", prob
+
+              idxAtributo = dataset.nombreAtributos.index("MLeftSq")
+              idxClass = dataset.nombreAtributos.index("Class")
+              prob = ClasificadorNaiveBayes.probMaxVerosimil(dataset.diccionarios, datosTrain, idxAtributo, "b", idxClass,
+                                                   "positive")
+              print "Prob. de máxima verosimilitud para P(MLeftSq=b|Class=positive)", prob
+
+              idxAtributo = dataset.nombreAtributos.index("TRightSq")
+              idxClass = dataset.nombreAtributos.index("Class")
+              prob = ClasificadorNaiveBayes.probMaxVerosimil(dataset.diccionarios, datosTrain, idxAtributo, "x", idxClass,
+                                                   "negative")
+              print "Prob. de máxima verosimilitud para P(TRightSq=x|Class=negative)", prob
+
+              idxAtributo = dataset.nombreAtributos.index("MLeftSq")
+              idxClass = dataset.nombreAtributos.index("Class")
+              prob = ClasificadorNaiveBayes.probMaxVerosimilLaplace(dataset.diccionarios, datosTrain, idxAtributo, "b",
+                                                          idxClass, "positive")
+              print "Prob. de máxima verosimilitud con corrección de Laplace para P(MLeftSq=b|Class=positive)", prob
+
+              idxAtributo = dataset.nombreAtributos.index("TRightSq")
+              idxClass = dataset.nombreAtributos.index("Class")
+              prob = ClasificadorNaiveBayes.probMaxVerosimilLaplace(dataset.diccionarios, datosTrain, idxAtributo, "x",
+                                                          idxClass, "negative")
+              print "Prob. de máxima verosimilitud con corrección de Laplace para P(TRightSq=x|Class=negative)", prob
+
+              return
+
+          elif numApartado == 4:
+              datosTrain, datosTest = dataset.extraeDatos([p.indicesTrain, p.indicesTest])
+              # Prob. a priori
+              idxClase = dataset.nombreAtributos.index("Class")
+              prob = ClasificadorNaiveBayes.probAPriori(datosTrain, dataset.diccionarios, idxClase, "+")
+              print "Prob. a priori para P(Class=positive)", prob
+
+              prob = ClasificadorNaiveBayes.probAPriori(datosTrain, dataset.diccionarios, idxClase, "-")
+              print "Prob. a priori para P(Class=negative)", prob
+
+              idxAtributo = dataset.nombreAtributos.index("A7")
+              prob = ClasificadorNaiveBayes.probMaxVerosimil(dataset.diccionarios, datosTrain, idxAtributo, "bb", idxClase,
+                                                   "+")
+              print "Prob. de máxima verosimilitud para P(A7=bb|Class=+)", prob
+
+              idxAtributo = dataset.nombreAtributos.index("A4")
+              prob = ClasificadorNaiveBayes.probMaxVerosimil(dataset.diccionarios, datosTrain, idxAtributo, "u", idxClase,
+                                                   "-")
+              print "Prob. de máxima verosimilitud para P(A4=u|Class=-)", prob
+
+              idxAtributo = dataset.nombreAtributos.index("A2")
+              media, std = ClasificadorNaiveBayes.mediaDesviacionAtr(datosTrain, dataset.diccionarios, idxAtributo, idxClase,
+                                                           "+")
+              print "Media (", media, ") y desviación típica (", std, ") del atributo A2 condicionado a clase +"
+
+              idxAtributo = dataset.nombreAtributos.index("A14")
+              media, std = ClasificadorNaiveBayes.mediaDesviacionAtr(datosTrain, dataset.diccionarios, idxAtributo, idxClase,
+                                                           "+")
+              print "Media (", media, ") y desviación típica (", std, ") del atributo A14 condicionado a clase +"
+
+              idxAtributo = dataset.nombreAtributos.index("A15")
+              media, std = ClasificadorNaiveBayes.mediaDesviacionAtr(datosTrain, dataset.diccionarios, idxAtributo, idxClase,
+                                                           "+")
+              print "Media (", media, ") y desviación típica (", std, ") del atributo A15 condicionado a clase +"
+              return
+          else:
+              print "Número de apartado (", numApartado, ") incorrecto. Por favor introduzca 3 o 4"
+              return
 
 ##############################################################################
 class ClasificadorMulticlase(Clasificador):

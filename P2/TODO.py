@@ -18,10 +18,13 @@ DONE- multiclase scikit learn
 DONE- plots (output a carpeta 'PlotsGenerados')
 DONE- multiclase de regresion logistica
 DONE- multiclase scikit-learn
-WORKING- analisis de resultados
-WORKING- Ipython notebook
-- revisar resultados tras los cambios del domingo a implementacion score/clasifica
+
 - revisar .docx de correcion
+- revisar resultados tras los cambios del domingo a implementacion score/clasifica
+WORKING- Ipython notebook
+WORKING- analisis de resultados
+
+
 
 ========================================================================================================
 NOTAS:
