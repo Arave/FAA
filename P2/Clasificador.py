@@ -5,6 +5,7 @@ from collections import Counter
 from scipy.special import expit
 from plotModel import plotModel
 from copy import copy,deepcopy
+import copy
 import numpy as np
 import math
 import operator
