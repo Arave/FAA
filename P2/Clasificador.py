@@ -115,7 +115,7 @@ class Clasificador(object):
            ii = particiones[-1].indicesTrain
            #clasificador = ClasificadorVecinosProximos(1)
            #print plotName
-           #_COMENTADA plotModel(dataset.datos[ii, 0], dataset.datos[ii, 1], dataset.datos[ii, -1] != 0, clasificador, "Frontera", plotName)
+           plotModel(dataset.datos[ii, 0], dataset.datos[ii, 1], dataset.datos[ii, -1] != 0, clasificador, "Frontera", plotName)
 ##############################################################################
 
 
@@ -248,7 +248,7 @@ class ClasificadorVecinosProximos(Clasificador):
 
     def clasifica(self, datostest, atributosDiscretos=None, diccionario=None, correcion=None):
         numFilas = datostest.shape[0]
-        predicciones = []
+        ret = np.zeros(shape=(numFilas))
 
         # Recorrer los datos(filas) del test
         for x in xrange(numFilas):
@@ -257,8 +257,9 @@ class ClasificadorVecinosProximos(Clasificador):
             #Obtener la clase mayoritaria para esa fila
             resultado = self.getResultado(vecinos)
             #Añadirla al array de predicciones
-            predicciones.append(resultado)
-        return predicciones #devolver el array de predicciones
+            #predicciones.append(resultado)
+            ret[x] = resultado
+        return ret #devolver el array de predicciones
 
 
 #############################################################################

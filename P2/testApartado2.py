@@ -267,3 +267,4 @@ Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, Tr
 about = "clasificador a Vecinos próximos k=51, normalizar"
 Main.run(data_file, ClasificadorVecinosProximos(51), about, ValidacionCruzada(10), 10, True, False, True)
 Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, True, 51)
+
