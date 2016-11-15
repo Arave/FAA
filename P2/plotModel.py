@@ -25,6 +25,10 @@ def plotModel(x,y,clase,clf,title, plotName):
     else:
         z = clf.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
 
+    #################################
+    #if type(z) != 'numpy.ndarray':
+    #    z = np.asarray(z)
+    #################################
 
     z = z.reshape(xx.shape)
     cm = plt.cm.RdBu

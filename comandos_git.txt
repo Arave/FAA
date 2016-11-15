@@ -35,3 +35,9 @@ git reset --hard origin/master
 git commit -m "Saving my work, just in case"
 git branch my-saved-work
 
+#discard de TODOS los cambios en local (si has estado guarreando y no quieres auto-mergearlo con el pull):
+#PARA: untracked files/unstaged changes
+git clean -df
+git checkout -- .
+
+

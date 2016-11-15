@@ -42,8 +42,8 @@ Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, Tr
 
 #==================================================wdbc=================================================#
 data_file = 'wdbc.data'
-
 about = "clasificador Regresion Logistica"
+
 Main.run(data_file, clasificador, about, ValidacionCruzada(10), 10, True, False, False, True)
 Main.runScikit(data_file, clf_id, about, ValidacionCruzada(10),10,True,False, False)
 

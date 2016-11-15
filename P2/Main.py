@@ -3,8 +3,8 @@ from sklearn.dummy import DummyClassifier
 from sklearn.naive_bayes import GaussianNB, MultinomialNB
 from sklearn.model_selection import cross_val_score
 from sklearn.pipeline import make_pipeline
-
 from Datos import Datos
+import numpy as np
 
 class Main(object):
 
@@ -36,19 +36,24 @@ class Main(object):
 
     @staticmethod
     def run(fichero_datos, cls, cls_brief, strat, k, supervisado, laplace, normalizar=False, separador=False):
+        """
         if separador:
             print "\n"
             print "==============================================================================="
             print "=============================(", fichero_datos, ")============================="
             print "==============================================================================="
+        """
         print "\nFichero de datos: " + fichero_datos
-        print "\nLaplace =" + str(laplace) + ", normalizar = ", str(normalizar)
+        print "Laplace =" + str(laplace) + ", normalizar = ", str(normalizar)
         dataset = Datos('./ConjuntosDatos/' + fichero_datos, supervisado)
         print "Estrategia: ", strat.getStratname(), ", numParticiones: ", str(k)
         print "Clasificador: ", cls_brief
         print "Ejecucion: "
-        print "________________________________________________________________"
-        plotName = 'PlotsGenerados/' + fichero_datos + '-' + cls_brief + '-' + 'normalizar=' + str(normalizar) + '.png'
+        #print "________________________________________________________________"
+        if normalizar:
+            plotName = 'PlotsGenerados/' + fichero_datos + '-' + cls_brief + '=' + str(normalizar) + '.png'
+        else:
+            plotName = 'PlotsGenerados/' + fichero_datos + '-' + cls_brief + '-' + 'normalizar=' + str(normalizar) + '.png'
         errores = cls.validacion(strat, dataset, cls, laplace, normalizar, plotName=plotName)
         print "\n"
         return errores
@@ -109,10 +114,5 @@ class Main(object):
         # siempre se aplica cross-validation con cv folds por defecto. Se puede cambiar si piden hold-out
         scores = cross_val_score(clf, x, y, cv=10)
         print "===========RESULTADO Scikit-learn=============="
-        print("Overall Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
-        """
-        print "Media de errores total:", 100-scores.mean(), "%"
-        print "Mediana de errores total:", 100-np.median(scores), "%"
-        print "Desviacion tipica:", 100-scores.std(), "%"
-        """
+        print("Media de errores total: %0.2f %% (+/- %0.2f %%)" % ((100.0*(1.0-scores.mean())), 100.0*(scores.std() * 2)))
         return

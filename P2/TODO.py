@@ -3,12 +3,20 @@
 #========================================================================================================
 from path import path
 
+#limpiar .pyc
 d = path('/home/arave/Documents/REPOS/faa/P2')
 files = d.walkfiles("*.pyc")
 for f in files:
     f.remove()
     print "Removed {} file".format(f)
-
+"""
+#limpiar plots
+d = path('/home/arave/Documents/REPOS/faa/P2/PlotsGenerados')
+files = d.walkfiles("*.png")
+for f in files:
+    f.remove()
+    print "Removed {} file".format(f)
+"""
 """
 ========================================================================================================
 TO-DO:
@@ -18,10 +26,10 @@ DONE- multiclase scikit learn
 DONE- plots (output a carpeta 'PlotsGenerados')
 DONE- multiclase de regresion logistica
 DONE- multiclase scikit-learn
+DONE- revisar .docx de correcion
+DONE- revisar resultados tras los cambios del domingo a implementacion score/clasifica
 
-- revisar .docx de correcion
-- revisar resultados tras los cambios del domingo a implementacion score/clasifica
-WORKING- Ipython notebook
+DONE- (80%)- Ipython notebook
 WORKING- analisis de resultados
 
 
@@ -45,7 +53,14 @@ Hotkeys notebook:
 	Enter Edit Mode	 - ENTER
 		Run cell, select below - Shift+Enter
 		Run selected cells	   - Ctrl+Enter
-		
+
+Sacar imagenes por jupyter notebook:
+    from IPython.display import Image
+    Image(filename="example.png")
+
+las tablas en Markdown son #@!*>:(
+    http://meta.stackexchange.com/questions/73566/is-there-markdown-to-create-tables
+
 Sobre el error que me daba con el algoritmo solver 'newton-cg':
 	http://stats.stackexchange.com/questions/184017/how-to-fix-non-convergence-in-logisticregressioncv
 

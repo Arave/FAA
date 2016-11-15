@@ -20,7 +20,7 @@ Main.runScikit('tic-tac-toe.data', "Prior", about, ValidacionCruzada(10),10,True
 
 about = "clasificador Naive Bayes sin correción de Laplace"
 Main.run('tic-tac-toe.data', ClasificadorNaiveBayes(), about, ValidacionCruzada(10),10,True,False)
-Main.runScikit('tic-tac-toe.data', "MultinomialNB", about, ValidacionCruzada(10),5,True,False)
+Main.runScikit('tic-tac-toe.data', "MultinomialNB", about, ValidacionCruzada(10),10,True,False)
 
 about = "clasificador Naive Bayes con correción de Laplace"
 Main.run('tic-tac-toe.data', ClasificadorNaiveBayes(), about, ValidacionCruzada(10),10,True,True)
