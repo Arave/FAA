@@ -1,6 +1,7 @@
 #========================================================================================================
 #BRIEF: Script de limpieza previo al push + lista TODO + anotaciones
 #========================================================================================================
+
 from path import path
 
 #limpiar .pyc
@@ -32,14 +33,6 @@ DONE- revisar resultados tras los cambios del domingo a implementacion score/cla
 DONE- (80%)- Ipython notebook
 WORKING- analisis de resultados
 
-Run apartado2:
-1)con plots:
-BEGIN - 00:08
-END   -
-
-2)sin plots:
-BEGIN -
-END   -
 
 ========================================================================================================
 NOTAS:
@@ -68,6 +61,9 @@ Sacar imagenes por jupyter notebook:
 las tablas en Markdown son #@!*>:(
     http://meta.stackexchange.com/questions/73566/is-there-markdown-to-create-tables
 
+Dar formato con markdown:
+	https://support.zendesk.com/hc/en-us/articles/203691016-Formatting-text-with-Markdown
+	
 Sobre el error que me daba con el algoritmo solver 'newton-cg':
 	http://stats.stackexchange.com/questions/184017/how-to-fix-non-convergence-in-logisticregressioncv
 
