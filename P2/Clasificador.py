@@ -55,6 +55,7 @@ class Clasificador(object):
     
        particiones = particionado.creaParticiones(dataset.datos)
        arrayErrores = np.empty(particionado.numeroParticiones)
+
        """
        if particionado.nombreEstrategia == "ValidacionSimple":
            print "Indices train y test para [" + str(particionado.numeroParticiones) + "] particiones:"
@@ -113,8 +114,8 @@ class Clasificador(object):
 
        if isinstance(clasificador, ClasificadorVecinosProximos) or isinstance(clasificador, ClasificadorRegresionLogistica):
            ii = particiones[-1].indicesTrain
-           #clasificador = ClasificadorVecinosProximos(1)
-           #print plotName
+           # clasificador = ClasificadorVecinosProximos(1)
+           # print plotName
            plotModel(dataset.datos[ii, 0], dataset.datos[ii, 1], dataset.datos[ii, -1] != 0, clasificador, "Frontera", plotName)
 ##############################################################################
 

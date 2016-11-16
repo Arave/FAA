@@ -32,7 +32,14 @@ DONE- revisar resultados tras los cambios del domingo a implementacion score/cla
 DONE- (80%)- Ipython notebook
 WORKING- analisis de resultados
 
+Run apartado2:
+1)con plots:
+BEGIN - 00:08
+END   -
 
+2)sin plots:
+BEGIN -
+END   -
 
 ========================================================================================================
 NOTAS:

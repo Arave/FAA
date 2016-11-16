@@ -4,13 +4,13 @@ Practica 2 test apartado 2
 Fichero de datos: example3.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=1
+Clasificador:  clasificador a Vecinos proximos k=1
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [2.500 0.000 2.500 2.500 2.500 2.500 5.000 0.000 5.000 0.000] 
+Array de % de errores obtenidos: [2.500 2.500 5.000 7.500 2.500 0.000 2.500 0.000 0.000 0.000] 
 Media de errores total: 2.25 %
 Mediana de errores total: 2.5 %
-Desviación típica: 1.75 %
+Desviación típica: 2.35849528301 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -19,13 +19,13 @@ Media de errores total: 2.75 % (+/- 4.15 %)
 Fichero de datos: example3.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=3
+Clasificador:  clasificador a Vecinos proximos k=3
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [0.000 0.000 2.500 7.500 5.000 2.500 0.000 7.500 10.000 5.000] 
-Media de errores total: 4.0 %
-Mediana de errores total: 3.75 %
-Desviación típica: 3.39116499156 %
+Array de % de errores obtenidos: [2.500 2.500 0.000 2.500 0.000 0.000 7.500 5.000 7.500 2.500] 
+Media de errores total: 3.0 %
+Mediana de errores total: 2.5 %
+Desviación típica: 2.69258240357 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -34,13 +34,13 @@ Media de errores total: 3.75 % (+/- 5.12 %)
 Fichero de datos: example3.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=5
+Clasificador:  clasificador a Vecinos proximos k=5
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [0.000 2.500 0.000 7.500 0.000 2.500 7.500 7.500 2.500 5.000] 
-Media de errores total: 3.5 %
+Array de % de errores obtenidos: [2.500 0.000 5.000 0.000 2.500 2.500 5.000 2.500 5.000 2.500] 
+Media de errores total: 2.75 %
 Mediana de errores total: 2.5 %
-Desviación típica: 3.0 %
+Desviación típica: 1.75 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -49,13 +49,13 @@ Media de errores total: 3.25 % (+/- 5.50 %)
 Fichero de datos: example3.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=11
+Clasificador:  clasificador a Vecinos proximos k=11
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [5.000 0.000 2.500 0.000 0.000 5.000 5.000 5.000 0.000 0.000] 
-Media de errores total: 2.25 %
-Mediana de errores total: 1.25 %
-Desviación típica: 2.35849528301 %
+Array de % de errores obtenidos: [2.500 0.000 2.500 2.500 2.500 2.500 5.000 0.000 0.000 0.000] 
+Media de errores total: 1.75 %
+Mediana de errores total: 2.5 %
+Desviación típica: 1.60078105936 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -64,13 +64,13 @@ Media de errores total: 2.25 % (+/- 5.22 %)
 Fichero de datos: example3.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=21
+Clasificador:  clasificador a Vecinos proximos k=21
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [5.000 5.000 7.500 2.500 5.000 2.500 2.500 2.500 0.000 0.000] 
-Media de errores total: 3.25 %
+Array de % de errores obtenidos: [2.500 2.500 2.500 2.500 7.500 5.000 0.000 2.500 2.500 0.000] 
+Media de errores total: 2.75 %
 Mediana de errores total: 2.5 %
-Desviación típica: 2.25 %
+Desviación típica: 2.07665596573 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -79,13 +79,13 @@ Media de errores total: 3.00 % (+/- 5.83 %)
 Fichero de datos: example3.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=51
+Clasificador:  clasificador a Vecinos proximos k=51
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [2.500 2.500 0.000 0.000 5.000 2.500 0.000 0.000 2.500 0.000] 
-Media de errores total: 1.5 %
-Mediana de errores total: 1.25 %
-Desviación típica: 1.65831239518 %
+Array de % de errores obtenidos: [2.500 2.500 0.000 2.500 7.500 2.500 0.000 2.500 2.500 0.000] 
+Media de errores total: 2.25 %
+Mediana de errores total: 2.5 %
+Desviación típica: 2.07665596573 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -94,13 +94,13 @@ Media de errores total: 3.00 % (+/- 5.39 %)
 Fichero de datos: example3.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=1, normalizar
+Clasificador:  clasificador a Vecinos proximos k=1, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [15.000 7.500 12.500 10.000 5.000 12.500 12.500 10.000 7.500 7.500] 
-Media de errores total: 10.0 %
-Mediana de errores total: 10.0 %
-Desviación típica: 2.95803989155 %
+Array de % de errores obtenidos: [5.000 2.500 0.000 12.500 10.000 2.500 0.000 10.000 5.000 7.500] 
+Media de errores total: 5.5 %
+Mediana de errores total: 5.0 %
+Desviación típica: 4.15331193146 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -109,13 +109,13 @@ Media de errores total: 2.75 % (+/- 4.15 %)
 Fichero de datos: example3.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=3, normalizar
+Clasificador:  clasificador a Vecinos proximos k=3, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [12.500 7.500 10.000 12.500 2.500 5.000 10.000 2.500 5.000 7.500] 
-Media de errores total: 7.5 %
-Mediana de errores total: 7.5 %
-Desviación típica: 3.53553390593 %
+Array de % de errores obtenidos: [2.500 5.000 5.000 0.000 2.500 5.000 7.500 20.000 5.000 7.500] 
+Media de errores total: 6.0 %
+Mediana de errores total: 5.0 %
+Desviación típica: 5.14781507049 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -124,13 +124,13 @@ Media de errores total: 3.75 % (+/- 5.12 %)
 Fichero de datos: example3.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=5, normalizar
+Clasificador:  clasificador a Vecinos proximos k=5, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [5.000 2.500 15.000 2.500 2.500 2.500 2.500 5.000 5.000 7.500] 
-Media de errores total: 5.0 %
-Mediana de errores total: 3.75 %
-Desviación típica: 3.70809924355 %
+Array de % de errores obtenidos: [5.000 5.000 5.000 12.500 7.500 2.500 2.500 2.500 7.500 5.000] 
+Media de errores total: 5.5 %
+Mediana de errores total: 5.0 %
+Desviación típica: 2.91547594742 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -139,13 +139,13 @@ Media de errores total: 3.25 % (+/- 5.50 %)
 Fichero de datos: example3.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=11, normalizar
+Clasificador:  clasificador a Vecinos proximos k=11, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [7.500 12.500 5.000 17.500 7.500 2.500 2.500 5.000 20.000 2.500] 
-Media de errores total: 8.25 %
-Mediana de errores total: 6.25 %
-Desviación típica: 6.0259853966 %
+Array de % de errores obtenidos: [2.500 2.500 5.000 2.500 2.500 12.500 5.000 0.000 17.500 0.000] 
+Media de errores total: 5.0 %
+Mediana de errores total: 2.5 %
+Desviación típica: 5.36190264738 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -154,13 +154,13 @@ Media de errores total: 2.25 % (+/- 5.22 %)
 Fichero de datos: example3.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=21, normalizar
+Clasificador:  clasificador a Vecinos proximos k=21, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [15.000 12.500 17.500 7.500 7.500 5.000 2.500 2.500 5.000 2.500] 
+Array de % de errores obtenidos: [5.000 10.000 7.500 12.500 10.000 15.000 7.500 2.500 5.000 2.500] 
 Media de errores total: 7.75 %
-Mediana de errores total: 6.25 %
-Desviación típica: 5.1780787943 %
+Mediana de errores total: 7.5 %
+Desviación típica: 3.94493345951 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -169,13 +169,13 @@ Media de errores total: 3.00 % (+/- 5.83 %)
 Fichero de datos: example3.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=51, normalizar
+Clasificador:  clasificador a Vecinos proximos k=51, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [5.000 7.500 17.500 12.500 7.500 15.000 10.000 5.000 12.500 10.000] 
-Media de errores total: 10.25 %
-Mediana de errores total: 10.0 %
-Desviación típica: 3.94493345951 %
+Array de % de errores obtenidos: [2.500 2.500 10.000 7.500 20.000 5.000 15.000 10.000 5.000 2.500] 
+Media de errores total: 8.0 %
+Mediana de errores total: 6.25 %
+Desviación típica: 5.56776436283 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -184,13 +184,13 @@ Media de errores total: 3.00 % (+/- 5.39 %)
 Fichero de datos: example4.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=1
+Clasificador:  clasificador a Vecinos proximos k=1
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [0.000 0.000 0.000 0.000 0.000 0.000 10.000 0.000 0.000 20.000] 
+Array de % de errores obtenidos: [10.000 10.000 0.000 0.000 10.000 0.000 0.000 0.000 0.000 0.000] 
 Media de errores total: 3.0 %
 Mediana de errores total: 0.0 %
-Desviación típica: 6.40312423743 %
+Desviación típica: 4.58257569496 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -199,13 +199,13 @@ Media de errores total: 3.00 % (+/- 9.17 %)
 Fichero de datos: example4.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=3
+Clasificador:  clasificador a Vecinos proximos k=3
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [10.000 40.000 0.000 30.000 10.000 0.000 0.000 0.000 10.000 10.000] 
-Media de errores total: 11.0 %
-Mediana de errores total: 10.0 %
-Desviación típica: 13.0 %
+Array de % de errores obtenidos: [20.000 10.000 10.000 0.000 0.000 0.000 10.000 0.000 0.000 40.000] 
+Media de errores total: 9.0 %
+Mediana de errores total: 5.0 %
+Desviación típica: 12.2065556157 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -214,13 +214,13 @@ Media de errores total: 9.00 % (+/- 18.87 %)
 Fichero de datos: example4.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=5
+Clasificador:  clasificador a Vecinos proximos k=5
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [10.000 10.000 40.000 10.000 10.000 10.000 0.000 10.000 0.000 0.000] 
-Media de errores total: 10.0 %
-Mediana de errores total: 10.0 %
-Desviación típica: 10.9544511501 %
+Array de % de errores obtenidos: [20.000 10.000 0.000 10.000 10.000 20.000 20.000 0.000 20.000 30.000] 
+Media de errores total: 14.0 %
+Mediana de errores total: 15.0 %
+Desviación típica: 9.16515138991 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -229,13 +229,13 @@ Media de errores total: 11.00 % (+/- 20.88 %)
 Fichero de datos: example4.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=11
+Clasificador:  clasificador a Vecinos proximos k=11
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [10.000 10.000 40.000 30.000 10.000 20.000 20.000 30.000 20.000 20.000] 
-Media de errores total: 21.0 %
+Array de % de errores obtenidos: [10.000 20.000 10.000 20.000 30.000 20.000 20.000 30.000 10.000 20.000] 
+Media de errores total: 19.0 %
 Mediana de errores total: 20.0 %
-Desviación típica: 9.43398113206 %
+Desviación típica: 7.0 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -244,13 +244,13 @@ Media de errores total: 20.00 % (+/- 15.49 %)
 Fichero de datos: example4.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=21
+Clasificador:  clasificador a Vecinos proximos k=21
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [30.000 50.000 50.000 70.000 20.000 20.000 10.000 30.000 30.000 50.000] 
-Media de errores total: 36.0 %
+Array de % de errores obtenidos: [40.000 40.000 30.000 30.000 40.000 20.000 10.000 30.000 20.000 50.000] 
+Media de errores total: 31.0 %
 Mediana de errores total: 30.0 %
-Desviación típica: 17.4355957742 %
+Desviación típica: 11.3578166916 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -259,13 +259,13 @@ Media de errores total: 34.00 % (+/- 24.00 %)
 Fichero de datos: example4.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=51
+Clasificador:  clasificador a Vecinos proximos k=51
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [50.000 60.000 50.000 60.000 60.000 40.000 70.000 70.000 60.000 30.000] 
-Media de errores total: 55.0 %
+Array de % de errores obtenidos: [70.000 70.000 60.000 60.000 60.000 60.000 30.000 50.000 50.000 50.000] 
+Media de errores total: 56.0 %
 Mediana de errores total: 60.0 %
-Desviación típica: 12.0415945788 %
+Desviación típica: 11.1355287257 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -274,7 +274,7 @@ Media de errores total: 52.00 % (+/- 37.74 %)
 Fichero de datos: example4.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=1, normalizar
+Clasificador:  clasificador a Vecinos proximos k=1, normalizar
 Ejecucion: 
 =================RESULTADO====================
 Array de % de errores obtenidos: [0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000] 
@@ -289,7 +289,7 @@ Media de errores total: 0.00 % (+/- 0.00 %)
 Fichero de datos: example4.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=3, normalizar
+Clasificador:  clasificador a Vecinos proximos k=3, normalizar
 Ejecucion: 
 =================RESULTADO====================
 Array de % de errores obtenidos: [0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000] 
@@ -304,7 +304,7 @@ Media de errores total: 0.00 % (+/- 0.00 %)
 Fichero de datos: example4.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=5, normalizar
+Clasificador:  clasificador a Vecinos proximos k=5, normalizar
 Ejecucion: 
 =================RESULTADO====================
 Array de % de errores obtenidos: [0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000] 
@@ -319,7 +319,7 @@ Media de errores total: 0.00 % (+/- 0.00 %)
 Fichero de datos: example4.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=11, normalizar
+Clasificador:  clasificador a Vecinos proximos k=11, normalizar
 Ejecucion: 
 =================RESULTADO====================
 Array de % de errores obtenidos: [0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000] 
@@ -334,13 +334,13 @@ Media de errores total: 0.00 % (+/- 0.00 %)
 Fichero de datos: example4.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=21, normalizar
+Clasificador:  clasificador a Vecinos proximos k=21, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000] 
-Media de errores total: 0.0 %
+Array de % de errores obtenidos: [0.000 0.000 0.000 0.000 0.000 0.000 10.000 0.000 0.000 0.000] 
+Media de errores total: 1.0 %
 Mediana de errores total: 0.0 %
-Desviación típica: 0.0 %
+Desviación típica: 3.0 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -349,7 +349,7 @@ Media de errores total: 0.00 % (+/- 0.00 %)
 Fichero de datos: example4.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=51, normalizar
+Clasificador:  clasificador a Vecinos proximos k=51, normalizar
 Ejecucion: 
 =================RESULTADO====================
 Array de % de errores obtenidos: [0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000] 
@@ -364,13 +364,13 @@ Media de errores total: 0.00 % (+/- 0.00 %)
 Fichero de datos: wine_proc.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=1
+Clasificador:  clasificador a Vecinos proximos k=1
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [11.111 11.111 27.778 38.889 22.222 38.889 27.778 16.667 11.765 35.294] 
-Media de errores total: 24.1503267974 %
-Mediana de errores total: 25.0 %
-Desviación típica: 10.6682704965 %
+Array de % de errores obtenidos: [22.222 11.111 33.333 16.667 27.778 27.778 16.667 5.556 17.647 29.412] 
+Media de errores total: 20.8169934641 %
+Mediana de errores total: 19.9346405229 %
+Desviación típica: 8.37271228915 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -379,13 +379,13 @@ Media de errores total: 25.22 % (+/- 18.43 %)
 Fichero de datos: wine_proc.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=3
+Clasificador:  clasificador a Vecinos proximos k=3
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [16.667 33.333 16.667 16.667 55.556 33.333 27.778 22.222 35.294 29.412] 
-Media de errores total: 28.6928104575 %
-Mediana de errores total: 28.5947712418 %
-Desviación típica: 11.3373732914 %
+Array de % de errores obtenidos: [22.222 16.667 22.222 38.889 33.333 33.333 27.778 38.889 47.059 29.412] 
+Media de errores total: 30.9803921569 %
+Mediana de errores total: 31.3725490196 %
+Desviación típica: 8.75036233787 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -394,13 +394,13 @@ Media de errores total: 27.81 % (+/- 19.03 %)
 Fichero de datos: wine_proc.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=5
+Clasificador:  clasificador a Vecinos proximos k=5
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [33.333 27.778 38.889 44.444 22.222 38.889 22.222 38.889 11.765 29.412] 
-Media de errores total: 30.7843137255 %
-Mediana de errores total: 31.3725490196 %
-Desviación típica: 9.53643823186 %
+Array de % de errores obtenidos: [22.222 38.889 33.333 27.778 33.333 27.778 27.778 27.778 35.294 29.412] 
+Media de errores total: 30.3594771242 %
+Mediana de errores total: 28.5947712418 %
+Desviación típica: 4.56686923259 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -409,13 +409,13 @@ Media de errores total: 32.42 % (+/- 16.87 %)
 Fichero de datos: wine_proc.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=11
+Clasificador:  clasificador a Vecinos proximos k=11
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [33.333 38.889 5.556 33.333 33.333 38.889 44.444 27.778 17.647 29.412] 
-Media de errores total: 30.2614379085 %
-Mediana de errores total: 33.3333333333 %
-Desviación típica: 10.7458215808 %
+Array de % de errores obtenidos: [38.889 27.778 27.778 27.778 44.444 33.333 16.667 27.778 29.412 23.529] 
+Media de errores total: 29.7385620915 %
+Mediana de errores total: 27.7777777778 %
+Desviación típica: 7.33367119094 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -424,13 +424,13 @@ Media de errores total: 28.56 % (+/- 16.29 %)
 Fichero de datos: wine_proc.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=21
+Clasificador:  clasificador a Vecinos proximos k=21
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [38.889 50.000 27.778 33.333 38.889 22.222 50.000 11.111 23.529 35.294] 
-Media de errores total: 33.1045751634 %
-Mediana de errores total: 34.3137254902 %
-Desviación típica: 11.6827665774 %
+Array de % de errores obtenidos: [16.667 38.889 33.333 27.778 33.333 33.333 33.333 27.778 35.294 35.294] 
+Media de errores total: 31.5032679739 %
+Mediana de errores total: 33.3333333333 %
+Desviación típica: 5.86999427956 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -439,13 +439,13 @@ Media de errores total: 29.08 % (+/- 21.59 %)
 Fichero de datos: wine_proc.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=51
+Clasificador:  clasificador a Vecinos proximos k=51
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [22.222 50.000 27.778 22.222 16.667 33.333 16.667 38.889 17.647 41.176] 
-Media de errores total: 28.660130719 %
-Mediana de errores total: 25.0 %
-Desviación típica: 11.0957698781 %
+Array de % de errores obtenidos: [16.667 33.333 50.000 38.889 16.667 44.444 33.333 16.667 23.529 29.412] 
+Media de errores total: 30.2941176471 %
+Mediana de errores total: 31.3725490196 %
+Desviación típica: 11.3338402914 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -454,13 +454,13 @@ Media de errores total: 28.98 % (+/- 16.16 %)
 Fichero de datos: wine_proc.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=1, normalizar
+Clasificador:  clasificador a Vecinos proximos k=1, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [5.556 16.667 0.000 5.556 5.556 0.000 5.556 5.556 11.765 0.000] 
-Media de errores total: 5.62091503268 %
+Array de % de errores obtenidos: [0.000 16.667 5.556 5.556 5.556 5.556 0.000 16.667 5.882 0.000] 
+Media de errores total: 6.14379084967 %
 Mediana de errores total: 5.55555555556 %
-Desviación típica: 5.04539603881 %
+Desviación típica: 5.79786824409 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -469,13 +469,13 @@ Media de errores total: 5.60 % (+/- 10.92 %)
 Fichero de datos: wine_proc.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=3, normalizar
+Clasificador:  clasificador a Vecinos proximos k=3, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [11.111 16.667 0.000 5.556 0.000 5.556 0.000 22.222 5.882 5.882] 
-Media de errores total: 7.28758169935 %
-Mediana de errores total: 5.71895424837 %
-Desviación típica: 7.03495419644 %
+Array de % de errores obtenidos: [11.111 5.556 5.556 5.556 5.556 0.000 5.556 5.556 5.882 0.000] 
+Media de errores total: 5.03267973856 %
+Mediana de errores total: 5.55555555556 %
+Desviación típica: 2.99942324329 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -484,13 +484,13 @@ Media de errores total: 4.55 % (+/- 8.56 %)
 Fichero de datos: wine_proc.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=5, normalizar
+Clasificador:  clasificador a Vecinos proximos k=5, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [5.556 5.556 11.111 5.556 0.000 27.778 0.000 0.000 0.000 11.765] 
-Media de errores total: 6.73202614379 %
-Mediana de errores total: 5.55555555556 %
-Desviación típica: 8.202809674 %
+Array de % de errores obtenidos: [16.667 16.667 0.000 11.111 5.556 0.000 5.556 11.111 0.000 5.882] 
+Media de errores total: 7.25490196078 %
+Mediana de errores total: 5.71895424837 %
+Desviación típica: 6.10297945583 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -499,13 +499,13 @@ Media de errores total: 3.34 % (+/- 7.38 %)
 Fichero de datos: wine_proc.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=11, normalizar
+Clasificador:  clasificador a Vecinos proximos k=11, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [0.000 5.556 11.111 0.000 5.556 0.000 16.667 0.000 17.647 0.000] 
-Media de errores total: 5.65359477124 %
-Mediana de errores total: 2.77777777778 %
-Desviación típica: 6.74351770006 %
+Array de % de errores obtenidos: [11.111 0.000 5.556 5.556 11.111 0.000 11.111 5.556 5.882 0.000] 
+Media de errores total: 5.58823529412 %
+Mediana de errores total: 5.55555555556 %
+Desviación típica: 4.30443146145 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -514,13 +514,13 @@ Media de errores total: 2.81 % (+/- 5.62 %)
 Fichero de datos: wine_proc.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=21, normalizar
+Clasificador:  clasificador a Vecinos proximos k=21, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [0.000 0.000 0.000 5.556 16.667 0.000 5.556 0.000 17.647 0.000] 
-Media de errores total: 4.54248366013 %
-Mediana de errores total: 0.0 %
-Desviación típica: 6.66770785154 %
+Array de % de errores obtenidos: [11.111 0.000 0.000 16.667 11.111 0.000 5.556 5.556 0.000 11.765] 
+Media de errores total: 6.17647058824 %
+Mediana de errores total: 5.55555555556 %
+Desviación típica: 5.85952360104 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -529,13 +529,13 @@ Media de errores total: 2.19 % (+/- 5.37 %)
 Fichero de datos: wine_proc.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=51, normalizar
+Clasificador:  clasificador a Vecinos proximos k=51, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [11.111 16.667 0.000 5.556 27.778 5.556 16.667 16.667 0.000 0.000] 
-Media de errores total: 10.0 %
-Mediana de errores total: 8.33333333333 %
-Desviación típica: 8.88888888889 %
+Array de % de errores obtenidos: [16.667 0.000 0.000 0.000 11.111 16.667 0.000 11.111 0.000 0.000] 
+Media de errores total: 5.55555555556 %
+Mediana de errores total: 0.0 %
+Desviación típica: 7.02728368926 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -544,13 +544,13 @@ Media de errores total: 5.59 % (+/- 10.09 %)
 Fichero de datos: wdbc.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=1
+Clasificador:  clasificador a Vecinos proximos k=1
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [15.789 5.263 8.772 8.772 10.526 5.263 7.018 3.509 5.263 12.500] 
-Media de errores total: 8.26754385965 %
+Array de % de errores obtenidos: [15.789 5.263 7.018 5.263 7.018 3.509 14.035 8.772 8.772 8.929] 
+Media de errores total: 8.43671679198 %
 Mediana de errores total: 7.89473684211 %
-Desviación típica: 3.62479502398 %
+Desviación típica: 3.6650667638 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -559,13 +559,13 @@ Media de errores total: 8.42 % (+/- 5.91 %)
 Fichero de datos: wdbc.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=3
+Clasificador:  clasificador a Vecinos proximos k=3
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [5.263 10.526 12.281 8.772 3.509 3.509 3.509 10.526 8.772 7.143] 
-Media de errores total: 7.38095238095 %
-Mediana de errores total: 7.95739348371 %
-Desviación típica: 3.11748118727 %
+Array de % de errores obtenidos: [7.018 5.263 14.035 8.772 5.263 8.772 10.526 10.526 1.754 5.357] 
+Media de errores total: 7.72869674185 %
+Mediana de errores total: 7.89473684211 %
+Desviación típica: 3.34037036096 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -574,13 +574,13 @@ Media de errores total: 7.37 % (+/- 5.92 %)
 Fichero de datos: wdbc.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=5
+Clasificador:  clasificador a Vecinos proximos k=5
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [7.018 8.772 5.263 10.526 10.526 3.509 8.772 5.263 1.754 8.929] 
-Media de errores total: 7.03320802005 %
-Mediana de errores total: 7.89473684211 %
-Desviación típica: 2.83894919921 %
+Array de % de errores obtenidos: [5.263 12.281 8.772 12.281 8.772 5.263 3.509 3.509 7.018 5.357] 
+Media de errores total: 7.20238095238 %
+Mediana de errores total: 6.1873433584 %
+Desviación típica: 3.07817133047 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -589,13 +589,13 @@ Media de errores total: 7.02 % (+/- 5.78 %)
 Fichero de datos: wdbc.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=11
+Clasificador:  clasificador a Vecinos proximos k=11
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [3.509 3.509 8.772 10.526 7.018 3.509 5.263 5.263 5.263 10.714] 
-Media de errores total: 6.33458646617 %
-Mediana de errores total: 5.26315789474 %
-Desviación típica: 2.65629430983 %
+Array de % de errores obtenidos: [1.754 10.526 7.018 7.018 8.772 3.509 10.526 7.018 1.754 8.929] 
+Media de errores total: 6.68233082707 %
+Mediana de errores total: 7.01754385965 %
+Desviación típica: 3.12957380688 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -604,13 +604,13 @@ Media de errores total: 7.00 % (+/- 7.20 %)
 Fichero de datos: wdbc.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=21
+Clasificador:  clasificador a Vecinos proximos k=21
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [8.772 3.509 5.263 12.281 7.018 5.263 3.509 10.526 5.263 7.143] 
-Media de errores total: 6.85463659148 %
-Mediana de errores total: 6.14035087719 %
-Desviación típica: 2.7694235589 %
+Array de % de errores obtenidos: [1.754 14.035 8.772 7.018 10.526 7.018 5.263 7.018 3.509 5.357] 
+Media de errores total: 7.02694235589 %
+Mediana de errores total: 7.01754385965 %
+Desviación típica: 3.32387578224 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -619,13 +619,13 @@ Media de errores total: 7.00 % (+/- 6.84 %)
 Fichero de datos: wdbc.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=51
+Clasificador:  clasificador a Vecinos proximos k=51
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [12.281 3.509 12.281 5.263 3.509 8.772 12.281 10.526 5.263 7.143] 
-Media de errores total: 8.08270676692 %
-Mediana de errores total: 7.95739348371 %
-Desviación típica: 3.43424705011 %
+Array de % de errores obtenidos: [7.018 5.263 5.263 15.789 7.018 7.018 10.526 5.263 7.018 8.929] 
+Media de errores total: 7.91040100251 %
+Mediana de errores total: 7.01754385965 %
+Desviación típica: 3.06874455173 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -634,13 +634,13 @@ Media de errores total: 8.23 % (+/- 6.31 %)
 Fichero de datos: wdbc.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=1, normalizar
+Clasificador:  clasificador a Vecinos proximos k=1, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [5.263 3.509 0.000 8.772 7.018 1.754 5.263 7.018 3.509 8.929] 
-Media de errores total: 5.10338345865 %
+Array de % de errores obtenidos: [1.754 3.509 8.772 1.754 7.018 5.263 5.263 0.000 7.018 5.357] 
+Media de errores total: 4.57080200501 %
 Mediana de errores total: 5.26315789474 %
-Desviación típica: 2.78953849339 %
+Desviación típica: 2.62838637049 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -649,13 +649,13 @@ Media de errores total: 4.93 % (+/- 4.93 %)
 Fichero de datos: wdbc.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=3, normalizar
+Clasificador:  clasificador a Vecinos proximos k=3, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [5.263 5.263 1.754 1.754 5.263 8.772 1.754 1.754 1.754 3.571] 
-Media de errores total: 3.69047619048 %
-Mediana de errores total: 2.66290726817 %
-Desviación típica: 2.28029720447 %
+Array de % de errores obtenidos: [7.018 5.263 1.754 1.754 3.509 7.018 15.789 3.509 1.754 10.714] 
+Media de errores total: 5.80827067669 %
+Mediana de errores total: 4.38596491228 %
+Desviación típica: 4.3219504969 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -664,13 +664,13 @@ Media de errores total: 3.52 % (+/- 4.48 %)
 Fichero de datos: wdbc.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=5, normalizar
+Clasificador:  clasificador a Vecinos proximos k=5, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [7.018 5.263 3.509 1.754 1.754 3.509 1.754 7.018 5.263 0.000] 
-Media de errores total: 3.68421052632 %
-Mediana de errores total: 3.50877192982 %
-Desviación típica: 2.28070175439 %
+Array de % de errores obtenidos: [5.263 5.263 8.772 5.263 0.000 1.754 3.509 8.772 3.509 0.000] 
+Media de errores total: 4.21052631579 %
+Mediana de errores total: 4.38596491228 %
+Desviación típica: 2.95654378006 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -679,13 +679,13 @@ Media de errores total: 3.34 % (+/- 4.00 %)
 Fichero de datos: wdbc.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=11, normalizar
+Clasificador:  clasificador a Vecinos proximos k=11, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [3.509 5.263 3.509 5.263 1.754 5.263 0.000 3.509 10.526 3.571] 
-Media de errores total: 4.21679197995 %
-Mediana de errores total: 3.54010025063 %
-Desviación típica: 2.62411670232 %
+Array de % de errores obtenidos: [10.526 0.000 10.526 3.509 1.754 3.509 0.000 5.263 1.754 8.929] 
+Media de errores total: 4.57706766917 %
+Mediana de errores total: 3.50877192982 %
+Desviación típica: 3.87698444202 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -694,13 +694,13 @@ Media de errores total: 3.33 % (+/- 5.29 %)
 Fichero de datos: wdbc.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=21, normalizar
+Clasificador:  clasificador a Vecinos proximos k=21, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [5.263 3.509 3.509 3.509 12.281 1.754 3.509 3.509 3.509 3.571] 
-Media de errores total: 4.39223057644 %
-Mediana de errores total: 3.50877192982 %
-Desviación típica: 2.74411055037 %
+Array de % de errores obtenidos: [3.509 5.263 7.018 3.509 3.509 7.018 1.754 7.018 0.000 5.357] 
+Media de errores total: 4.39536340852 %
+Mediana de errores total: 4.38596491228 %
+Desviación típica: 2.25738106295 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -709,13 +709,13 @@ Media de errores total: 4.38 % (+/- 4.47 %)
 Fichero de datos: wdbc.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=51, normalizar
+Clasificador:  clasificador a Vecinos proximos k=51, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [5.263 5.263 3.509 8.772 1.754 3.509 12.281 8.772 5.263 1.786] 
-Media de errores total: 5.6171679198 %
-Mediana de errores total: 5.26315789474 %
-Desviación típica: 3.21209412209 %
+Array de % de errores obtenidos: [3.509 5.263 3.509 7.018 8.772 8.772 3.509 10.526 10.526 10.714] 
+Media de errores total: 7.21177944862 %
+Mediana de errores total: 7.89473684211 %
+Desviación típica: 2.89964891528 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -724,13 +724,13 @@ Media de errores total: 4.73 % (+/- 5.17 %)
 Fichero de datos: digits.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=1
+Clasificador:  clasificador a Vecinos proximos k=1
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [12.766 8.511 6.383 9.574 8.511 5.319 6.383 12.766 8.511 10.638] 
-Media de errores total: 8.93617021277 %
-Mediana de errores total: 8.51063829787 %
-Desviación típica: 2.43521768984 %
+Array de % de errores obtenidos: [5.319 12.766 12.766 7.447 6.383 6.383 11.702 10.638 10.638 6.383] 
+Media de errores total: 9.04255319149 %
+Mediana de errores total: 9.04255319149 %
+Desviación típica: 2.78430900602 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -739,13 +739,13 @@ Media de errores total: 9.33 % (+/- 9.44 %)
 Fichero de datos: digits.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=3
+Clasificador:  clasificador a Vecinos proximos k=3
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [9.574 12.766 7.447 10.638 9.574 12.766 7.447 17.021 10.638 7.447] 
+Array de % de errores obtenidos: [11.702 6.383 9.574 7.447 13.830 12.766 8.511 9.574 14.894 10.638] 
 Media de errores total: 10.5319148936 %
 Mediana de errores total: 10.1063829787 %
-Desviación típica: 2.87234042553 %
+Desviación típica: 2.62531120835 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -754,13 +754,13 @@ Media de errores total: 10.86 % (+/- 7.96 %)
 Fichero de datos: digits.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=5
+Clasificador:  clasificador a Vecinos proximos k=5
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [14.894 12.766 9.574 8.511 3.191 11.702 8.511 10.638 15.957 12.766] 
-Media de errores total: 10.8510638298 %
-Mediana de errores total: 11.170212766 %
-Desviación típica: 3.48962116316 %
+Array de % de errores obtenidos: [9.574 10.638 15.957 8.511 18.085 12.766 9.574 10.638 4.255 4.255] 
+Media de errores total: 10.4255319149 %
+Mediana de errores total: 10.1063829787 %
+Desviación típica: 4.19640062198 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -769,13 +769,13 @@ Media de errores total: 10.44 % (+/- 6.07 %)
 Fichero de datos: digits.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=11
+Clasificador:  clasificador a Vecinos proximos k=11
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [10.638 12.766 15.957 5.319 5.319 14.894 6.383 11.702 19.149 18.085] 
-Media de errores total: 12.0212765957 %
-Mediana de errores total: 12.2340425532 %
-Desviación típica: 4.85297647998 %
+Array de % de errores obtenidos: [14.894 17.021 7.447 10.638 12.766 14.894 7.447 7.447 10.638 12.766] 
+Media de errores total: 11.5957446809 %
+Mediana de errores total: 11.7021276596 %
+Desviación típica: 3.27721740441 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -784,13 +784,13 @@ Media de errores total: 12.53 % (+/- 7.08 %)
 Fichero de datos: digits.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=21
+Clasificador:  clasificador a Vecinos proximos k=21
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [14.894 10.638 6.383 21.277 12.766 14.894 14.894 12.766 13.830 11.702] 
-Media de errores total: 13.4042553191 %
-Mediana de errores total: 13.2978723404 %
-Desviación típica: 3.59819883517 %
+Array de % de errores obtenidos: [15.957 13.830 5.319 11.702 12.766 13.830 12.766 15.957 15.957 17.021] 
+Media de errores total: 13.5106382979 %
+Mediana de errores total: 13.829787234 %
+Desviación típica: 3.19326191911 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -799,13 +799,13 @@ Media de errores total: 13.28 % (+/- 6.43 %)
 Fichero de datos: digits.data
 Laplace =False, normalizar =  False
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=51
+Clasificador:  clasificador a Vecinos proximos k=51
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [18.085 24.468 12.766 20.213 15.957 15.957 20.213 15.957 12.766 21.277] 
-Media de errores total: 17.7659574468 %
-Mediana de errores total: 17.0212765957 %
-Desviación típica: 3.59347782001 %
+Array de % de errores obtenidos: [13.830 13.830 26.596 14.894 12.766 15.957 17.021 18.085 21.277 18.085] 
+Media de errores total: 17.2340425532 %
+Mediana de errores total: 16.4893617021 %
+Desviación típica: 3.94622063638 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -814,13 +814,13 @@ Media de errores total: 17.66 % (+/- 4.86 %)
 Fichero de datos: digits.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=1, normalizar
+Clasificador:  clasificador a Vecinos proximos k=1, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [18.085 19.149 13.830 7.447 10.638 12.766 14.894 10.638 9.574 11.702] 
-Media de errores total: 12.8723404255 %
-Mediana de errores total: 12.2340425532 %
-Desviación típica: 3.51063829787 %
+Array de % de errores obtenidos: [14.894 13.830 9.574 15.957 7.447 8.511 12.766 17.021 15.957 14.894] 
+Media de errores total: 13.085106383 %
+Mediana de errores total: 14.3617021277 %
+Desviación típica: 3.2285087033 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -829,13 +829,13 @@ Media de errores total: 11.29 % (+/- 11.77 %)
 Fichero de datos: digits.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=3, normalizar
+Clasificador:  clasificador a Vecinos proximos k=3, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [18.085 18.085 17.021 6.383 15.957 13.830 17.021 22.340 15.957 10.638] 
-Media de errores total: 15.5319148936 %
-Mediana de errores total: 16.4893617021 %
-Desviación típica: 4.18018780944 %
+Array de % de errores obtenidos: [12.766 21.277 18.085 12.766 9.574 8.511 10.638 13.830 20.213 14.894] 
+Media de errores total: 14.2553191489 %
+Mediana de errores total: 13.2978723404 %
+Desviación típica: 4.15302580765 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -844,13 +844,13 @@ Media de errores total: 13.61 % (+/- 6.46 %)
 Fichero de datos: digits.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=5, normalizar
+Clasificador:  clasificador a Vecinos proximos k=5, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [13.830 11.702 21.277 12.766 13.830 10.638 13.830 13.830 20.213 9.574] 
-Media de errores total: 14.1489361702 %
+Array de % de errores obtenidos: [11.702 13.830 17.021 22.340 12.766 11.702 21.277 13.830 17.021 11.702] 
+Media de errores total: 15.3191489362 %
 Mediana de errores total: 13.829787234 %
-Desviación típica: 3.59347782001 %
+Desviación típica: 3.75216852948 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -859,13 +859,13 @@ Media de errores total: 13.24 % (+/- 7.94 %)
 Fichero de datos: digits.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=11, normalizar
+Clasificador:  clasificador a Vecinos proximos k=11, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [14.894 13.830 18.085 14.894 15.957 11.702 10.638 19.149 13.830 12.766] 
-Media de errores total: 14.5744680851 %
-Mediana de errores total: 14.3617021277 %
-Desviación típica: 2.51972750688 %
+Array de % de errores obtenidos: [8.511 15.957 12.766 14.894 22.340 14.894 21.277 11.702 19.149 13.830] 
+Media de errores total: 15.5319148936 %
+Mediana de errores total: 14.8936170213 %
+Desviación típica: 4.09816176261 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -874,13 +874,13 @@ Media de errores total: 14.83 % (+/- 6.72 %)
 Fichero de datos: digits.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=21, normalizar
+Clasificador:  clasificador a Vecinos proximos k=21, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [17.021 13.830 13.830 21.277 18.085 20.213 17.021 11.702 21.277 13.830] 
-Media de errores total: 16.8085106383 %
-Mediana de errores total: 17.0212765957 %
-Desviación típica: 3.25469330655 %
+Array de % de errores obtenidos: [12.766 18.085 18.085 17.021 13.830 18.085 21.277 11.702 19.149 23.404] 
+Media de errores total: 17.3404255319 %
+Mediana de errores total: 18.085106383 %
+Desviación típica: 3.49771962187 %
 
 
 ===========RESULTADO Scikit-learn==============
@@ -889,13 +889,13 @@ Media de errores total: 15.19 % (+/- 7.27 %)
 Fichero de datos: digits.data
 Laplace =False, normalizar =  True
 Estrategia:  ValidacionCruzada , numParticiones:  10
-Clasificador:  clasificador a Vecinos próximos k=51, normalizar
+Clasificador:  clasificador a Vecinos proximos k=51, normalizar
 Ejecucion: 
 =================RESULTADO====================
-Array de % de errores obtenidos: [23.404 19.149 18.085 18.085 26.596 14.894 34.043 22.340 24.468 20.213] 
-Media de errores total: 22.1276595745 %
-Mediana de errores total: 21.2765957447 %
-Desviación típica: 5.16368557426 %
+Array de % de errores obtenidos: [14.894 23.404 26.596 14.894 20.213 22.340 28.723 26.596 22.340 18.085] 
+Media de errores total: 21.8085106383 %
+Mediana de errores total: 22.3404255319 %
+Desviación típica: 4.56951736062 %
 
 
 ===========RESULTADO Scikit-learn==============
