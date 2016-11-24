@@ -5,6 +5,7 @@ from collections import Counter
 from scipy.special import expit
 from plotModel import plotModel
 from copy import copy,deepcopy
+from itertools import chain
 import copy
 import numpy as np
 import math
@@ -118,6 +119,59 @@ class Clasificador(object):
            # print plotName
            plotModel(dataset.datos[ii, 0], dataset.datos[ii, 1], dataset.datos[ii, -1] != 0, clasificador, "Frontera", plotName)
 ##############################################################################
+
+class AlgoritmoGenetico(Clasificador):
+    probCruce = 60 #Probabilidad de cruzar individuos 60%
+    probMutacion = 0.1 #Probabilidad de mutación de un individuo 0.1%
+    propElitismo = 5 #Proporcion de individuos que pasan gracias al elitismo 5%
+    tipoSeleccion = "Proporcional al fitness" #Se realiza una seleccion proporcional al fitness
+    tamPoblacion = 10 #Tamaño de la poblacion
+    numGeneraciones = 100 #Numero de generaciones (Condicion de terminacion)
+
+
+    def __init__(self, tamPoblacion, numGeneraciones):
+        self.tamPoblacion = tamPoblacion
+        self.numGeneraciones = numGeneraciones
+
+    """Funcion que permite inicizalizar una poblacion aleatoria de individuos"""
+    @staticmethod
+    def inicializarPoblacion(tamPoblacion, sizeRegla, maxReglas):
+        poblacion = np.zeros(shape=(tamPoblacion))
+        
+        #Recorrer la poblacion
+        for x in np.nditer(poblacion):
+            #Determinar el numero de reglas por individuo
+            numReglas = np.random.randint(low=1, high=maxReglas + 1, size=1)
+            #print "numReglas", numReglas
+            reglas = np.zeros(shape=(numReglas))
+            for regla in np.nditer(reglas):
+                #Generar reglas random
+                regla = np.random.randint(2, size=sizeRegla)
+                #print "Regla", regla
+            
+        
+        return poblacion
+        
+        
+        
+    def entrenamiento(self, datostrain, atributosDiscretos, diccionario):
+        #1º- Inicializar una población aleatoria de individuos
+    
+        # Tamaño de cada regla es fijo = Suma del núm. valores posibles por atributos + 1 (clase)
+        #sizeRegla = Counter(chain.from_iterable(e.keys() for e in diccionario))
+        sizeRegla = 0            
+        for d in diccionario:
+            sizeRegla += len(d)
+        maxReglas = 10 #numero máximo de reglas que puede tener cada individuo    
+        poblacion = self.inicializarPoblacion(self.tamPoblacion,sizeRegla, maxReglas)
+        
+        
+        pass
+        
+        
+    def clasifica(self, datostest, atributosDiscretos=None, diccionario=None, correcion=None):
+        pass
+    
 
 
 class ClasificadorRegresionLogistica(Clasificador):
