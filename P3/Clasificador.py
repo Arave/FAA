@@ -127,32 +127,52 @@ class AlgoritmoGenetico(Clasificador):
     tipoSeleccion = "Proporcional al fitness" #Se realiza una seleccion proporcional al fitness
     tamPoblacion = 10 #Tamaño de la poblacion
     numGeneraciones = 100 #Numero de generaciones (Condicion de terminacion)
+    maxReglas = 10 #Numero máximo de reglas por individuo
+    
+    bestIndividuo = None #Mejor individuo -> Se utilizará para clasificar
 
 
-    def __init__(self, tamPoblacion, numGeneraciones):
+    def __init__(self, tamPoblacion, numGeneraciones, maxReglas):
         self.tamPoblacion = tamPoblacion
         self.numGeneraciones = numGeneraciones
+        self.maxReglas = maxReglas
 
     """Funcion que permite inicizalizar una poblacion aleatoria de individuos"""
-    @staticmethod
-    def inicializarPoblacion(tamPoblacion, sizeRegla, maxReglas):
-        poblacion = np.zeros(shape=(tamPoblacion))
+    def inicializarPoblacion(self, tamPoblacion, sizeRegla):
+        
+        poblacion = np.zeros(shape=(tamPoblacion, self.maxReglas, sizeRegla))
         
         #Recorrer la poblacion
-        for x in np.nditer(poblacion):
-            #Determinar el numero de reglas por individuo
-            numReglas = np.random.randint(low=1, high=maxReglas + 1, size=1)
-            #print "numReglas", numReglas
-            reglas = np.zeros(shape=(numReglas))
-            for regla in np.nditer(reglas):
+        for idx in xrange(tamPoblacion):
+            #Determinar el numero de reglas por individuo = numReglas
+            numReglas = np.random.randint(low=1, high=self.maxReglas + 1, size=1)
+            #Rellener las reglas del individuo de manera aleatoria            
+            for i in xrange(numReglas):
                 #Generar reglas random
-                regla = np.random.randint(2, size=sizeRegla)
-                #print "Regla", regla
+                poblacion[idx][i] = np.random.randint(2, size=sizeRegla)  
+        return poblacion        
+
+    @staticmethod
+    def valorFitness(datos,pred):
+        # Aqui se compara la prediccion (pred) con las clases reales y se calcula fitness del individuo   
+          numColumnas = datos.shape[1]
+          numFilas = datos.shape[0]
+          numAciertos = 0
+          arrayEqual = np.equal(datos[:,numColumnas-1],pred)
+          numAciertos = np.sum(arrayEqual) #Contar los True
+          return (numAciertos / numFilas) * 100        
             
         
-        return poblacion
-        
-        
+    """Funcion que permite obtener el fitness de la poblacion"""
+    def calcularFitness(self, poblacion, datostrain):
+        ret = np.zeros(shape=(self.tamPoblacion))
+        for idx in xrange(self.tamPoblacion):       
+            self.bestIndividuo = poblacion[idx]
+            predicciones = self.clasifica(datostrain)
+            fitnessVal = self.valorFitness(datostrain, predicciones)
+            ret[idx] = fitnessVal
+            #print "Valor de fitness", fitnessVal
+        return ret    
         
     def entrenamiento(self, datostrain, atributosDiscretos, diccionario):
         #1º- Inicializar una población aleatoria de individuos
@@ -162,15 +182,57 @@ class AlgoritmoGenetico(Clasificador):
         sizeRegla = 0            
         for d in diccionario:
             sizeRegla += len(d)
-        maxReglas = 10 #numero máximo de reglas que puede tener cada individuo    
-        poblacion = self.inicializarPoblacion(self.tamPoblacion,sizeRegla, maxReglas)
+        poblacion = self.inicializarPoblacion(self.tamPoblacion,sizeRegla)
         
+        #Evaluar el fitness de la población inicial
+        fitness = self.calcularFitness(poblacion, datostrain)
+        print "Valor de fitness de la poblacion 0", fitness
         
-        pass
+        #mientras no se satisfazca la condicion de terminacion
+        for i in xrange(self.numGeneraciones):
+            pass
+
+            
+
         
         
     def clasifica(self, datostest, atributosDiscretos=None, diccionario=None, correcion=None):
-        pass
+        #Evaluar reglas del individuo
+        numFilas = datostest.shape[0]
+        numColumnas = datostest.shape[1]
+        ret = np.zeros(shape=(numFilas))
+        resultadoDefecto = 0.0 #Resultado pro defecto
+
+        #Recorrer todos los datos Test (instancias)
+        for idx in xrange(numFilas):
+            #Recorrer todas las reglas del mejor individuo
+            prediReglas = []
+            for i in xrange(self.maxReglas):
+                #Evaluar regla
+                flagCoincide = 1 #Coincide al regla
+                for atr in xrange(numColumnas):
+                    valorAtributo = int(datostest[i][atr])
+                    #Comprobar si NO hay un uno para ese valor --> sigueine regla
+                    if(self.bestIndividuo[i][valorAtributo] != 1.0):
+                        flagCoincide = 0
+                if(flagCoincide == 1):    
+                    predClaseIndi = self.bestIndividuo[i][-1]
+                    prediReglas.append(predClaseIndi)
+            #Si ninguna regla ha predicho nada, asignar clase por defecto
+            if (len(prediReglas) == 0):
+                ret[idx] = resultadoDefecto
+            else:    
+                most_common,num_most_common = Counter(prediReglas).most_common(1)[0]    
+                ret[idx] = most_common   
+        #print "pred:", predicciones
+            
+        return ret #devolver el array de predicciones
+
+
+                            
+                
+        
+        
     
 
 

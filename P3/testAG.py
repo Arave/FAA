@@ -12,6 +12,8 @@ from Clasificador import AlgoritmoGenetico
 print "Practica 3 test AG"
 tamPoblacion = 10 #Tamaño de la poblacion
 numGeneraciones = 100 #Numero de generaciones (Condicion de terminacion)
+maxReglas = 10 #Numero máximo de reglas por individuo
+
 
 #Fichero 1 - d4.data
 print "\nFichero de datos: tic-tac-toe.data"
@@ -25,7 +27,7 @@ dataset=Datos('./ConjuntosDatos/tic-tac-toe.data',True)
 print "Estrategia: validacion cruzada, numParticiones: 10"
 estrategia=ValidacionCruzada(5)
 print "Clasificador: clasificador Algoritmo Genético tamPoblacion: ",tamPoblacion," y numGeneraciones" , numGeneraciones
-clasificador = AlgoritmoGenetico(tamPoblacion, numGeneraciones)
+clasificador = AlgoritmoGenetico(tamPoblacion, numGeneraciones, maxReglas)
 print "Ejecucción: "
 print "________________________________________________________________"
 errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
