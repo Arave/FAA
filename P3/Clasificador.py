@@ -140,6 +140,9 @@ class AlgoritmoGenetico(Clasificador):
     """Funcion que permite inicizalizar una poblacion aleatoria de individuos"""
     def inicializarPoblacion(self, tamPoblacion, sizeRegla):
         
+        #Poblacion array en 3D. tamaño población, número máximo reglas, y tamaño de regla
+        #Aquellos individuos que no tengan todas ls reglas posibles, su regla en vez de 
+        #ser un array de 0-1, será un 0. 
         poblacion = np.zeros(shape=(tamPoblacion, self.maxReglas, sizeRegla))
         
         #Recorrer la poblacion
@@ -172,7 +175,18 @@ class AlgoritmoGenetico(Clasificador):
             fitnessVal = self.valorFitness(datostrain, predicciones)
             ret[idx] = fitnessVal
             #print "Valor de fitness", fitnessVal
-        return ret    
+        return ret
+
+    """Funcion que selecciona individuos (numSeleccionar) en base a su fitness
+        también llamada ruleta creo, método visto en teoría. Se realiza un array de
+        tam 100 y cada individo ocupa en relación a su fitness, cuanto más fitness más ocupa
+        Y al crear un num. aleatorio entre 0 y numSeleccionar, es más probable que caiga en
+        los que mayor fitness tienen.
+        Ejemplo: A: f=10, B:f=5, C:f=3, D:f=2 ==> AAAAAAAAAABBBBBCCCDD más o menos
+        Como implementarlo da igual, lo importante es que sea proporcional al fitness"""
+    @staticmethod        
+    def seleccionProporcionalFitness(poblacion, fitness, numSeleccionar):
+        pass
         
     def entrenamiento(self, datostrain, atributosDiscretos, diccionario):
         #1º- Inicializar una población aleatoria de individuos
@@ -190,7 +204,35 @@ class AlgoritmoGenetico(Clasificador):
         
         #mientras no se satisfazca la condicion de terminacion
         for i in xrange(self.numGeneraciones):
+            #Pasar a los mejores a la sigueiten poblacion - Elitismo. El porcentaje que nos digan
+            numElitistas = (self.propElitismo * self.tamPoblacion) / 100
+            newPoblacion = """TODO: Pasar los numElitistas con mejor fitness de la poblacion anterior (poblacion)"""
+            
+            
+            
+            #Seleccion de individuos respecto a una condicion. En nuestro caso,
+            #proporcional fitness
+            numCruce = (self.probCruce * self.tamPoblacion) / 100
+            if (self.tipoSeleccion == "Proporcional al fitness"):
+                self.seleccionProporcionalFitness(poblacion, fitness, numCruce)
+                """TODO: Seleccionar el self.probCruce % de población que los individuos seleccionados por: seleccionProporcionalFitness
+                y cruzarlos, y los hijos asignarlos a newPoblacion.
+                Y si se da la prob. de mutar, mutar uno de los individuos resultantes de los seleccionados. 
+                
+                [si poblacion = 100 individuos ] Ahora habría 60 (cruce) + 5 (elitismo) en la newPoblacion. =>
+                Opcion1. Evaluar el fitness de estos (65 nuevos) y añadirle 35 (100 - 65) individuos de la anterior población hasta llegar a tamPoblacion.
+                Opcion2. Añadir (100 - 65) individuos de la anteriorhasta llegar a tamPoblacion, y ahora calcular el fitness de los individuos. Problema, estás
+                recalculando el fitness de 35 indidividuos que ya habías calculado antes. 
+                
+                OJO: El tamPoblacion siempre debe ser el mismo
+                OJO2: Cuanto mayor Fitness Mejor es el individuo
+                
+                Continuar con el bucle hasta condición de parada, en nuestro caso numGeneraciones. """
+                
             pass
+        
+        """TODO: Ya hemos "entrenado" los individuos, ahora simplemente cogemos el mejor individo y lo copiamos:
+            self.bestIndividuo = poblacion[indexMayorFitness] y hemos terminado"""
 
             
 
