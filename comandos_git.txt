@@ -40,4 +40,17 @@ git branch my-saved-work
 git clean -df
 git checkout -- .
 
+#Revertir cambios en repo local y dejarlo como el ultimo commit de remoto, BORRANDO LOS ARCHIVOS/CAMBIOS
+git reset --hard
 
+#Ignorar cambios en un archivo local QUE YA ESTÁ EN EL REPO
+#	Some files in a repository change often but are rarely committed. Usually, these are various local
+#	configuration files that are edited, but should never be committed upstream. Git lets you ignore 
+#	those filesby assuming they are unchanged.
+git update-index --assume-unchanged path/to/file.txt
+
+#	To make Git track the file again, simply run:
+git update-index --no-assume-unchanged path/to/file.txt
+
+#Ignorar new untracked file QUE NO ESTABA EN EL REPO
+#	https://git-scm.com/docs/gitignore#_examples 
