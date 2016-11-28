@@ -183,10 +183,28 @@ class AlgoritmoGenetico(Clasificador):
         Y al crear un num. aleatorio entre 0 y numSeleccionar, es más probable que caiga en
         los que mayor fitness tienen.
         Ejemplo: A: f=10, B:f=5, C:f=3, D:f=2 ==> AAAAAAAAAABBBBBCCCDD más o menos
-        Como implementarlo da igual, lo importante es que sea proporcional al fitness"""
+        Como implementarlo da igual, lo importante es que sea proporcional al fitness"""        
+    def seleccionProporcionalFitness(self, poblacion, fitness, numSeleccionar, sizeRegla):
+
+        fitnessTotal = float(sum(fitness))
+        fitnessRelativo = [f/fitnessTotal for f in fitness]
+        # Generar los intervalos de probabilidad para cada individuo
+        probs = [sum(fitnessRelativo[:i+1]) for i in range(len(fitnessRelativo))]
+        # Seleccionar numSeleccionar individuos
+        seleccionados = np.zeros(shape=(numSeleccionar, self.maxReglas, sizeRegla))
+        for n in xrange(numSeleccionar):
+            r = np.random.randint(low=0, high=1, size=1)
+            for i in xrange(self.tamPoblacion):     
+                if r <= probs[i]:
+                    seleccionados[n] = poblacion[i]
+                    break
+        return seleccionados
+        
+    
+    """Funcion que cruza en un punto padre y madre y devuelve 2 hijos"""
     @staticmethod        
-    def seleccionProporcionalFitness(poblacion, fitness, numSeleccionar):
-        pass
+    def cruceEnUnPunto(padre, madre):
+        pass    
         
     def entrenamiento(self, datostrain, atributosDiscretos, diccionario):
         #1º- Inicializar una población aleatoria de individuos
@@ -197,24 +215,35 @@ class AlgoritmoGenetico(Clasificador):
         for d in diccionario:
             sizeRegla += len(d)
         poblacion = self.inicializarPoblacion(self.tamPoblacion,sizeRegla)
+        print "Poblacion 0", poblacion
         
         #Evaluar el fitness de la población inicial
         fitness = self.calcularFitness(poblacion, datostrain)
         print "Valor de fitness de la poblacion 0", fitness
         
+        newPoblacion = np.zeros(shape=(self.tamPoblacion, self.maxReglas, sizeRegla))
         #mientras no se satisfazca la condicion de terminacion
         for i in xrange(self.numGeneraciones):
             #Pasar a los mejores a la sigueiten poblacion - Elitismo. El porcentaje que nos digan
-            numElitistas = (self.propElitismo * self.tamPoblacion) / 100
-            newPoblacion = """TODO: Pasar los numElitistas con mejor fitness de la poblacion anterior (poblacion)"""
+            numElitistas = (self.propElitismo * self.tamPoblacion) // 100
+            if (numElitistas == 0):
+                numElitistas = 1 #Si el porcentaje es muy pequeño, pasar al menos 1. 
+            indicesE = np.argpartition(fitness, -numElitistas)[-numElitistas:]
+            for idx in xrange(numElitistas):
+                newPoblacion[idx] = poblacion[indicesE[idx]] #copiarlos
+                fitness[indicesE[idx]] = 0.0 #poner a 0 el fitness, "eliminarlos"
+            print "new poblacion (after fitness)", newPoblacion
+            
             
             
             
             #Seleccion de individuos respecto a una condicion. En nuestro caso,
             #proporcional fitness
-            numCruce = (self.probCruce * self.tamPoblacion) / 100
+            numCruce = (self.probCruce * self.tamPoblacion) // 100
             if (self.tipoSeleccion == "Proporcional al fitness"):
-                self.seleccionProporcionalFitness(poblacion, fitness, numCruce)
+                seleccionados = self.seleccionProporcionalFitness(poblacion, fitness, numCruce, sizeRegla)
+
+                print "Seleccionados (cruce)", seleccionados
                 """TODO: Seleccionar el self.probCruce % de población que los individuos seleccionados por: seleccionProporcionalFitness
                 y cruzarlos, y los hijos asignarlos a newPoblacion.
                 Y si se da la prob. de mutar, mutar uno de los individuos resultantes de los seleccionados. 
