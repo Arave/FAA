@@ -1,4 +1,4 @@
-EStoy mirándolo- Sobre 'seleccionProporcionalFitness':
+DONE- Sobre 'seleccionProporcionalFitness':
 	Algo no cuadra en la list comprehension que haces porque el debugger salta con un 'division by zero'.
 		Seleccionados (cruce)
 		: [[[0.000 0.000 0.000 1.000 0.000 0.000]

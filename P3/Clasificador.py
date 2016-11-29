@@ -125,6 +125,7 @@ class AlgoritmoGenetico(Clasificador):
     probMutacion = 0.1 #Probabilidad de mutación de un individuo 0.1%
     propElitismo = 5 #Proporcion de individuos que pasan gracias al elitismo 5%
     tipoSeleccion = "Proporcional al fitness" #Se realiza una seleccion proporcional al fitness
+    sizeRegla = 0
 
     #ARGS!
     tamPoblacion = 10 #Tamaño de la poblacion
@@ -152,10 +153,19 @@ class AlgoritmoGenetico(Clasificador):
         for idx in xrange(tamPoblacion):
             #Determinar el numero de reglas por individuo = numReglas
             numReglas = np.random.randint(low=1, high=self.maxReglas + 1, size=1)
+            #print "numReglas", numReglas
             #Rellener las reglas del individuo de manera aleatoria            
             for i in xrange(numReglas):
                 #Generar reglas random
-                poblacion[idx][i] = np.random.randint(2, size=sizeRegla)  
+                poblacion[idx][i] = np.random.randint(2, size=sizeRegla)
+            
+            #Poner a None las reglas vacías    
+            while numReglas < self.maxReglas:
+                poblacion[idx][numReglas] = None
+                numReglas+=1
+            #Contar el número de reglas que tiene el array
+            #Contar no NaN: https://stackoverflow.com/questions/21778118/counting-the-number-of-non-nan-elements-in-a-numpy-ndarray-matrix-in-python
+            #print np.count_nonzero(~np.isnan(poblacion[idx])) // sizeRegla           
         return poblacion        
 
     @staticmethod
@@ -197,7 +207,6 @@ class AlgoritmoGenetico(Clasificador):
         #Array a devover
         seleccionados = np.zeros(shape=(numSeleccionar, self.maxReglas, sizeRegla))
 
-        
         #Calcular el fitness total de todos los individuos
         fitnessTotal = float(sum(fitness))
         #si el fitnessTotal es 0, cada individuo tiene fitness 0, devolver  ind. aleatorios
@@ -205,8 +214,7 @@ class AlgoritmoGenetico(Clasificador):
             print "Fitness de cada individuo = 0.0, devolviendo numSeleccionar indiv. aleatorios de la poblacion anterior"
             seleccionados = poblacion[np.random.choice(numSeleccionar , numSeleccionar, replace=False)]
             return seleccionados                          
-            
-        
+                  
         #Calcular el fitness relativo de cada individuo dado fitnessTotal
         fitnessRelativo = [f/fitnessTotal for f in fitness]
         # Generar los intervalos de probabilidad para cada individuo
@@ -221,16 +229,56 @@ class AlgoritmoGenetico(Clasificador):
             #Reccorer poblacion
             for i in xrange(self.tamPoblacion):# i - índice de la poblacion de indiv. a seleccionar
                 #print "% r Random:",r, "Prob. seleccionar indi.(",i,")",probs[i]
-                if r <= probs[i]:
+                if r <= probs[i]: #elegimos el primer ind. cuyo porcentaje sea mayor al aleatorio que hemos generado
                     seleccionados[n] = poblacion[i]
                     break
         return seleccionados
         
     
-    """Funcion que cruza en un punto padre y madre y devuelve 2 hijos"""
-    @staticmethod        
-    def cruceEnUnPunto(padre, madre):
-        pass    
+    """Funcion que cruza en un punto padre y madre y devuelve 2 hijos""" 
+    def cruceEnUnPunto(self, padre, madre):
+                
+        numReglasPadre = np.count_nonzero(~np.isnan(padre)) // self.sizeRegla
+        numReglasMadre = np.count_nonzero(~np.isnan(madre)) // self.sizeRegla
+        numReglas = 0
+        if numReglasMadre > numReglasPadre:
+            numReglas = numReglasPadre
+        else:
+            numReglas = numReglasMadre
+
+        hijo1 = np.zeros(shape=(self.maxReglas, self.sizeRegla))
+        hijo2 = np.zeros(shape=(self.maxReglas, self.sizeRegla))
+            
+        for i in xrange(numReglas):
+            index1 = np.random.randint(1, self.sizeRegla - 2)
+            hijo1[i] = np.concatenate((padre[i][:index1], madre[i][index1:] ))
+            hijo2[i] = np.concatenate((madre[i][:index1], padre[i][index1:]))
+            np.squeeze(hijo1[i])
+            np.squeeze(hijo2[i])
+
+        """¿TODO?: añadir diferencia de reglas si numReglasP != numReglasM, 
+        las copiamos aleat a los hijos?"""     
+            
+        #Poner a None las reglas vacías    
+        while numReglas < self.maxReglas:
+            hijo1[numReglas] = None
+            hijo2[numReglas] = None
+            numReglas+=1            
+            
+
+        return (hijo1, hijo2) 
+
+    """ Falta editarlo, cuando funcione bien cruceEnUnPunto, se termina este
+    def cruceEnDosPuntos(self, padre, madre):
+
+        index1 = np.random.randint(1, self.sizeRegla - 2)
+        index2 = np.random.randint(1, self.sizeRegla - 2)
+        if index1 > index2: 
+            index1, index2 = index2, index1
+        hijo1 = padre[:index1] + madre[index1:index2] + padre[index2:]
+        hijo2 = madre[:index1] + padre[index1:index2] + madre[index2:]
+        return (hijo1, hijo2) """       
+        
         
     def entrenamiento(self, datostrain, atributosDiscretos, diccionario):
         #1º- Inicializar una población aleatoria de individuos
@@ -240,37 +288,57 @@ class AlgoritmoGenetico(Clasificador):
         sizeRegla = 0            
         for d in diccionario:
             sizeRegla += len(d)
-        sizeRegla = sizeRegla - 1 #Restar uno de la clase. la clase (bin) se mapea como 0 o 1. no como 2 bits    
+        sizeRegla = sizeRegla - 1 #Restar uno de la clase. la clase (bin) se mapea como 0 o 1. no como 2 bits   
+        self.sizeRegla = sizeRegla
         poblacion = self.inicializarPoblacion(self.tamPoblacion,sizeRegla)
         print "Poblacion 0:\n", poblacion
         
         #Evaluar el fitness de la población inicial
         fitness = self.calcularFitness(poblacion, datostrain, atributosDiscretos, diccionario)
-        print "Valor de fitness de la poblacion 0", fitness, "\n"
+        print "Valor de fitness de la poblacion inicial", fitness, "\n"
         
         newPoblacion = np.zeros(shape=(self.tamPoblacion, self.maxReglas, sizeRegla))
+        
+        
         #mientras no se satisfazca la condicion de terminacion
         for i in xrange(self.numGeneraciones):
+            
+            contadorNewPoblacion = 0 #Contador de elementos insertados en newPoblacion
+            
             #Pasar a los mejores a la sigueiten poblacion - Elitismo. El porcentaje que nos digan
             numElitistas = (self.propElitismo * self.tamPoblacion) // 100
             if numElitistas == 0:
                 numElitistas = 1 #Si el porcentaje es muy pequeño, pasar al menos 1. 
             indicesE = np.argpartition(fitness, -numElitistas)[-numElitistas:]
-            for idx in xrange(numElitistas):
+            for idx in xrange(numElitistas):#idx - índice de elististas 
                 newPoblacion[idx] = poblacion[indicesE[idx]] #copiarlos
                 fitness[indicesE[idx]] = 0.0 #poner a 0 el fitness, "eliminarlos"
-            print "new poblacion (after elitismo) [Array todo 0, muy posiblmente indv empty]:\n", newPoblacion, "\n"
+            print "new poblacion (after elitismo) [Array todo 0, muy posiblmente individuo empty]:\n", newPoblacion, "\n"
+            
+            contadorNewPoblacion += numElitistas
 
             #Seleccion de individuos respecto a una condicion. En nuestro caso,
             #proporcional fitness
             numCruce = (self.probCruce * self.tamPoblacion) // 100
+            if numCruce % 2 != 0: #Si el numero de elementos a cruzar es impar, convertirlo a par
+                numCruce += 1
             if self.tipoSeleccion == "Proporcional al fitness":
                 seleccionados = self.seleccionProporcionalFitness(poblacion, fitness, numCruce, sizeRegla)
-
                 print "Seleccionados (cruce)\n:", seleccionados, "\n"
-                """TODO: Seleccionar el self.probCruce % de población que los individuos seleccionados por: seleccionProporcionalFitness
-                y cruzarlos, y los hijos asignarlos a newPoblacion.
-                Y si se da la prob. de mutar, mutar uno de los individuos resultantes de los seleccionados. 
+                indiceCruce = 0
+                while indiceCruce < numCruce: 
+                    #print "contadorNewPoblacion: ", contadorNewPoblacion
+                    hijo1,hijo2 = self.cruceEnUnPunto(seleccionados[indiceCruce], seleccionados[indiceCruce + 1])
+                    #print "hijo1 \n",hijo1
+                    #print "hijo2 \n",hijo2                    
+                    newPoblacion[contadorNewPoblacion], newPoblacion[contadorNewPoblacion + 1] = hijo1,hijo2
+                    contadorNewPoblacion += 2
+                    indiceCruce += 2                   
+                print "new poblacion (after cruce) [Array todo 0, muy posiblmente individuo empty]:\n", newPoblacion, "\n"
+
+                
+
+                """TODO:si se da la prob. de mutar, mutar uno de los individuos resultantes de los seleccionados ? o de 10 random?. 
                 
                 [si poblacion = 100 individuos ] Ahora habría 60 (cruce) + 5 (elitismo) en la newPoblacion. =>
                 Opcion1. Evaluar el fitness de estos (65 nuevos) y añadirle 35 (100 - 65) individuos de la anterior población hasta llegar a tamPoblacion.
@@ -281,11 +349,17 @@ class AlgoritmoGenetico(Clasificador):
                 OJO2: Cuanto mayor Fitness Mejor es el individuo
                 
                 Continuar con el bucle hasta condición de parada, en nuestro caso numGeneraciones. """
+            
+            
+            poblacion = newPoblacion    
+            fitness = self.calcularFitness(poblacion, datostrain, atributosDiscretos, diccionario)
+            print "Valor de fitness de la poblacion final Generacion (",i,")", fitness, "\n"
                 
-            pass
-        
-        """TODO: Ya hemos "entrenado" los individuos, ahora simplemente cogemos el mejor individo y lo copiamos:
-            self.bestIndividuo = poblacion[indexMayorFitness] y hemos terminado"""
+        print "------------  Fin de entrenamiento -----------"
+        #Ya hemos "entrenado" los individuos, ahora simplemente cogemos el mejor individo 
+        indexMayorFitness , value = max(enumerate(fitness), key=operator.itemgetter(1))
+        self.bestIndividuo = poblacion[indexMayorFitness]
+
 
             
 
@@ -306,7 +380,8 @@ class AlgoritmoGenetico(Clasificador):
             #print "--Instancia de Test(",idx,")",datostest[idx]
             #Recorrer todas las reglas del mejor individuo
             prediReglas = [] #Array de clases que predice 1 individuo por cada instancia del test(como mucho una clase por regla)
-            for i in xrange(self.maxReglas): #i - índice de reglas
+            numReglas = np.count_nonzero(~np.isnan(self.bestIndividuo)) // self.sizeRegla
+            for i in xrange(numReglas):
                 #Evaluar regla
                 flagCoincide = 1 #Coincide la regla
                 #Reccorrer todos los atributos de la instancia del test, para comprobar si están en la regla.
