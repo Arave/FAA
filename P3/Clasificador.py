@@ -160,15 +160,15 @@ class AlgoritmoGenetico(Clasificador):
     @staticmethod
     def valorFitness(datos,pred):
         # Aqui se compara la prediccion (pred) con las clases reales y se calcula fitness del individuo 
-        print "====DEBUG: valorFitness===="
+        #print "====DEBUG: valorFitness===="
         numColumnas = datos.shape[1]
         numFilas = datos.shape[0]
         numAciertos = 0
         arrayEqual = np.equal(datos[:,numColumnas-1],pred)
-        print "datos:",datos[:,numColumnas-1],"\n pred",pred
+        #print "datos:",datos[:,numColumnas-1],"\n pred",pred
 
         numAciertos = np.sum(arrayEqual) #Contar los True
-        print "numAciertos", numAciertos, "numFilas: ", numFilas
+        #print "numAciertos", numAciertos, "numFilas: ", numFilas
         return (numAciertos / numFilas) * 100        
             
         
@@ -239,7 +239,7 @@ class AlgoritmoGenetico(Clasificador):
             for idx in xrange(numElitistas):
                 newPoblacion[idx] = poblacion[indicesE[idx]] #copiarlos
                 fitness[indicesE[idx]] = 0.0 #poner a 0 el fitness, "eliminarlos"
-            print "new poblacion (after fitness):\n", newPoblacion, "\n"
+            print "new poblacion (after elitismo) [Array todo 0, muy posiblmente indv empty]:\n", newPoblacion, "\n"
 
             #Seleccion de individuos respecto a una condicion. En nuestro caso,
             #proporcional fitness
@@ -278,12 +278,12 @@ class AlgoritmoGenetico(Clasificador):
         ret = np.zeros(shape=numFilas)
         resultadoDefecto = 0.0 #Resultado por defecto
         
-        print "============ DEBUG: Clasifica ==============="
-        print "Individuo: ", self.bestIndividuo
+        #print "============ DEBUG: Clasifica ==============="
+        #print "Individuo: ", self.bestIndividuo
 
         #Recorrer todos los datos Test (instancias)
         for idx in xrange(numFilas): #idx - índice de cada instancia (fila) del test
-            print "--Instancia de Test(",idx,")",datostest[idx]
+            #print "--Instancia de Test(",idx,")",datostest[idx]
             #Recorrer todas las reglas del mejor individuo
             prediReglas = [] #Array de clases que predice 1 individuo por cada instancia del test(como mucho una clase por regla)
             for i in xrange(self.maxReglas): #i - índice de reglas
@@ -291,32 +291,32 @@ class AlgoritmoGenetico(Clasificador):
                 flagCoincide = 1 #Coincide la regla
                 #Reccorrer todos los atributos de la instancia del test, para comprobar si están en la regla.
                 numBitsSaltar = 0
-                print "--REGLA (",i,")",self.bestIndividuo[i]
+                #print "--REGLA (",i,")",self.bestIndividuo[i]
                 for atr in xrange(numColumnas - 1): #que NO mire en el atr. de la clase
                     valorAtributo = int(datostest[idx][atr])
                     #Comprobar si NO hay un uno para ese valor --> sigueine regla
                     if self.bestIndividuo[i][numBitsSaltar + valorAtributo] != 1.0:
                         flagCoincide = 0
-                        print "No coincide en la regla",i, "atributo: ", atr
+                        #print "No coincide en la regla",i, "atributo: ", atr
                     #Numero de bits a saltar (anteriores atributos). Máximo posible de representación en bits de los pasados atr.
                     numBitsSaltar += len(diccionario[atr])
                     #print "numBitsSaltar: ", numBitsSaltar, "atributo: ", atr    
                 if flagCoincide == 1: #AND implicita
                     predClaseIndi = self.bestIndividuo[i][-1] #Coge el último bit, predice la clase
                     prediReglas.append(predClaseIndi)
-                    print "Coincide en todas, predice clase: ", predClaseIndi
-            print "Array de clases predecidas: ", prediReglas        
+                    #print "Coincide en todas, predice clase: ", predClaseIndi
+            #print "Array de clases predecidas: ", prediReglas        
             #Si ninguna regla ha predicho nada, asignar clase por defecto
             if len(prediReglas) == 0:
                 ret[idx] = resultadoDefecto
-                print "ninguna regla ha predicho nada, asignado clase default",resultadoDefecto
+                #print "ninguna regla ha predicho nada, asignado clase default",resultadoDefecto
             else:    
                 most_common,num_most_common = Counter(prediReglas).most_common(1)[0]    
                 ret[idx] = most_common
-                print "Array de clases predecidas: ", prediReglas, "clase mayoritaria: ", most_common   
+                #print "Array de clases predecidas: ", prediReglas, "clase mayoritaria: ", most_common   
         
-        print "Predicciones:", ret
-        print "============ END debug clasifica ==============="
+        #print "Predicciones:", ret
+        #print "============ END debug clasifica ==============="
             
         return ret #devolver el array de predicciones
 
