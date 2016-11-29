@@ -131,6 +131,7 @@ class AlgoritmoGenetico(Clasificador):
     numGeneraciones = 100 #Numero de generaciones (Condicion de terminacion)
     maxReglas = 10 #Numero máximo de reglas por individuo
     
+    #Es lo que utiliza clasifica
     bestIndividuo = None #Mejor individuo -> Se utilizará para clasificar
 
 
@@ -191,16 +192,35 @@ class AlgoritmoGenetico(Clasificador):
         Ejemplo: A: f=10, B:f=5, C:f=3, D:f=2 ==> AAAAAAAAAABBBBBCCCDD más o menos
         Como implementarlo da igual, lo importante es que sea proporcional al fitness"""        
     def seleccionProporcionalFitness(self, poblacion, fitness, numSeleccionar, sizeRegla):
+        
+        #print "========= DEBUG: seleccionProporcionalFitness ========"
+        #Array a devover
+        seleccionados = np.zeros(shape=(numSeleccionar, self.maxReglas, sizeRegla))
+
+        
+        #Calcular el fitness total de todos los individuos
         fitnessTotal = float(sum(fitness))
-        print "fitnessTotal: ", fitnessTotal, "\n"
+        #si el fitnessTotal es 0, cada individuo tiene fitness 0, devolver  ind. aleatorios
+        if (fitnessTotal == 0.0):
+            print "Fitness de cada individuo = 0.0, devolviendo numSeleccionar indiv. aleatorios de la poblacion anterior"
+            seleccionados = poblacion[np.random.choice(numSeleccionar , numSeleccionar, replace=False)]
+            return seleccionados                          
+            
+        
+        #Calcular el fitness relativo de cada individuo dado fitnessTotal
         fitnessRelativo = [f/fitnessTotal for f in fitness]
         # Generar los intervalos de probabilidad para cada individuo
         probs = [sum(fitnessRelativo[:i+1]) for i in range(len(fitnessRelativo))]
+                 
+        #print "fitness poblacion", fitness,"\nFitness Total (suma):", fitnessTotal
+        #print "fitness relativo", fitnessRelativo,"\n Probs:", probs
+                
         # Seleccionar numSeleccionar individuos
-        seleccionados = np.zeros(shape=(numSeleccionar, self.maxReglas, sizeRegla))
-        for n in xrange(numSeleccionar):
-            r = np.random.randint(low=0, high=1, size=1)
-            for i in xrange(self.tamPoblacion):     
+        for n in xrange(numSeleccionar): # n - índice de individuos seleccionados
+            r = np.random.rand()
+            #Reccorer poblacion
+            for i in xrange(self.tamPoblacion):# i - índice de la poblacion de indiv. a seleccionar
+                #print "% r Random:",r, "Prob. seleccionar indi.(",i,")",probs[i]
                 if r <= probs[i]:
                     seleccionados[n] = poblacion[i]
                     break
