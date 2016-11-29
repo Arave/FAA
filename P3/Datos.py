@@ -106,7 +106,7 @@ class Datos(object):
 
     #print "Datos (numpy)"
     #print self.datos 
-   
+    #print "Dicts: ",self.diccionarios
   # idx: lista de indices de los patrones a extraer 
   def extraeDatos(self,idx):
     #print "idx[0]",idx[0]

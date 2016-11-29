@@ -90,10 +90,10 @@ class Clasificador(object):
                dataset.normalizarDatos(datosTest)
                #print 'Datos test normalizados' ,datosTest 
 
-           """print ' =>DatosTrain [', idx, ']:'
+           print ' =>DatosTrain [', idx, ']:'
            print datosTrain
            print ' =>DatosTest [', idx, ']:'
-           print datosTest"""
+           print datosTest
 
            # Entrenamiento
            clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
@@ -118,13 +118,15 @@ class Clasificador(object):
            # clasificador = ClasificadorVecinosProximos(1)
            # print plotName
            plotModel(dataset.datos[ii, 0], dataset.datos[ii, 1], dataset.datos[ii, -1] != 0, clasificador, "Frontera", plotName)
-##############################################################################
+#################################################################################################################
 
 class AlgoritmoGenetico(Clasificador):
     probCruce = 60 #Probabilidad de cruzar individuos 60%
     probMutacion = 0.1 #Probabilidad de mutación de un individuo 0.1%
     propElitismo = 5 #Proporcion de individuos que pasan gracias al elitismo 5%
     tipoSeleccion = "Proporcional al fitness" #Se realiza una seleccion proporcional al fitness
+
+    #ARGS!
     tamPoblacion = 10 #Tamaño de la poblacion
     numGeneraciones = 100 #Numero de generaciones (Condicion de terminacion)
     maxReglas = 10 #Numero máximo de reglas por individuo
@@ -168,9 +170,9 @@ class AlgoritmoGenetico(Clasificador):
         
     """Funcion que permite obtener el fitness de la poblacion"""
     def calcularFitness(self, poblacion, datostrain):
-        ret = np.zeros(shape=(self.tamPoblacion))
+        ret = np.zeros(shape=self.tamPoblacion)
         for idx in xrange(self.tamPoblacion):       
-            self.bestIndividuo = poblacion[idx]
+            self.bestIndividuo = poblacion[idx] #"Sugerencia: llamada a clasifica con cada individuo de la población"
             predicciones = self.clasifica(datostrain)
             fitnessVal = self.valorFitness(datostrain, predicciones)
             ret[idx] = fitnessVal
@@ -185,8 +187,8 @@ class AlgoritmoGenetico(Clasificador):
         Ejemplo: A: f=10, B:f=5, C:f=3, D:f=2 ==> AAAAAAAAAABBBBBCCCDD más o menos
         Como implementarlo da igual, lo importante es que sea proporcional al fitness"""        
     def seleccionProporcionalFitness(self, poblacion, fitness, numSeleccionar, sizeRegla):
-
         fitnessTotal = float(sum(fitness))
+        print "fitnessTotal: ", fitnessTotal, "\n"
         fitnessRelativo = [f/fitnessTotal for f in fitness]
         # Generar los intervalos de probabilidad para cada individuo
         probs = [sum(fitnessRelativo[:i+1]) for i in range(len(fitnessRelativo))]
@@ -215,35 +217,32 @@ class AlgoritmoGenetico(Clasificador):
         for d in diccionario:
             sizeRegla += len(d)
         poblacion = self.inicializarPoblacion(self.tamPoblacion,sizeRegla)
-        print "Poblacion 0", poblacion
+        print "Poblacion 0:\n", poblacion
         
         #Evaluar el fitness de la población inicial
         fitness = self.calcularFitness(poblacion, datostrain)
-        print "Valor de fitness de la poblacion 0", fitness
+        print "Valor de fitness de la poblacion 0", fitness, "\n"
         
         newPoblacion = np.zeros(shape=(self.tamPoblacion, self.maxReglas, sizeRegla))
         #mientras no se satisfazca la condicion de terminacion
         for i in xrange(self.numGeneraciones):
             #Pasar a los mejores a la sigueiten poblacion - Elitismo. El porcentaje que nos digan
             numElitistas = (self.propElitismo * self.tamPoblacion) // 100
-            if (numElitistas == 0):
+            if numElitistas == 0:
                 numElitistas = 1 #Si el porcentaje es muy pequeño, pasar al menos 1. 
             indicesE = np.argpartition(fitness, -numElitistas)[-numElitistas:]
             for idx in xrange(numElitistas):
                 newPoblacion[idx] = poblacion[indicesE[idx]] #copiarlos
                 fitness[indicesE[idx]] = 0.0 #poner a 0 el fitness, "eliminarlos"
-            print "new poblacion (after fitness)", newPoblacion
-            
-            
-            
-            
+            print "new poblacion (after fitness):\n", newPoblacion, "\n"
+
             #Seleccion de individuos respecto a una condicion. En nuestro caso,
             #proporcional fitness
             numCruce = (self.probCruce * self.tamPoblacion) // 100
-            if (self.tipoSeleccion == "Proporcional al fitness"):
+            if self.tipoSeleccion == "Proporcional al fitness":
                 seleccionados = self.seleccionProporcionalFitness(poblacion, fitness, numCruce, sizeRegla)
 
-                print "Seleccionados (cruce)", seleccionados
+                print "Seleccionados (cruce)\n:", seleccionados, "\n"
                 """TODO: Seleccionar el self.probCruce % de población que los individuos seleccionados por: seleccionProporcionalFitness
                 y cruzarlos, y los hijos asignarlos a newPoblacion.
                 Y si se da la prob. de mutar, mutar uno de los individuos resultantes de los seleccionados. 
@@ -266,13 +265,13 @@ class AlgoritmoGenetico(Clasificador):
             
 
         
-        
+    #Clase 0 por defecto cuando no hay match
     def clasifica(self, datostest, atributosDiscretos=None, diccionario=None, correcion=None):
         #Evaluar reglas del individuo
         numFilas = datostest.shape[0]
         numColumnas = datostest.shape[1]
-        ret = np.zeros(shape=(numFilas))
-        resultadoDefecto = 0.0 #Resultado pro defecto
+        ret = np.zeros(shape=numFilas)
+        resultadoDefecto = 0.0 #Resultado por defecto
 
         #Recorrer todos los datos Test (instancias)
         for idx in xrange(numFilas):
@@ -284,13 +283,13 @@ class AlgoritmoGenetico(Clasificador):
                 for atr in xrange(numColumnas):
                     valorAtributo = int(datostest[i][atr])
                     #Comprobar si NO hay un uno para ese valor --> sigueine regla
-                    if(self.bestIndividuo[i][valorAtributo] != 1.0):
+                    if self.bestIndividuo[i][valorAtributo] != 1.0:
                         flagCoincide = 0
-                if(flagCoincide == 1):    
+                if flagCoincide == 1: #AND implicita
                     predClaseIndi = self.bestIndividuo[i][-1]
                     prediReglas.append(predClaseIndi)
             #Si ninguna regla ha predicho nada, asignar clase por defecto
-            if (len(prediReglas) == 0):
+            if len(prediReglas) == 0:
                 ret[idx] = resultadoDefecto
             else:    
                 most_common,num_most_common = Counter(prediReglas).most_common(1)[0]    

@@ -1,0 +1,13 @@
+'pruebas_short_priori.data'
+=================RESULTADO====================
+Array de % de errores obtenidos: [40.000 100.000] 
+Media de errores total: 70.0 %
+Mediana de errores total: 70.0 %
+Desviación típica: 30.0 %
+
+'pruebas_short_priori_B.data'
+=================RESULTADO====================
+Array de % de errores obtenidos: [80.000 75.000] 
+Media de errores total: 77.5 %
+Mediana de errores total: 77.5 %
+Desviación típica: 2.5 %

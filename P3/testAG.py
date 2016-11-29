@@ -23,7 +23,7 @@ print "Laplace = False, normalizar = True"
 laplace = False
 normalizar = True
 
-dataset=Datos('./ConjuntosDatos/ejemplo5.data',True)
+dataset=Datos('./ConjuntosDatos/pruebas_short_priori_B.data',True)
 print "Estrategia: validacion cruzada, numParticiones: 5"
 estrategia=ValidacionCruzada(2)
 print "Clasificador: clasificador Algoritmo Genético tamPoblacion: ",tamPoblacion," y numGeneraciones" , numGeneraciones
