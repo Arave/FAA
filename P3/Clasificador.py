@@ -122,7 +122,8 @@ class Clasificador(object):
 
 class AlgoritmoGenetico(Clasificador):
     probCruce = 60 #Probabilidad de cruzar individuos 60%
-    probMutacion = 0.1 #Probabilidad de mutación de un individuo 0.1%
+    probMutacionBit = 0.1 #prob. mutación de 1 bit 0.1%
+    probMutacion = 10 #Probabilidad de mutar 10 %
     propElitismo = 5 #Proporcion de individuos que pasan gracias al elitismo 5%
     tipoSeleccion = "Proporcional al fitness" #Se realiza una seleccion proporcional al fitness
     sizeRegla = 0
@@ -231,6 +232,8 @@ class AlgoritmoGenetico(Clasificador):
                 #print "% r Random:",r, "Prob. seleccionar indi.(",i,")",probs[i]
                 if r <= probs[i]: #elegimos el primer ind. cuyo porcentaje sea mayor al aleatorio que hemos generado
                     seleccionados[n] = poblacion[i]
+                    print "i",i
+                    print "fitness[i]", fitness[i]
                     break
         return seleccionados
         
@@ -312,7 +315,6 @@ class AlgoritmoGenetico(Clasificador):
             indicesE = np.argpartition(fitness, -numElitistas)[-numElitistas:]
             for idx in xrange(numElitistas):#idx - índice de elististas 
                 newPoblacion[idx] = poblacion[indicesE[idx]] #copiarlos
-                fitness[indicesE[idx]] = 0.0 #poner a 0 el fitness, "eliminarlos"
             print "new poblacion (after elitismo) [Array todo 0, muy posiblmente individuo empty]:\n", newPoblacion, "\n"
             
             contadorNewPoblacion += numElitistas
@@ -335,20 +337,33 @@ class AlgoritmoGenetico(Clasificador):
                     contadorNewPoblacion += 2
                     indiceCruce += 2                   
                 print "new poblacion (after cruce) [Array todo 0, muy posiblmente individuo empty]:\n", newPoblacion, "\n"
+                
+            
+            #Mutacion
+            numMutacion = 0
+            
+            
+            
+            
+            fitness = self.calcularFitness(newPoblacion, datostrain, atributosDiscretos, diccionario)
+            indexMayorFitness , value = max(enumerate(fitness), key=operator.itemgetter(1))
+            print "Fitness Mejor individuo: ", fitness[indexMayorFitness]        
+            print "Regla(s) Mejor individuo: ", poblacion[indexMayorFitness]                
+            
 
                 
 
-                """TODO:si se da la prob. de mutar, mutar uno de los individuos resultantes de los seleccionados ? o de 10 random?. 
-                
-                [si poblacion = 100 individuos ] Ahora habría 60 (cruce) + 5 (elitismo) en la newPoblacion. =>
-                Opcion1. Evaluar el fitness de estos (65 nuevos) y añadirle 35 (100 - 65) individuos de la anterior población hasta llegar a tamPoblacion.
-                Opcion2. Añadir (100 - 65) individuos de la anteriorhasta llegar a tamPoblacion, y ahora calcular el fitness de los individuos. Problema, estás
-                recalculando el fitness de 35 indidividuos que ya habías calculado antes. 
-                
-                OJO: El tamPoblacion siempre debe ser el mismo
-                OJO2: Cuanto mayor Fitness Mejor es el individuo
-                
-                Continuar con el bucle hasta condición de parada, en nuestro caso numGeneraciones. """
+            """TODO:si se da la prob. de mutar, mutar uno de los individuos resultantes de los seleccionados ? o de 10 random?. 
+            
+            [si poblacion = 100 individuos ] Ahora habría 60 (cruce) + 5 (elitismo) en la newPoblacion. =>
+            Opcion1. Evaluar el fitness de estos (65 nuevos) y añadirle 35 (100 - 65) individuos de la anterior población hasta llegar a tamPoblacion.
+            Opcion2. Añadir (100 - 65) individuos de la anteriorhasta llegar a tamPoblacion, y ahora calcular el fitness de los individuos. Problema, estás
+            recalculando el fitness de 35 indidividuos que ya habías calculado antes. 
+            
+            OJO: El tamPoblacion siempre debe ser el mismo
+            OJO2: Cuanto mayor Fitness Mejor es el individuo
+            
+            Continuar con el bucle hasta condición de parada, en nuestro caso numGeneraciones. """
             
             
             poblacion = newPoblacion    
