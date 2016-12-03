@@ -9,6 +9,9 @@ from Datos import Datos
 from EstrategiaParticionado import ValidacionSimple
 from Clasificador import AlgoritmoGenetico
 
+##########################
+debug = True
+##########################
 print "Practica 3 test AG"
 tamPoblacion = 5 #Tamaño de la poblacion
 numGeneraciones = 3 #Numero de generaciones (Condicion de terminacion)
@@ -30,10 +33,10 @@ dataset=Datos('./ConjuntosDatos/pruebas_short_priori_B.data',True)
 print "Estrategia: validacion simple, numParticiones: ",numParticionesSimples,", porcentaje: ", porcentajeParticiones
 estrategia=ValidacionSimple(numParticionesSimples, porcentajeParticiones)
 print "Clasificador: clasificador Algoritmo Genético tamPoblacion: ",tamPoblacion," y numGeneraciones" , numGeneraciones
-clasificador = AlgoritmoGenetico(tamPoblacion, numGeneraciones, maxReglas)
+clasificador = AlgoritmoGenetico(tamPoblacion, numGeneraciones, maxReglas, debug)
 print "Ejecucción: "
 print "________________________________________________________________"
-errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
+errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar, debug)
 print "\n"
 
 

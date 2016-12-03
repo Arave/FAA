@@ -46,7 +46,7 @@ class Clasificador(object):
     
   # Realiza una clasificacion utilizando una estrategia de particionado determinada
   @staticmethod
-  def validacion(particionado,dataset,clasificador,correcionL=False,normalizacion=False,seed=None, plotName=None):
+  def validacion(particionado,dataset,clasificador,correcionL=False,normalizacion=False,seed=None, plotName=None, debug=False):
     # Creamos las particiones siguiendo la estrategia llamando a particionado.creaParticiones
     # - Para validacion cruzada: en el bucle hasta nv entrenamos el clasificador con la particion de train i
     # y obtenemos el error en la particion de test i
@@ -89,11 +89,11 @@ class Clasificador(object):
                dataset.calcularMediasDesv(datosTest)
                dataset.normalizarDatos(datosTest)
                #print 'Datos test normalizados' ,datosTest 
-
-           print ' =>DatosTrain [', idx, ']:'
-           print datosTrain
-           print ' =>DatosTest [', idx, ']:'
-           print datosTest
+           if debug:
+               print ' =>DatosTrain [', idx, ']:'
+               print datosTrain
+               print ' =>DatosTest [', idx, ']:'
+               print datosTest
 
            # Entrenamiento
            clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
@@ -137,10 +137,11 @@ class AlgoritmoGenetico(Clasificador):
     bestIndividuo = None #Mejor individuo -> Se utilizará para clasificar
 
 
-    def __init__(self, tamPoblacion, numGeneraciones, maxReglas):
+    def __init__(self, tamPoblacion, numGeneraciones, maxReglas, debug):
         self.tamPoblacion = tamPoblacion
         self.numGeneraciones = numGeneraciones
         self.maxReglas = maxReglas
+        self.debug = debug
 
     """Funcion que permite inicizalizar una poblacion aleatoria de individuos"""
     def inicializarPoblacion(self, tamPoblacion, sizeRegla):
@@ -211,7 +212,7 @@ class AlgoritmoGenetico(Clasificador):
         #Calcular el fitness total de todos los individuos
         fitnessTotal = float(sum(fitness))
         #si el fitnessTotal es 0, cada individuo tiene fitness 0, devolver  ind. aleatorios
-        if (fitnessTotal == 0.0):
+        if fitnessTotal == 0.0:
             print "Fitness de cada individuo = 0.0, devolviendo numSeleccionar indiv. aleatorios de la poblacion anterior"
             seleccionados = poblacion[np.random.choice(numSeleccionar , numSeleccionar, replace=False)]
             return seleccionados                          
@@ -225,6 +226,8 @@ class AlgoritmoGenetico(Clasificador):
         #print "fitness relativo", fitnessRelativo,"\n Probs:", probs
                 
         # Seleccionar numSeleccionar individuos
+        if self.debug:
+            print "in \"Seleccionar numSeleccionar individuos\":"
         for n in xrange(numSeleccionar): # n - índice de individuos seleccionados
             r = np.random.rand()
             #Reccorer poblacion
@@ -232,15 +235,19 @@ class AlgoritmoGenetico(Clasificador):
                 #print "% r Random:",r, "Prob. seleccionar indi.(",i,")",probs[i]
                 if r <= probs[i]: #elegimos el primer ind. cuyo porcentaje sea mayor al aleatorio que hemos generado
                     seleccionados[n] = poblacion[i]
-                    print "i",i
-                    print "fitness[i]", fitness[i]
+                    if self.debug:
+                        print "\t[i]",i
+                        print "\tfitness[i]", fitness[i]
                     break
         return seleccionados
         
     
     """Funcion que cruza en un punto padre y madre y devuelve 2 hijos""" 
-    def cruceEnUnPunto(self, padre, madre):
-                
+    def cruceEnUnPunto(self, padre, madre, tipo="lossy"):
+        if self.debug:
+            print "in \"cruceEnUnPunto()\":"
+            print "Padre:\n", padre
+            print "Madre:\n", madre
         numReglasPadre = np.count_nonzero(~np.isnan(padre)) // self.sizeRegla
         numReglasMadre = np.count_nonzero(~np.isnan(madre)) // self.sizeRegla
         numReglas = 0
@@ -254,6 +261,8 @@ class AlgoritmoGenetico(Clasificador):
             
         for i in xrange(numReglas):
             index1 = np.random.randint(1, self.sizeRegla - 2)
+            if self.debug:
+                print "index1 de cruce: ", index1
             hijo1[i] = np.concatenate((padre[i][:index1], madre[i][index1:] ))
             hijo2[i] = np.concatenate((madre[i][:index1], padre[i][index1:]))
             np.squeeze(hijo1[i])
@@ -268,8 +277,10 @@ class AlgoritmoGenetico(Clasificador):
             hijo2[numReglas] = None
             numReglas+=1            
             
-
-        return (hijo1, hijo2) 
+        if self.debug:
+            print "hijo1:\n", hijo1
+            print "hijo2:\n", hijo2
+        return hijo1, hijo2
 
     """ Falta editarlo, cuando funcione bien cruceEnUnPunto, se termina este
     def cruceEnDosPuntos(self, padre, madre):
@@ -294,11 +305,13 @@ class AlgoritmoGenetico(Clasificador):
         sizeRegla = sizeRegla - 1 #Restar uno de la clase. la clase (bin) se mapea como 0 o 1. no como 2 bits   
         self.sizeRegla = sizeRegla
         poblacion = self.inicializarPoblacion(self.tamPoblacion,sizeRegla)
-        print "Poblacion 0:\n", poblacion
+        if self.debug:
+            print "\nPoblacion 0:\n", poblacion
         
         #Evaluar el fitness de la población inicial
         fitness = self.calcularFitness(poblacion, datostrain, atributosDiscretos, diccionario)
-        print "Valor de fitness de la poblacion inicial", fitness, "\n"
+        if self.debug:
+            print "Valor de fitness de la poblacion inicial", fitness, "\n"
         
         newPoblacion = np.zeros(shape=(self.tamPoblacion, self.maxReglas, sizeRegla))
         
@@ -315,7 +328,8 @@ class AlgoritmoGenetico(Clasificador):
             indicesE = np.argpartition(fitness, -numElitistas)[-numElitistas:]
             for idx in xrange(numElitistas):#idx - índice de elististas 
                 newPoblacion[idx] = poblacion[indicesE[idx]] #copiarlos
-            print "new poblacion (after elitismo) [Array todo 0, muy posiblmente individuo empty]:\n", newPoblacion, "\n"
+            if self.debug:
+                print "new poblacion (post elitismo) [Array todo nan -> individuo empty]:\n", newPoblacion, "\n"
             
             contadorNewPoblacion += numElitistas
 
@@ -326,7 +340,8 @@ class AlgoritmoGenetico(Clasificador):
                 numCruce += 1
             if self.tipoSeleccion == "Proporcional al fitness":
                 seleccionados = self.seleccionProporcionalFitness(poblacion, fitness, numCruce, sizeRegla)
-                print "Seleccionados (cruce)\n:", seleccionados, "\n"
+                if self.debug:
+                    print "\nSeleccionados (cruce):\n", seleccionados, "\n"
                 indiceCruce = 0
                 while indiceCruce < numCruce: 
                     #print "contadorNewPoblacion: ", contadorNewPoblacion
@@ -336,7 +351,8 @@ class AlgoritmoGenetico(Clasificador):
                     newPoblacion[contadorNewPoblacion], newPoblacion[contadorNewPoblacion + 1] = hijo1,hijo2
                     contadorNewPoblacion += 2
                     indiceCruce += 2                   
-                print "new poblacion (after cruce) [Array todo 0, muy posiblmente individuo empty]:\n", newPoblacion, "\n"
+                if self.debug:
+                    print "\nnew poblacion (after cruce) [Array todo 0, muy posiblmente individuo empty]:\n", newPoblacion, "\n"
                 
             
             #Mutacion
@@ -369,8 +385,10 @@ class AlgoritmoGenetico(Clasificador):
             poblacion = newPoblacion    
             fitness = self.calcularFitness(poblacion, datostrain, atributosDiscretos, diccionario)
             print "Valor de fitness de la poblacion final Generacion (",i,")", fitness, "\n"
+            if self.debug:
+                print "\n===================================== gen (",i,") ends =====================================\n"
                 
-        print "------------  Fin de entrenamiento -----------"
+        print "------------  Fin de entrenamiento -----------\n\n"
         #Ya hemos "entrenado" los individuos, ahora simplemente cogemos el mejor individo 
         indexMayorFitness , value = max(enumerate(fitness), key=operator.itemgetter(1))
         self.bestIndividuo = poblacion[indexMayorFitness]
@@ -430,12 +448,6 @@ class AlgoritmoGenetico(Clasificador):
             
         return ret #devolver el array de predicciones
 
-
-                            
-                
-        
-        
-    
 
 
 class ClasificadorRegresionLogistica(Clasificador):
