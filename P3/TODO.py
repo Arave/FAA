@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #========================================================================================================
 #BRIEF: Script de limpieza previo al push + lista TODO + anotaciones
 #========================================================================================================
@@ -20,10 +21,37 @@ for f in files:
 """
 """
 ========================================================================================================
+INFO:
+========================================================================================================
+- implementado mecanismo dinámico para cambiar parametros sin redefinir funciones/guarreos
+    - el diccionario 'mode' recoge una serie de atributos que varian de valor entre 'devault' y <valor>
+      que alteran al algoritmo. Ver comentarios en el test.
+
+- corregido cruce
+    - desbalanceo
+    - ahora con el argumento randSon se reparten las reglas sobrantes de los progenitores entre los
+      hijos de manera random.
+
+- implementada mutacion
+    - se selecciona un 10% de la poblacion como candidatos y se evalua para cada indvidiuo una prob.
+      del 0,1%. Si se cumple, se cambia un bit aleatorio de la primera regla.
+
+- unificado y balanceado el algoritmo para que se ajusten las proporciones de elitismo, cruce, mutacion
+  y fill de manera correcta. Tambien he introducido comprobaciones para que no rompa con poblaciones
+  de testeo o quede una poblacion nueva mas pequeña de lo normal.
+
+- arreglados problemas de referenciación que hacía que alteraciones de individuos en newPoblacion
+  afectara a poblacion. Si el deepcopy del final afecta mucho al rendimiento, se puede refinar
+  (conjuntos de indices).
+
+- reestructuracion (siguiendo un poco la correcion), depuracion en general.
+
+========================================================================================================
 TO-DO:
 ========================================================================================================
 
-ALL ^^
+- validacion cruzada en 2 puntos, si se quiere probar
+- test con ficheros tochos y mas generaciones
 
 
 ========================================================================================================

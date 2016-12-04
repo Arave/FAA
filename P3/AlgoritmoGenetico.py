@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
 from __future__ import division #Para divisiones float por defecto
 from collections import Counter
+import copy
 import numpy as np
 import operator
 
@@ -7,7 +9,7 @@ from Clasificador import Clasificador
 
 class AlgoritmoGenetico(Clasificador):
     probCruce = 60  # Probabilidad de cruzar individuos 60%
-    probMutacionBit = 0.1  # prob. mutación de 1 bit 0.1%
+    probMutacionBit = 0.1  #ESTÁTICO, prob. mutación de 1 bit 0.1%
     probMutacion = 10  # Probabilidad de mutar 10 %
     propElitismo = 5  # Proporcion de individuos que pasan gracias al elitismo 5%
     tipoSeleccion = "Proporcional al fitness"  # Se realiza una seleccion proporcional al fitness
@@ -21,16 +23,15 @@ class AlgoritmoGenetico(Clasificador):
     # Es lo que utiliza clasifica
     bestIndividuo = None  # Mejor individuo -> Se utilizará para clasificar
 
-    def __init__(self, tamPoblacion, numGeneraciones, maxReglas, debug):
+    def __init__(self, tamPoblacion, numGeneraciones, maxReglas, mode):
         self.tamPoblacion = tamPoblacion
         self.numGeneraciones = numGeneraciones
         self.maxReglas = maxReglas
-        self.debug = debug
+        self.mode = mode
 
     """Funcion que permite inicizalizar una poblacion aleatoria de individuos"""
 
     def inicializarPoblacion(self, tamPoblacion, sizeRegla):
-
         # Poblacion array en 3D. tamaño población, número máximo reglas, y tamaño de regla
         # Aquellos individuos que no tengan todas ls reglas posibles, su regla en vez de
         # ser un array de 0-1, será un 0.
@@ -40,6 +41,12 @@ class AlgoritmoGenetico(Clasificador):
         for idx in xrange(tamPoblacion):
             # Determinar el numero de reglas por individuo = numReglas
             numReglas = np.random.randint(low=1, high=self.maxReglas + 1, size=1)
+
+            if self.mode['Diversidad']=='maxReglas-1':
+                numReglas = self.maxReglas
+                if idx == tamPoblacion-1:
+                    numReglas = 1
+
             # print "numReglas", numReglas
             # Rellener las reglas del individuo de manera aleatoria
             for i in xrange(numReglas):
@@ -81,17 +88,20 @@ class AlgoritmoGenetico(Clasificador):
             # print "Valor de fitness", fitnessVal
         return ret
 
-    """Funcion que selecciona individuos (numSeleccionar) en base a su fitness
-        también llamada ruleta creo, método visto en teoría. Se realiza un array de
-        tam 100 y cada individo ocupa en relación a su fitness, cuanto más fitness más ocupa
-        Y al crear un num. aleatorio entre 0 y numSeleccionar, es más probable que caiga en
-        los que mayor fitness tienen.
-        Ejemplo: A: f=10, B:f=5, C:f=3, D:f=2 ==> AAAAAAAAAABBBBBCCCDD más o menos
-        Como implementarlo da igual, lo importante es que sea proporcional al fitness"""
+    #Selecciona un numero N de individuos de manera aleatoria
+    def seleccionAleatoria(self, poblacion, numSeleccionar, sizeRegla):
+        # (!) seleccionados = np.zeros(shape=(numSeleccionar, self.maxReglas, sizeRegla))
+        seleccionados = poblacion[np.random.choice(numSeleccionar, numSeleccionar, replace=False)]
+        return seleccionados
 
+        #Funcion que selecciona individuos (numSeleccionar) en base a su fitness
+        #también llamada ruleta creo, método visto en teoría. Se realiza un array de
+        #tam 100 y cada individo ocupa en relación a su fitness, cuanto más fitness más ocupa
+        #Y al crear un num. aleatorio entre 0 y numSeleccionar, es más probable que caiga en
+        #los que mayor fitness tienen.
+        #Ejemplo: A: f=10, B:f=5, C:f=3, D:f=2 ==> AAAAAAAAAABBBBBCCCDD más o menos
+        #Como implementarlo da igual, lo importante es que sea proporcional al fitness
     def seleccionProporcionalFitness(self, poblacion, fitness, numSeleccionar, sizeRegla):
-
-        # print "========= DEBUG: seleccionProporcionalFitness ========"
         # Array a devover
         seleccionados = np.zeros(shape=(numSeleccionar, self.maxReglas, sizeRegla))
 
@@ -99,7 +109,8 @@ class AlgoritmoGenetico(Clasificador):
         fitnessTotal = float(sum(fitness))
         # si el fitnessTotal es 0, cada individuo tiene fitness 0, devolver  ind. aleatorios
         if fitnessTotal == 0.0:
-            print "Fitness de cada individuo = 0.0, devolviendo numSeleccionar indiv. aleatorios de la poblacion anterior"
+            if self.mode['Prints'] == 'verbose':
+                print "\tFitness de cada individuo = 0.0, devolviendo numSeleccionar indiv. aleatorios de la poblacion anterior"
             seleccionados = poblacion[np.random.choice(numSeleccionar, numSeleccionar, replace=False)]
             return seleccionados
 
@@ -112,7 +123,7 @@ class AlgoritmoGenetico(Clasificador):
         # print "fitness relativo", fitnessRelativo,"\n Probs:", probs
 
         # Seleccionar numSeleccionar individuos
-        if self.debug:
+        if self.mode['Prints'] == "verbose":
             print "in \"Seleccionar numSeleccionar individuos\":"
         for n in xrange(numSeleccionar):  # n - índice de individuos seleccionados
             r = np.random.rand()
@@ -121,63 +132,123 @@ class AlgoritmoGenetico(Clasificador):
                 # print "% r Random:",r, "Prob. seleccionar indi.(",i,")",probs[i]
                 if r <= probs[i]:  # elegimos el primer ind. cuyo porcentaje sea mayor al aleatorio que hemos generado
                     seleccionados[n] = poblacion[i]
-                    if self.debug:
+                    if self.mode['Prints'] == "verbose":
                         print "\t[i]", i
                         print "\tfitness[i]", fitness[i]
                     break
         return seleccionados
 
-    """Funcion que cruza en un punto padre y madre y devuelve 2 hijos"""
-
-    def cruceEnUnPunto(self, padre, madre, tipo="lossy"):
-        if self.debug:
+    #Funcion que cruza en un punto padre y madre y devuelve 2 hijos
+    def cruceEnUnPunto(self, padre, madre):
+        if self.mode['Prints'] == "verbose":
             print "in \"cruceEnUnPunto()\":"
             print "Padre:\n", padre
             print "Madre:\n", madre
+
         numReglasPadre = np.count_nonzero(~np.isnan(padre)) // self.sizeRegla
         numReglasMadre = np.count_nonzero(~np.isnan(madre)) // self.sizeRegla
         numReglas = 0
+        diff = 0
+        flag_equal = None
         if numReglasMadre > numReglasPadre:
             numReglas = numReglasPadre
+            diff = numReglasMadre - numReglasPadre
+        elif numReglasMadre < numReglasPadre:
+            numReglas = numReglasMadre
+            diff = numReglasPadre - numReglasMadre
         else:
             numReglas = numReglasMadre
+            diff = 0
+            flag_equal = "iguales"
 
         hijo1 = np.zeros(shape=(self.maxReglas, self.sizeRegla))
         hijo2 = np.zeros(shape=(self.maxReglas, self.sizeRegla))
 
         for i in xrange(numReglas):
             index1 = np.random.randint(1, self.sizeRegla - 2)
-            if self.debug:
-                print "index1 de cruce: ", index1
+            if self.mode['Prints'] == "verbose":
+                print "\tindex1 de cruce(rand): ", index1
             hijo1[i] = np.concatenate((padre[i][:index1], madre[i][index1:]))
             hijo2[i] = np.concatenate((madre[i][:index1], padre[i][index1:]))
             np.squeeze(hijo1[i])
             np.squeeze(hijo2[i])
 
-        """¿TODO?: añadir diferencia de reglas si numReglasP != numReglasM,
-        las copiamos aleat a los hijos?"""
+        #repartir de forma aleatoria entre los hijos als reglas del padre/madre sobrantes
+        numReglasH1 = numReglas
+        numReglasH2 = numReglas
+        if flag_equal is None:
+            if self.mode['ReglasExtra'] == "randSons":
+                #caso: repartir reglas extra del padre
+                if numReglasPadre > numReglasMadre:
+                    for d in xrange(diff):
+                        hijo = np.random.randint(1, 3)
+                        if hijo == 1:
+                            hijo1[numReglas+d] = padre[numReglas+d]
+                            numReglasH1 += 1
+                        else:
+                            hijo2[numReglas+d] = padre[numReglas+d]
+                            numReglasH2 += 1
+                #caso: repartir reglas extra de la madre
+                else:
+                    for d in xrange(diff):
+                        hijo = np.random.randint(1, 3)
+                        if hijo == 1:
+                            hijo1[numReglas+d] = madre[numReglas+d]
+                            numReglasH1 += 1
+                        else:
+                            hijo2[numReglas+d] = madre[numReglas+d]
+                            numReglasH2 += 1
+            #  self.mode['Reglas_extra'] == 'default':
+            else:
+                #default, se trunca el numero de reglas de los hijos
+                pass
 
         # Poner a None las reglas vacías
-        while numReglas < self.maxReglas:
-            hijo1[numReglas] = None
-            hijo2[numReglas] = None
-            numReglas += 1
+        while numReglasH1 < self.maxReglas:
+            hijo1[numReglasH1] = None
+            numReglasH1 +=1
+        while numReglasH2 < self.maxReglas:
+            hijo2[numReglasH2] = None
+            numReglasH2 +=1
 
-        if self.debug:
+        if self.mode['Prints'] == "verbose":
             print "hijo1:\n", hijo1
             print "hijo2:\n", hijo2
         return hijo1, hijo2
 
-    """ Falta editarlo, cuando funcione bien cruceEnUnPunto, se termina este
+    """
     def cruceEnDosPuntos(self, padre, madre):
-
         index1 = np.random.randint(1, self.sizeRegla - 2)
         index2 = np.random.randint(1, self.sizeRegla - 2)
         if index1 > index2:
             index1, index2 = index2, index1
         hijo1 = padre[:index1] + madre[index1:index2] + padre[index2:]
         hijo2 = madre[:index1] + padre[index1:index2] + madre[index2:]
-        return (hijo1, hijo2) """
+        return hijo1, hijo2
+    """
+    #def seleccionProporcionalFitness(self, poblacion, fitness, numSeleccionar, sizeRegla):
+    #Muta con las probabilidades definidas en el objeto.
+    #La probabilidad de mutar un bit es fija al 0,1%
+    def mutar(self, poblacion, numMutaciones, sizeRegla):
+        seleccionados = np.zeros(shape=(numMutaciones, self.maxReglas, sizeRegla))
+        seleccionados_aleat = self.seleccionAleatoria(poblacion, numMutaciones, sizeRegla)
+        if self.mode['Prints'] == 'verbose':
+            print "Seleccionado/s aleat. (",numMutaciones, ") para posible mutacion:\n",seleccionados_aleat
+        for idx, indv in enumerate(seleccionados_aleat):
+            seleccionados[idx] = indv
+            muta = np.random.randint(1, 100001) #0,1% => (0,001)base100 => (1)base100000
+            if muta == 1: #equiprobabilidad en los 100000 nums
+                if self.mode['Prints'] == 'verbose':
+                    print "\t[MUTACION TUVO LUGAR!]"
+                    print "\tIndividuo previo mutacion:", seleccionados[idx]
+                muta_bit = np.random.randint(0,sizeRegla+1) #rand del bit a mutar
+                if seleccionados[idx][muta_bit] == 0:
+                    seleccionados[idx][muta_bit] = 1
+                else:
+                    seleccionados[idx][muta_bit] = 0
+                if self.mode['Prints']=='verbose':
+                    print "\tIndividuo post mutacion:",seleccionados[idx]
+        return seleccionados
 
     def entrenamiento(self, datostrain, atributosDiscretos, diccionario):
         # 1º- Inicializar una población aleatoria de individuos
@@ -187,36 +258,42 @@ class AlgoritmoGenetico(Clasificador):
         sizeRegla = 0
         for d in diccionario:
             sizeRegla += len(d)
-        sizeRegla = sizeRegla - 1  # Restar uno de la clase. la clase (bin) se mapea como 0 o 1. no como 2 bits
+        sizeRegla -= 1  # Restar uno de la clase. la clase (bin) se mapea como 0 o 1. no como 2 bits
         self.sizeRegla = sizeRegla
         poblacion = self.inicializarPoblacion(self.tamPoblacion, sizeRegla)
-        if self.debug:
+        if self.mode['Prints'] == "verbose":
             print "\nPoblacion 0:\n", poblacion
 
         # Evaluar el fitness de la población inicial
+        # 1ª EVAL DEL FITNESS
         fitness = self.calcularFitness(poblacion, datostrain, atributosDiscretos, diccionario)
-        if self.debug:
+        if self.mode['Prints'] == "verbose":
             print "Valor de fitness de la poblacion inicial", fitness, "\n"
-
-        newPoblacion = np.zeros(shape=(self.tamPoblacion, self.maxReglas, sizeRegla))
 
         # mientras no se satisfazca la condicion de terminacion
         for i in xrange(self.numGeneraciones):
-
+            newPoblacion = np.zeros(shape=(self.tamPoblacion, self.maxReglas, sizeRegla))
             contadorNewPoblacion = 0  # Contador de elementos insertados en newPoblacion
-
             # Pasar a los mejores a la sigueiten poblacion - Elitismo. El porcentaje que nos digan
             numElitistas = (self.propElitismo * self.tamPoblacion) // 100
+
             if numElitistas == 0:
                 numElitistas = 1  # Si el porcentaje es muy pequeño, pasar al menos 1.
             indicesE = np.argpartition(fitness, -numElitistas)[-numElitistas:]
+
+            if self.mode['Prints'] == 'verbose':
+                print "\n====>COMIENZO GEN (",i,")"
+                print "numElitistas: ", numElitistas, "indicesE: ", indicesE
+                print "[contadorNewPoblacion: ",contadorNewPoblacion,"]\n"
+
             for idx in xrange(numElitistas):  # idx - índice de elististas
                 newPoblacion[idx] = poblacion[indicesE[idx]]  # copiarlos
-            if self.debug:
+            if self.mode['Prints'] == 'verbose':
                 print "new poblacion (post elitismo) [Array todo nan -> individuo empty]:\n", newPoblacion, "\n"
 
             contadorNewPoblacion += numElitistas
-
+            if self.mode['Prints']=='verbose':
+                print "[contadorNewPoblacion: ",contadorNewPoblacion,"]\n"
             # Seleccion de individuos respecto a una condicion. En nuestro caso,
             # proporcional fitness
             numCruce = (self.probCruce * self.tamPoblacion) // 100
@@ -224,8 +301,8 @@ class AlgoritmoGenetico(Clasificador):
                 numCruce += 1
             if self.tipoSeleccion == "Proporcional al fitness":
                 seleccionados = self.seleccionProporcionalFitness(poblacion, fitness, numCruce, sizeRegla)
-                if self.debug:
-                    print "\nSeleccionados (cruce):\n", seleccionados, "\n"
+                if self.mode['Prints'] == "verbose":
+                    print "\nSeleccionados cruce (", numCruce, "):\n", seleccionados, "\n"
                 indiceCruce = 0
                 while indiceCruce < numCruce:
                     # print "contadorNewPoblacion: ", contadorNewPoblacion
@@ -235,33 +312,58 @@ class AlgoritmoGenetico(Clasificador):
                     newPoblacion[contadorNewPoblacion], newPoblacion[contadorNewPoblacion + 1] = hijo1, hijo2
                     contadorNewPoblacion += 2
                     indiceCruce += 2
-                if self.debug:
+                if self.mode['Prints'] == "verbose":
                     print "\nnew poblacion (after cruce) [Array todo 0, muy posiblmente individuo empty]:\n", newPoblacion, "\n"
+                    print "[contadorNewPoblacion: ", contadorNewPoblacion, "]\n"
 
             # Mutacion
-            numMutacion = 0
+            #comprobacion por si se toma un tam de poblacion muy pequeño
+            #Ej.: tam 5 - con elitismo y cruce ya llega a 5 por el ajuste de 0 y ajuste de impares
+            if contadorNewPoblacion < self.tamPoblacion:
+                numMutaciones = (self.probMutacion * self.tamPoblacion) // 100
+                if numMutaciones == 0:
+                    numMutaciones = 1  # Si el porcentaje es muy pequeño, pasar al menos 1.
+                seleccionados = self.mutar(poblacion,numMutaciones, self.sizeRegla)
+                for idx, idv in enumerate(seleccionados):
+                    newPoblacion[contadorNewPoblacion] = seleccionados[idx]
+                    contadorNewPoblacion += 1
+                if self.mode['Prints'] == "verbose":
+                    print "[contadorNewPoblacion (post mutacion): ", contadorNewPoblacion, "]\n"
 
+            #Resto: distintos criterios para rellenar los ultimos que falten
+            #Misma comprobacion para tamPoblacion pequeños
+            if contadorNewPoblacion < self.tamPoblacion:
+                restantes = self.tamPoblacion-contadorNewPoblacion
+                if self.mode['Resto'] == 'random':
+                    seleccionados = self.seleccionAleatoria(poblacion,restantes,self.sizeRegla)
+                    if self.mode['Prints'] == 'verbose':
+                        print "\nSeleccionados aleatorios para fill (",restantes, "):\n", seleccionados
+                elif self.mode['Resto'] == 'fitness':
+                    seleccionados = self.seleccionProporcionalFitness(poblacion, fitness, restantes, self.sizeRegla)
+                    if self.mode['Prints'] == 'verbose':
+                        print "\nSeleccionados prop. al fitness para fill (",restantes, "):\n", seleccionados
+                else:
+                    #posible implementacion de otro criterio
+                    pass
+                for idx,chosen in enumerate(seleccionados):
+                    newPoblacion[contadorNewPoblacion] = seleccionados[idx]
+                    contadorNewPoblacion += 1
+                if self.mode['Prints'] == 'verbose':
+                    print "[contadorNewPoblacion (post fill): ", contadorNewPoblacion, "]\n"
+
+            #2ª EVAL DEL FITNESS (necesaria por las nuevas inserciones. Podría optimizarse por índices)
             fitness = self.calcularFitness(newPoblacion, datostrain, atributosDiscretos, diccionario)
             indexMayorFitness, value = max(enumerate(fitness), key=operator.itemgetter(1))
             print "Fitness Mejor individuo: ", fitness[indexMayorFitness]
             print "Regla(s) Mejor individuo: ", poblacion[indexMayorFitness]
 
-            """TODO:si se da la prob. de mutar, mutar uno de los individuos resultantes de los seleccionados ? o de 10 random?.
+            poblacion = copy.deepcopy(newPoblacion)
 
-            [si poblacion = 100 individuos ] Ahora habría 60 (cruce) + 5 (elitismo) en la newPoblacion. =>
-            Opcion1. Evaluar el fitness de estos (65 nuevos) y añadirle 35 (100 - 65) individuos de la anterior población hasta llegar a tamPoblacion.
-            Opcion2. Añadir (100 - 65) individuos de la anteriorhasta llegar a tamPoblacion, y ahora calcular el fitness de los individuos. Problema, estás
-            recalculando el fitness de 35 indidividuos que ya habías calculado antes.
-
-            OJO: El tamPoblacion siempre debe ser el mismo
-            OJO2: Cuanto mayor Fitness Mejor es el individuo
-
-            Continuar con el bucle hasta condición de parada, en nuestro caso numGeneraciones. """
-
-            poblacion = newPoblacion
-            fitness = self.calcularFitness(poblacion, datostrain, atributosDiscretos, diccionario)
+            #Ya calculado arriba
+            #fitness = self.calcularFitness(poblacion, datostrain, atributosDiscretos, diccionario)
             print "Valor de fitness de la poblacion final Generacion (", i, ")", fitness, "\n"
-            if self.debug:
+            if self.mode['Prints'] == "verbose":
+                print "Poblacion al final de la gen(",i,"):\n", poblacion
                 print "\n===================================== gen (", i, ") ends =====================================\n"
 
         print "------------  Fin de entrenamiento -----------\n\n"
