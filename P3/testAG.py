@@ -26,9 +26,12 @@ from Main import Main
 #   random      - se seleccionan los 'fill' de manera aleatoria.
 #   fitness     - se seleccionan los 'fill' en funcion del fitness
 #
+#CondicionTerminacion:
+#   numero      - a partir de este porcentaje de acierto se termina el entrenamiento 
+#   no          - el entreamiento finaliza cuando se han ejecutado todas las generaciones  
 ###################################################################################
 #default para pruebas:
-mode = {'Prints':'verbose', 'Diversidad':'default', 'ReglasExtra':'randSons', 'Resto':'random'}
+mode = {'Prints':'default', 'Diversidad':'default', 'ReglasExtra':'randSons', 'Resto':'random', 'CondicionTerminacion':'100'}
 
 #test: maximiza el numero de reglas por individuo menos el ultimo:
 #mode = {'Prints':'verbose', 'Diversidad':'maxReglas-1', 'Reglas_extra':'randSon'}
@@ -37,7 +40,7 @@ mode = {'Prints':'verbose', 'Diversidad':'default', 'ReglasExtra':'randSons', 'R
 print "Practica 3 test AG"
 
 #validacion Simple
-numParticionesSimples = 1
+numParticionesSimples = 3
 porcentajeParticiones = 80
 estrategia=ValidacionSimple(numParticionesSimples, porcentajeParticiones)
 

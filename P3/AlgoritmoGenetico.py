@@ -256,6 +256,7 @@ class AlgoritmoGenetico(Clasificador):
         # Tamaño de cada regla es fijo = Suma del núm. valores posibles por atributos + 1 (clase)
         # sizeRegla = Counter(chain.from_iterable(e.keys() for e in diccionario))
         sizeRegla = 0
+        print "Diccionarios atributos:", diccionario[:-1]," clase: ", diccionario[-1],"\n"
         for d in diccionario:
             sizeRegla += len(d)
         sizeRegla -= 1  # Restar uno de la clase. la clase (bin) se mapea como 0 o 1. no como 2 bits
@@ -355,16 +356,21 @@ class AlgoritmoGenetico(Clasificador):
             fitness = self.calcularFitness(newPoblacion, datostrain, atributosDiscretos, diccionario)
             indexMayorFitness, value = max(enumerate(fitness), key=operator.itemgetter(1))
             print "Fitness Mejor individuo: ", fitness[indexMayorFitness]
-            print "Regla(s) Mejor individuo: ", poblacion[indexMayorFitness]
+            print "Regla(s) Mejor individuo: \n \t", poblacion[indexMayorFitness]
 
             poblacion = copy.deepcopy(newPoblacion)
 
             #Ya calculado arriba
             #fitness = self.calcularFitness(poblacion, datostrain, atributosDiscretos, diccionario)
-            print "Valor de fitness de la poblacion final Generacion (", i, ")", fitness, "\n"
+            print "Valor de fitness de la poblacion al final Generacion (", i, ")", fitness, "\n"
             if self.mode['Prints'] == "verbose":
                 print "Poblacion al final de la gen(",i,"):\n", poblacion
                 print "\n===================================== gen (", i, ") ends =====================================\n"
+            #Si el fitness del mejor individuo es 100 (no hay errores de clasificación hemos terminado)
+            if self.mode['CondicionTerminacion'] != "no":
+                if fitness[indexMayorFitness] >= int(self.mode['CondicionTerminacion']):
+                    print "El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento.."
+                    break
 
         print "------------  Fin de entrenamiento -----------\n\n"
         # Ya hemos "entrenado" los individuos, ahora simplemente cogemos el mejor individo

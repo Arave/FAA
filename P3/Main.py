@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from sklearn import neighbors, linear_model, preprocessing
 from sklearn.dummy import DummyClassifier
 from sklearn.naive_bayes import GaussianNB, MultinomialNB
@@ -44,11 +45,16 @@ class Main(object):
             print "==============================================================================="
         """
         print "\nFichero de datos: " + fichero_datos
-        print "Laplace =" + str(laplace) + ", normalizar = ", str(normalizar)
+        print "Laplace = " + str(laplace) + ", normalizar = ", str(normalizar)
         dataset = Datos('./ConjuntosDatos/' + fichero_datos, supervisado)
         print "Estrategia: ", strat.getStratname(), ", numParticiones: ", str(k)
         print "Clasificador: ", cls_brief
-        print "Ejecucion: "
+        if cls.__class__.__name__ == "AlgoritmoGenetico":
+            print "Tamaño de la población: ", cls.tamPoblacion
+            print "Número de generaciones: ", cls.numGeneraciones
+            print "Número máximo de reglas: ", cls.maxReglas
+            print "Modo de funcionamiento (mode): ", cls.mode
+        print "Ejecución: \n"
         #print "________________________________________________________________"
         if normalizar:
             plotName = 'PlotsGenerados/' + fichero_datos + '-' + cls_brief + '=' + str(normalizar) + '.png'
