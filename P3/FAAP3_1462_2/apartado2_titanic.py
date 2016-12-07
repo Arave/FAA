@@ -45,7 +45,7 @@ numParticiones = 3
 estrategiaCruzada=ValidacionCruzada(numParticiones)
 
 #validacion Simple
-numParticiones = 1
+numParticiones = 3
 porcentajeParticiones = 80
 estrategiaSimple=ValidacionSimple(numParticiones, porcentajeParticiones)
 
@@ -54,9 +54,8 @@ laplace = False
 normalizar = True
 separador = False
 
-
-#======================================tic-tac-toe.data=====================================#
-data_file = 'tic-tac-toe.data'
+#======================================titanic.data=====================================#
+data_file = 'titanic.data'
 about = "clasificador Algoritmo Genetico"
 clf_id = "GenAlg"
 
@@ -91,7 +90,6 @@ maxReglas = 5 #Numero máximo de reglas por individuo
 clasificador = AlgoritmoGenetico(tamPoblacion, numGeneraciones, maxReglas, mode)
 Main.run(data_file,clasificador,about,estrategiaSimple,numParticiones,True,laplace,normalizar,separador)
 
-
 #Algoritmo Genetico
 tamPoblacion = 500 #Tamaño de la poblacion
 numGeneraciones = 100 #Numero de generaciones (Condicion de terminacion)
@@ -99,9 +97,8 @@ maxReglas = 5 #Numero máximo de reglas por individuo
 clasificador = AlgoritmoGenetico(tamPoblacion, numGeneraciones, maxReglas, mode)
 Main.run(data_file,clasificador,about,estrategiaSimple,numParticiones,True,laplace,normalizar,separador)
 
-#Algoritmo Genetico
 tamPoblacion = 500 #Tamaño de la poblacion
-numGeneraciones = 500 #Numero de generaciones (Condicion de terminacion)
+numGeneraciones = 100 #Numero de generaciones (Condicion de terminacion)
 maxReglas = 5 #Numero máximo de reglas por individuo
 clasificador = AlgoritmoGenetico(tamPoblacion, numGeneraciones, maxReglas, mode)
 Main.run(data_file,clasificador,about,estrategiaSimple,numParticiones,True,laplace,normalizar,separador)
