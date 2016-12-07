@@ -32,7 +32,7 @@ from Main import Main
 #   no          - el entreamiento finaliza cuando se han ejecutado todas las generaciones  
 ###################################################################################
 #default para pruebas:
-mode = {'Prints':'default', 'Diversidad':'default', 'ReglasExtra':'randSons', 'Resto':'random', 'CondicionTerminacion':'100'}
+mode = {'Prints':'default', 'Diversidad':'default', 'ReglasExtra':'randSons', 'Resto':'random', 'CondicionTerminacion':'100', 'Threshold':90.0}
 
 #test: maximiza el numero de reglas por individuo menos el ultimo:
 #mode = {'Prints':'verbose', 'Diversidad':'maxReglas-1', 'Reglas_extra':'randSon'}
