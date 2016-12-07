@@ -11,6 +11,7 @@ import numpy as np
 import math
 import operator
 
+#from AlgoritmoGenetico import AlgoritmoGenetico
 #import scipy.stats
 
 
@@ -71,6 +72,7 @@ class Clasificador(object):
        print 'Normalizar:',normalizacion
        """
        #for each particion: clasificar y sacar los errores de cada evaluación
+
        for idx, p in enumerate(particiones):
            #print "======================================================"
            #print "PARTICION (" + str(idx) + "):"
@@ -97,15 +99,23 @@ class Clasificador(object):
                print ' =>DatosTest [', idx, ']:'
                print datosTest
 
+           #para algoritmo genetico, plot
+           plot_flag = None
+           if idx == 2: #ultima de val simple para 3
+               plot_flag = True
+               print "PLOT_FLAG = True"
+
            # Entrenamiento
-           clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
+           clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios, plot_flag)
            pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios,correcionL)
+
            #print "Predicción: "
            #print pred
 
            error = clasificador.error(datosTest, pred)
            arrayErrores[idx] = error
-          
+
+
            #print "\t Porcentaje de error (%): ",error
            #estrategia=ValidacionSimple(10,80) => particionado, arg[0] - numero de particiones. Calcular la media y desv.
        #estadística

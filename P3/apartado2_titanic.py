@@ -54,22 +54,22 @@ laplace = False
 normalizar = True
 separador = False
 
-#Algoritmo Genetico
-tamPoblacion = 10 #Tamaño de la poblacion
-numGeneraciones = 100 #Numero de generaciones (Condicion de terminacion)
-maxReglas = 5 #Numero máximo de reglas por individuo
-clasificador = AlgoritmoGenetico(tamPoblacion, numGeneraciones, maxReglas, mode)
-
 #======================================titanic.data=====================================#
 data_file = 'titanic.data'
 about = "clasificador Algoritmo Genetico"
 clf_id = "GenAlg"
+
+#Algoritmo Genetico
+tamPoblacion = 10 #Tamaño de la poblacion
+numGeneraciones = 100 #Numero de generaciones (Condicion de terminacion)
+maxReglas = 5 #Numero máximo de reglas por individuo
+clasificador = AlgoritmoGenetico(tamPoblacion, numGeneraciones, maxReglas, mode)
 Main.run(data_file,clasificador,about,estrategiaSimple,numParticiones,True,laplace,normalizar,separador)
 
 
 #Algoritmo Genetico
 tamPoblacion = 10 #Tamaño de la poblacion
-numGeneraciones = 200 #Numero de generaciones (Condicion de terminacion)
+numGeneraciones = 500 #Numero de generaciones (Condicion de terminacion)
 maxReglas = 5 #Numero máximo de reglas por individuo
 clasificador = AlgoritmoGenetico(tamPoblacion, numGeneraciones, maxReglas, mode)
 Main.run(data_file,clasificador,about,estrategiaSimple,numParticiones,True,laplace,normalizar,separador)
@@ -90,7 +90,6 @@ maxReglas = 5 #Numero máximo de reglas por individuo
 clasificador = AlgoritmoGenetico(tamPoblacion, numGeneraciones, maxReglas, mode)
 Main.run(data_file,clasificador,about,estrategiaSimple,numParticiones,True,laplace,normalizar,separador)
 
-
 #Algoritmo Genetico
 tamPoblacion = 500 #Tamaño de la poblacion
 numGeneraciones = 100 #Numero de generaciones (Condicion de terminacion)
@@ -98,9 +97,8 @@ maxReglas = 5 #Numero máximo de reglas por individuo
 clasificador = AlgoritmoGenetico(tamPoblacion, numGeneraciones, maxReglas, mode)
 Main.run(data_file,clasificador,about,estrategiaSimple,numParticiones,True,laplace,normalizar,separador)
 
-#Algoritmo Genetico
 tamPoblacion = 500 #Tamaño de la poblacion
-numGeneraciones = 500 #Numero de generaciones (Condicion de terminacion)
+numGeneraciones = 100 #Numero de generaciones (Condicion de terminacion)
 maxReglas = 5 #Numero máximo de reglas por individuo
 clasificador = AlgoritmoGenetico(tamPoblacion, numGeneraciones, maxReglas, mode)
 Main.run(data_file,clasificador,about,estrategiaSimple,numParticiones,True,laplace,normalizar,separador)

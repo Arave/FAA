@@ -6,6 +6,7 @@ import numpy as np
 import operator
 
 from Clasificador import Clasificador
+from plotter import genPlot
 
 class AlgoritmoGenetico(Clasificador):
     probCruce = 60  # Probabilidad de cruzar individuos 60%
@@ -236,26 +237,32 @@ class AlgoritmoGenetico(Clasificador):
             print "Seleccionado/s aleat. (",numMutaciones, ") para posible mutacion:\n",seleccionados_aleat
         for idx, indv in enumerate(seleccionados_aleat):
             seleccionados[idx] = indv
-            muta = np.random.randint(1, 100001) #0,1% => (0,001)base100 => (1)base100000
+            muta = np.random.randint(1, 101) #1%
+            muta = 1
             if muta == 1: #equiprobabilidad en los 100000 nums
                 if self.mode['Prints'] == 'verbose':
                     print "\t[MUTACION TUVO LUGAR!]"
                     print "\tIndividuo previo mutacion:", seleccionados[idx]
-                muta_bit = np.random.randint(0,sizeRegla+1) #rand del bit a mutar
-                if seleccionados[idx][muta_bit] == 0:
-                    seleccionados[idx][muta_bit] = 1
+                numReglas = np.count_nonzero(~np.isnan(indv)) // sizeRegla
+                muta_regla = np.random.randint(0, numReglas)
+                muta_bit = np.random.randint(0,sizeRegla) #rand del bit a mutar
+                if seleccionados[idx][muta_regla][muta_bit] == 0:
+                    seleccionados[idx][muta_regla][muta_bit] = 1
                 else:
-                    seleccionados[idx][muta_bit] = 0
+                    seleccionados[idx][muta_regla][muta_bit] = 0
                 if self.mode['Prints']=='verbose':
                     print "\tIndividuo post mutacion:",seleccionados[idx]
         return seleccionados
 
-    def entrenamiento(self, datostrain, atributosDiscretos, diccionario):
+    def entrenamiento(self, datostrain, atributosDiscretos, diccionario, plot_flag=None):
         # 1º- Inicializar una población aleatoria de individuos
 
         # Tamaño de cada regla es fijo = Suma del núm. valores posibles por atributos + 1 (clase)
         # sizeRegla = Counter(chain.from_iterable(e.keys() for e in diccionario))
         sizeRegla = 0
+        #plot
+        bestIndvGens = []
+        fitnessMedioGens = []
         print "Diccionarios atributos:", diccionario[:-1]," clase: ", diccionario[-1],"\n"
         for d in diccionario:
             sizeRegla += len(d)
@@ -271,6 +278,9 @@ class AlgoritmoGenetico(Clasificador):
         if self.mode['Prints'] == "verbose":
             print "Valor de fitness de la poblacion inicial", fitness, "\n"
 
+        indexMayorFitness, value = max(enumerate(fitness), key=operator.itemgetter(1))
+        mejorFitness = fitness[indexMayorFitness]
+        repesCount = 1
         # mientras no se satisfazca la condicion de terminacion
         for i in xrange(self.numGeneraciones):
             newPoblacion = np.zeros(shape=(self.tamPoblacion, self.maxReglas, sizeRegla))
@@ -358,6 +368,10 @@ class AlgoritmoGenetico(Clasificador):
             print "Fitness Mejor individuo: ", fitness[indexMayorFitness]
             print "Regla(s) Mejor individuo: \n \t", poblacion[indexMayorFitness]
 
+            #plot
+            bestIndvGens.append(fitness[indexMayorFitness])
+            fitnessMedioGens.append(np.median(fitness))
+
             poblacion = copy.deepcopy(newPoblacion)
 
             #Ya calculado arriba
@@ -372,7 +386,22 @@ class AlgoritmoGenetico(Clasificador):
                     print "El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento.."
                     break
 
+            if self.mode['Threshold'] is not None and fitness[indexMayorFitness] >= self.mode['Threshold']:
+                if mejorFitness == fitness[indexMayorFitness]:
+                    repesCount += 1
+                else:
+                    mejorFitness = fitness[indexMayorFitness]
+                    repesCount = 1
+                if repesCount == 10:
+                    if self.mode['Prints'] == 'verbose':
+                        print "[!] Mejor fitness repetido 10 veces: fin de entrenamiento"
+                    break
+        #(fin loop generaciones)
         print "------------  Fin de entrenamiento -----------\n\n"
+        #plot
+        if plot_flag == True:
+            genPlot(None,bestIndvGens,fitnessMedioGens)
+
         # Ya hemos "entrenado" los individuos, ahora simplemente cogemos el mejor individo
         indexMayorFitness, value = max(enumerate(fitness), key=operator.itemgetter(1))
         self.bestIndividuo = poblacion[indexMayorFitness]

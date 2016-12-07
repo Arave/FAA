@@ -62,7 +62,7 @@ MEME-INSTALATOR para modulos python (probar siempre primero):
 	sudo easy_install <nombre_modulo>.py
 
 Lanzar el servidor de jupyter notebook:
-	arave@arave-XMG:/opt/anaconda2/bin$ ./jupyter notebook --notebook-dir=/home/arave/Documents/REPOS/faa/P2
+	arave@arave-XMG:/opt/anaconda2/bin$ ./jupyter notebook --notebook-dir=/home/arave/Documents/REPOS/faa/P3
 
 Hotkeys notebook:
 	Enter Command Mode - ESC
