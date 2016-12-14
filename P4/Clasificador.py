@@ -3,7 +3,7 @@ from __future__ import division #Para divisiones float por defecto
 from operator import itemgetter
 from collections import Counter
 from scipy.special import expit
-from plotModel import plotModel
+#from plotModel import plotModel
 from copy import copy,deepcopy
 from itertools import chain
 """
@@ -165,9 +165,9 @@ class ClasificadorEnsemble(Clasificador):
         #Obtener la prediccion cada clasificador
         for clf in self.arrayClf:
             predicciones = clf.clasifica(datostest, atributosDiscretos, diccionario)
-            print predicciones
-            self.arrayPredicciones.append(clf.clasifica(datostest, atributosDiscretos,diccionario))
-        #print self.arrayPredicciones    
+            #print predicciones
+            #self.arrayPredicciones.append(clf.clasifica(datostest, atributosDiscretos,diccionario))
+        print self.arrayPredicciones    
         
 
 
