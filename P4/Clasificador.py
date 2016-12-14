@@ -6,12 +6,14 @@ from scipy.special import expit
 from plotModel import plotModel
 from copy import copy,deepcopy
 from itertools import chain
+"""
 from sklearn import neighbors, linear_model, preprocessing
 from sklearn.dummy import DummyClassifier
 from sklearn.naive_bayes import GaussianNB, MultinomialNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.ensemble import VotingClassifier
+"""
 
 
 import copy
@@ -140,8 +142,36 @@ class Clasificador(object):
            # print plotName
            plotModel(dataset.datos[ii, 0], dataset.datos[ii, 1], dataset.datos[ii, -1] != 0, clasificador, "Frontera", plotName)
 #################################################################################################################
-
 class ClasificadorEnsemble(Clasificador):
+
+    arrayClf = None
+    arrayPredicciones = []
+
+    def __init__(self, arrayClf):
+        self.arrayClf = arrayClf
+
+
+    def entrenamiento(self, datostrain, atributosDiscretos=None, diccionario=None, plot_flag=None):
+        
+        #Entrenar cada clasificador
+        for clf in self.arrayClf:
+            clf.entrenamiento(datostrain, atributosDiscretos,diccionario)
+        
+
+
+
+    def clasifica(self, datostest, atributosDiscretos=None, diccionario=None, correcion=None):
+        
+        #Obtener la prediccion cada clasificador
+        for clf in self.arrayClf:
+            predicciones = clf.clasifica(datostest, atributosDiscretos, diccionario)
+            print predicciones
+            self.arrayPredicciones.append(clf.clasifica(datostest, atributosDiscretos,diccionario))
+        #print self.arrayPredicciones    
+        
+
+
+class ClasificadorEnsembleSklearn(Clasificador):
     
     modelo = None
 
