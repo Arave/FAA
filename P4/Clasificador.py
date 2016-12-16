@@ -6,14 +6,13 @@ from scipy.special import expit
 #from plotModel import plotModel
 from copy import copy,deepcopy
 from itertools import chain
-"""
 from sklearn import neighbors, linear_model, preprocessing
 from sklearn.dummy import DummyClassifier
 from sklearn.naive_bayes import GaussianNB, MultinomialNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.ensemble import VotingClassifier
-"""
+
 
 
 import copy
@@ -144,12 +143,12 @@ class Clasificador(object):
 #################################################################################################################
 class ClasificadorEnsemble(Clasificador):
 
-    arrayClf = None
-    arrayPredicciones = []
+    arrayClf = None #Array de clasificadores
+    numAlgoritmos = 3 #Número de clasificadores
 
     def __init__(self, arrayClf):
         self.arrayClf = arrayClf
-
+        self.numAlgoritmos = len(arrayClf)
 
     def entrenamiento(self, datostrain, atributosDiscretos=None, diccionario=None, plot_flag=None):
         
@@ -157,25 +156,38 @@ class ClasificadorEnsemble(Clasificador):
         for clf in self.arrayClf:
             clf.entrenamiento(datostrain, atributosDiscretos,diccionario)
         
-
-
-
     def clasifica(self, datostest, atributosDiscretos=None, diccionario=None, correcion=None):
         
+        numFilas = datostest.shape[0]
+        #Crear una matriz de numpy para almacenar las predicciones y obtener la clase mayoritaria
+        #   es una matriz de Algoritmos x predicciones. Es decir, tendrá tantas filas como algoritmos
+        #   y tantas columnas como filas de datostest. 
+        matrizPredicciones = np.zeros(shape=(self.numAlgoritmos, numFilas))
+     
         #Obtener la prediccion cada clasificador
-        for clf in self.arrayClf:
-            predicciones = clf.clasifica(datostest, atributosDiscretos, diccionario)
-            #print predicciones
-            #self.arrayPredicciones.append(clf.clasifica(datostest, atributosDiscretos,diccionario))
-        print self.arrayPredicciones    
+        for indAlg, clf in enumerate(self.arrayClf): #Recorrer array de clasificadores
+            #Array de predicciones para cada clasificador
+            predicciones = clf.clasifica(datostest, atributosDiscretos, diccionario) 
+            for indCla,p in enumerate(predicciones):#Reccorer el array de predicciones de 1 clasificador
+                matrizPredicciones[indAlg][indCla] = p #Asignarlo a la matriz
+        #print matrizPredicciones
         
+        #Array para devolver la clase mayoritaria de las predicciones
+        datos = np.empty(numFilas)
+        #Obetener la mayoritaria
+        for i in xrange(numFilas): #Para cada columna obtener la mayoritaria
+            most_common,num_most_common = Counter(matrizPredicciones[:,i]).most_common(1)[0]        
+            #print most_common
+            #print num_most_common
+            datos[i] = most_common
+        #print "Predicciones (Mayoritaria): ", datos
+        return datos
+                 
 
 
 class ClasificadorEnsembleSklearn(Clasificador):
     
     modelo = None
-
-
 
     def entrenamiento(self, datostrain, atributosDiscretos=None, diccionario=None, plot_flag=None):
         
@@ -201,9 +213,6 @@ class ClasificadorEnsembleSklearn(Clasificador):
         eclf1 = eclf1.fit(datostrain[:,:-1], datostrain[:,idxColumnaClase])
         self.modelo = eclf1
 
-        
-
-
 
     def clasifica(self, datostest, atributosDiscretos=None, diccionario=None, correcion=None):
        
@@ -212,14 +221,6 @@ class ClasificadorEnsembleSklearn(Clasificador):
         #print predicciones
         return predicciones
 	
-
-
-
-
-
-
-
-
 ##################################
 
 class ClasificadorRegresionLogistica(Clasificador):

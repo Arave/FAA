@@ -1,0 +1,395 @@
+Fichero de datos: ejemplo6.data
+Laplace = False, normalizar =  True
+Estrategia:  ValidacionSimple , numParticiones:  3
+Clasificador:  clasificador Algoritmo Genetico
+Tamaño de la población:  10
+Número de generaciones:  100
+Número máximo de reglas:  5
+Modo de funcionamiento (mode):  {'Diversidad': 'default', 'Prints': 'default', 'Resto': 'random', 'CondicionTerminacion': '100', 'ReglasExtra': 'randSons'}
+Ejecución: 
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[0.000 0.000 0.000 1.000]
+ [0.000 1.000 0.000 1.000]
+ [nan nan nan nan]
+ [nan nan nan nan]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 63.750 67.917 67.917 67.917 63.750 67.917 100.000 100.000 67.917] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[0.000 0.000 0.000 0.000]
+ [1.000 1.000 1.000 1.000]
+ [1.000 0.000 0.000 0.000]
+ [1.000 0.000 1.000 0.000]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 32.083 67.917 67.917 67.917 100.000 100.000 100.000 100.000 32.083] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  68.75
+Regla(s) Mejor individuo: 
+        [[1.000 0.000 1.000 1.000]
+ [1.000 1.000 0.000 0.000]
+ [0.000 0.000 1.000 0.000]
+ [1.000 1.000 1.000 1.000]
+ [1.000 1.000 1.000 0.000]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [68.750 66.250 65.000 31.250 65.000 65.000 31.250 65.000 65.000 65.000] 
+
+Fitness Mejor individuo:  68.75
+Regla(s) Mejor individuo: 
+        [[0.000 0.000 1.000 1.000]
+ [0.000 0.000 1.000 1.000]
+ [1.000 1.000 0.000 1.000]
+ [1.000 0.000 1.000 0.000]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 1 ) [68.750 31.250 65.000 68.750 65.000 65.000 33.750 68.750 66.250 68.750] 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[0.000 0.000 1.000 1.000]
+ [0.000 0.000 1.000 1.000]
+ [0.000 1.000 0.000 1.000]
+ [nan nan nan nan]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 2 ) [68.750 66.250 65.000 100.000 33.750 100.000 33.750 68.750 31.250 68.750] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+=================RESULTADO====================
+Array de % de errores obtenidos: [0.000 0.000 0.000] 
+Media de errores total: 0.0 %
+Mediana de errores total: 0.0 %
+Desviación típica: 0.0 %
+
+
+
+Fichero de datos: ejemplo6.data
+Laplace = False, normalizar =  True
+Estrategia:  ValidacionSimple , numParticiones:  3
+Clasificador:  clasificador Algoritmo Genetico
+Tamaño de la población:  10
+Número de generaciones:  200
+Número máximo de reglas:  5
+Modo de funcionamiento (mode):  {'Diversidad': 'default', 'Prints': 'default', 'Resto': 'random', 'CondicionTerminacion': '100', 'ReglasExtra': 'randSons'}
+Ejecución: 
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[0.000 1.000 0.000 0.000]
+ [0.000 1.000 1.000 0.000]
+ [nan nan nan nan]
+ [nan nan nan nan]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 68.333 68.333 100.000 100.000 68.333 68.333 68.333 68.333 63.750] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[0.000 1.000 1.000 1.000]
+ [1.000 1.000 0.000 0.000]
+ [1.000 0.000 1.000 0.000]
+ [nan nan nan nan]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 68.333 68.333 100.000 36.250 36.250 68.333 68.333 68.333 31.667] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[1.000 0.000 0.000 0.000]
+ [nan nan nan nan]
+ [nan nan nan nan]
+ [nan nan nan nan]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 64.167 64.583 64.583 100.000 100.000 64.583 64.583 64.583 64.583] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+=================RESULTADO====================
+Array de % de errores obtenidos: [0.000 0.000 0.000] 
+Media de errores total: 0.0 %
+Mediana de errores total: 0.0 %
+Desviación típica: 0.0 %
+
+
+
+Fichero de datos: ejemplo6.data
+Laplace = False, normalizar =  True
+Estrategia:  ValidacionSimple , numParticiones:  3
+Clasificador:  clasificador Algoritmo Genetico
+Tamaño de la población:  200
+Número de generaciones:  100
+Número máximo de reglas:  5
+Modo de funcionamiento (mode):  {'Diversidad': 'default', 'Prints': 'default', 'Resto': 'random', 'CondicionTerminacion': '100', 'ReglasExtra': 'randSons'}
+Ejecución: 
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[0.000 1.000 0.000 1.000]
+ [1.000 0.000 0.000 0.000]
+ [1.000 0.000 1.000 0.000]
+ [1.000 0.000 1.000 1.000]
+ [1.000 0.000 0.000 0.000]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 100.000 100.000 ..., 32.083 34.167 65.833] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[0.000 0.000 1.000 0.000]
+ [nan nan nan nan]
+ [nan nan nan nan]
+ [nan nan nan nan]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 100.000 100.000 ..., 61.667 69.167 69.167] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[1.000 0.000 1.000 1.000]
+ [0.000 0.000 1.000 1.000]
+ [0.000 1.000 1.000 0.000]
+ [1.000 1.000 1.000 1.000]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 100.000 100.000 ..., 66.250 33.750 66.250] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+=================RESULTADO====================
+Array de % de errores obtenidos: [0.000 0.000 0.000] 
+Media de errores total: 0.0 %
+Mediana de errores total: 0.0 %
+Desviación típica: 0.0 %
+
+
+
+Fichero de datos: ejemplo6.data
+Laplace = False, normalizar =  True
+Estrategia:  ValidacionSimple , numParticiones:  3
+Clasificador:  clasificador Algoritmo Genetico
+Tamaño de la población:  200
+Número de generaciones:  500
+Número máximo de reglas:  5
+Modo de funcionamiento (mode):  {'Diversidad': 'default', 'Prints': 'default', 'Resto': 'random', 'CondicionTerminacion': '100', 'ReglasExtra': 'randSons'}
+Ejecución: 
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[0.000 1.000 0.000 1.000]
+ [1.000 1.000 1.000 1.000]
+ [0.000 0.000 0.000 0.000]
+ [0.000 0.000 1.000 1.000]
+ [1.000 0.000 1.000 1.000]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 100.000 100.000 ..., 69.167 69.167 69.167] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[1.000 1.000 0.000 1.000]
+ [1.000 0.000 0.000 1.000]
+ [nan nan nan nan]
+ [nan nan nan nan]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 100.000 100.000 ..., 32.917 67.083 67.083] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[1.000 1.000 0.000 0.000]
+ [1.000 1.000 0.000 1.000]
+ [0.000 0.000 1.000 0.000]
+ [nan nan nan nan]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 100.000 100.000 ..., 67.500 67.500 67.500] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+=================RESULTADO====================
+Array de % de errores obtenidos: [0.000 0.000 0.000] 
+Media de errores total: 0.0 %
+Mediana de errores total: 0.0 %
+Desviación típica: 0.0 %
+
+
+
+Fichero de datos: ejemplo6.data
+Laplace = False, normalizar =  True
+Estrategia:  ValidacionSimple , numParticiones:  3
+Clasificador:  clasificador Algoritmo Genetico
+Tamaño de la población:  500
+Número de generaciones:  100
+Número máximo de reglas:  5
+Modo de funcionamiento (mode):  {'Diversidad': 'default', 'Prints': 'default', 'Resto': 'random', 'CondicionTerminacion': '100', 'ReglasExtra': 'randSons'}
+Ejecución: 
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[0.000 1.000 0.000 1.000]
+ [0.000 1.000 0.000 1.000]
+ [0.000 1.000 0.000 1.000]
+ [0.000 0.000 1.000 0.000]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 100.000 100.000 ..., 68.333 68.333 31.667] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[1.000 0.000 1.000 0.000]
+ [0.000 0.000 0.000 0.000]
+ [0.000 1.000 1.000 1.000]
+ [nan nan nan nan]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 100.000 100.000 ..., 67.500 100.000 30.417] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[0.000 1.000 0.000 0.000]
+ [1.000 0.000 0.000 1.000]
+ [1.000 0.000 0.000 1.000]
+ [1.000 1.000 0.000 1.000]
+ [0.000 1.000 0.000 0.000]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 100.000 100.000 ..., 66.250 66.250 65.417] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+=================RESULTADO====================
+Array de % de errores obtenidos: [0.000 0.000 0.000] 
+Media de errores total: 0.0 %
+Mediana de errores total: 0.0 %
+Desviación típica: 0.0 %
+
+
+
+Fichero de datos: ejemplo6.data
+Laplace = False, normalizar =  True
+Estrategia:  ValidacionSimple , numParticiones:  3
+Clasificador:  clasificador Algoritmo Genetico
+Tamaño de la población:  500
+Número de generaciones:  500
+Número máximo de reglas:  5
+Modo de funcionamiento (mode):  {'Diversidad': 'default', 'Prints': 'default', 'Resto': 'random', 'CondicionTerminacion': '100', 'ReglasExtra': 'randSons'}
+Ejecución: 
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[1.000 0.000 1.000 1.000]
+ [0.000 0.000 1.000 0.000]
+ [1.000 1.000 0.000 1.000]
+ [0.000 1.000 0.000 0.000]
+ [1.000 0.000 1.000 1.000]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 100.000 100.000 ..., 37.500 34.583 37.500] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[0.000 1.000 1.000 0.000]
+ [nan nan nan nan]
+ [nan nan nan nan]
+ [nan nan nan nan]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 100.000 100.000 ..., 66.667 37.083 33.333] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+Diccionarios atributos: [{'a': 0, 'c': 2, 'b': 1}]  clase:  {'+': 0, '-': 1} 
+
+Fitness Mejor individuo:  100.0
+Regla(s) Mejor individuo: 
+        [[1.000 0.000 0.000 0.000]
+ [1.000 1.000 1.000 0.000]
+ [nan nan nan nan]
+ [nan nan nan nan]
+ [nan nan nan nan]]
+Valor de fitness de la poblacion al final Generacion ( 0 ) [100.000 100.000 100.000 ..., 65.417 34.583 70.000] 
+
+El fitness del mejor individuo es mayor a la condición de terminación. Finalizando entrenamiento..
+------------  Fin de entrenamiento -----------
+
+
+=================RESULTADO====================
+Array de % de errores obtenidos: [0.000 0.000 0.000] 
+Media de errores total: 0.0 %
+Mediana de errores total: 0.0 %
+Desviación típica: 0.0 %
+
+

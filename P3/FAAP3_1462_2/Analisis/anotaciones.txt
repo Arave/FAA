@@ -1,0 +1,51 @@
+DONE- Sobre 'seleccionProporcionalFitness':
+	Algo no cuadra en la list comprehension que haces porque el debugger salta con un 'division by zero'.
+		Seleccionados (cruce)
+		: [[[0.000 0.000 0.000 1.000 0.000 0.000]
+		  [0.000 1.000 0.000 1.000 1.000 0.000]]
+
+		 [[0.000 0.000 0.000 1.000 0.000 0.000]
+		  [0.000 1.000 0.000 1.000 1.000 0.000]]
+
+		 [[0.000 0.000 0.000 1.000 0.000 0.000]
+		  [0.000 1.000 0.000 1.000 1.000 0.000]]] 
+
+		new poblacion (after fitness):
+		[[[1.000 1.000 1.000 1.000 1.000 1.000]
+		  [0.000 0.000 0.000 0.000 0.000 0.000]]
+
+		 [[0.000 0.000 0.000 0.000 0.000 0.000]
+		  [0.000 0.000 0.000 0.000 0.000 0.000]]
+
+		 [[0.000 0.000 0.000 0.000 0.000 0.000]
+		  [0.000 0.000 0.000 0.000 0.000 0.000]]
+
+		 [[0.000 0.000 0.000 0.000 0.000 0.000]
+		  [0.000 0.000 0.000 0.000 0.000 0.000]]
+
+		 [[0.000 0.000 0.000 0.000 0.000 0.000]
+		  [0.000 0.000 0.000 0.000 0.000 0.000]]] 
+
+		fitnessTotal:  0.0 
+
+		==> Ver 'seleccionarProporcional....png'
+
+DONE: mirar captura, no se que fallo te daba. Diría que siempre ha funcionado bien - Sobre 'elitismo':
+	Si he entendido bien lo que haces, algo no cuadra ya que para 1 seleccion por elitismo a la nueva poblacion,
+	pilla la de menor fitness.
+	==> Ver 'debug_elitismo.png', donde se ve el indice que pilla y el array de fitness.
+	Como no entiendo el pitote que haces, no lo he cambiado, pero yo lo haría así: http://stackoverflow.com/a/20177786
+
+DONE: - Sobre 'clasifica':
+	Algo no me cuadra en la línea 289, porque siempre pillamos el segundo bit del valor de la claase codificado, y eso no
+	tiene mucho sense. 
+	Lo hablamos en persona mejor
+	**Explicacion** El último bit es el valor de la clase, lo que predice el individuo, pero lo estaba haciendo mal yo ya que se me habia olvidado restar 1 al tamRegla. Y estaba poniendo la clase representada como 2 bits.
+
+- Sobre el resto:
+	Me he analizado las funciones y me hecho varios debugs en hojas. Por lo demas, tiene todo sentido (salvo la de la 
+	ruleta, que no la he analizado en detalle más allá del fallo que daba). Hay un par de cosas que me gustaria comentarte
+	en persona que CREO que pueden afectar a los resultados por las decisiones de implementación.
+
+	He incluido los ficheros que he ido usando para probar.
+

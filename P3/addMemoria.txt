@@ -1,0 +1,111 @@
+Explicación de los diferentes parámetros de ejecucción:
+tamPoblacion: Tamaño de la población
+
+numGeneraciones: Número de generaciones
+
+maxReglas: Número máximo de reglas
+
+[mode] - Establece los parametros de ejecucion.
+	Prints:
+	   default     - sólo aquellos prints que se nos piden + resultados.
+	   verbose     - prints de debug en todas las fases, máx. de información (debug).
+	Diversidad:
+	   default     - sin alteraciones en el rand del num. de reglas. (num. Reglas de un
+						individuo es un número aleatorio entre 1 y maxReglas)
+	   maxReglas-1 - genera maxReglas reglas para cada individuo salvo el último
+	                 (test alta diversidad en reglas por indv.).
+	Reglas_extra:
+	   default     - se trunca el numero de reglas si no matchea entre padre,madre.
+	   randSon     - asigna de forma random las reglas extras a los hijos.
+
+	Resto:
+	   random      - se seleccionan los 'fill' de manera aleatoria.
+	   fitness     - se seleccionan los 'fill' en funcion del fitness
+
+	CondicionTerminacion:
+	   numero      - a partir de este porcentaje de acierto se termina el entrenamiento 
+	   no          - el entreamiento finaliza cuando se han ejecutado todas las generaciones  
+	Threshold:
+		numero 	   - a partir de este porcentaje de acierto, si se repite el fitness del 
+						mejor individuo 10 veces se termina el entrenamiento
+		None	   - el entreamiento finaliza cuando se han ejecutado todas las generaciones
+
+
+
+
+
+
+
+
+Apartado 1 ===============================================================
+A. Generación de la población inicial con especial indicación del número de reglas por individuo consideradas
+
+Para inicializar la población nos hemos creado una función llamada: "inicializarPoblacion". Lo primero que hacemos es crear un array de numpy de 3 dimensiones [tam. Población][num. máximo Reglas][tam. Regla] que inicializamos a ceros. 
+Respecto al número de reglas hemos puesto de máximo 5, pero es un parámetro que recibe el clasificador AlgoritmoGenetico por lo que se puede modificar fácilmente. Hemos visto que 5 es un tamaño que nos permitía obtener buenos resultados de clasificación sin lastrar de manera significativa el tiempo de ejecucción. 
+Para facilitar las pruebas y testear diferentes implementaciones en los parámetros de ejecución que establecemos con mode. Uno de ellos es "Diversidad" que puede tomar 2 valores, "default" que generamos un número aleatorio de reglas desde 1 regla hasta el máximo de reglas para cada individuo de la población. O el "maxReglas-1" que no asigna el número de reglas de cada individuo al máximo número de reglas excepto para el último que tendrá solo una regla. 
+Posteriormente, una vez hemos obtenido el número de reglas, simplemente las rellenamos aleatoriamente entre 0 y 1. El tamaño de regla, lo obtenemos sumando la máxima cantidad valores posibles de cada atributo + 1 (corresponde a la clase); para ello nos valemos de la longitud de las entradas del diccionario. 
+Por último, las reglas no existentes para un individuo porque tiene menos que el número máximo de reglas se rellenan con NaN (Not a number).
+
+
+
+B. Mecanismo de cruce implementado
+
+Se nos plantearon 2 problemas a la hora de decidir cómo implementarlo:
+Qué hacer cuando los progenitores del cruce tienen distinto número de reglas. Dado que inicialmente nos limitábamos a truncar el número de reglas al mínimo entre los 2 progenitores, se acababa perdiendo muy rápido la información así como al diversidad de los propios individuos y de la población en general a medidad que avanzaban las generaciones. Por ello decidimos simplemente cruzar el mínimo de reglas entre ambos progenitores y las restantes del que tuviera más se asignan a un hijo de manera aleatoria. Esto se puede modificar con el parámetro del "mode" "ReglasExtra", donde "default" se trunca el numero de reglas si no es igual entre padre y madre. Y "randSon" que asigna de forma aleatoria las reglas extras a los hijos.
+
+
+Qué implementar entre cruce en 1 punto, cruce en 2 puntos y cruce uniforme. Nos decantamos por cruce en un punto por su sencillez y porque conservaba la estrucura de la información mejor que cruce uniforme donde se pierde al asignar cada gen de los padres de manera aleatoria a los hijos. 
+
+
+C. Mecanismo de mutación implementado
+
+Como está, en el notebook. 
+
+
+
+
+D. Mecanismo de clasificación implementado
+
+Nuestra función clasifica devuelve para cada fila (instancia) del conjunto de datos que se le pasa la clase mayoritaria que predice cada regla del mejor individuo. En caso de que ninguna regla prediga alguna clase, se ha optado por devolver una clase por defecto, en nuetro caso la 0. Esto se podría modificar, y una implementación más correcta podría ser calcular las propabilidades a priori de las clases y la que tenga más asignarla como defecto. 
+
+¿Cómo funciona? Primero recorremos el conjunto de datos, después obtenemos el número de reglas del Individuo. Y ahora simplemente tenemos que recorrer la reglas del Individuo y ver si para cada regla que clase devuelve dada la instancia. Para convertir la notación de las instancis a reglas, lo único que debemos hacer es tomar el valor de la instancia como índice de la regla + offset. Donde el offset será el número valores posibles de los atributos anteriores de la regla. Por último obtenemos las clase mayoritaria de la predicción de las reglas o si no hubiera, la clase por defecto. 
+
+
+
+
+
+Apartado 3 ===============================================================
+
+Tasas de cruce: 60% de la población 
+Mutación: El 10% de la población, con probabilidad 1% de mutar uno de los individuos seleccionados. 
+
+Análisis de los resultados obtenidos:
+NOTA:
+Para reducir el tiempo de ejecucción del algorimo genético hemos puesto varias variables en mode:
+	CondicionTerminacion:
+	   numero      - a partir de este porcentaje de acierto se termina el entrenamiento 
+	   no          - el entreamiento finaliza cuando se han ejecutado todas las generaciones  
+	Threshold:
+		numero 	   - a partir de este porcentaje de acierto, si se repite el fitness del 
+						mejor individuo 10 veces se termina el entrenamiento
+		None	   - el entreamiento finaliza cuando se han ejecutado todas las generaciones
+
+tic-tac-toe:
+
+example2, ejemplo5 y ejemplo6: Obtenemos un error del 0%, y la ejecucción del ejemplo5 y ejemplo6 es muy rápida gracias a que llega muy rápido el mejor individuo a un fitness del 100 y terminamos el entrenamiento. Example2 tarda un poco más. Señalar que cuanto mayor es el tamaño de la población menos generaciones se necesitan para llegar a un individuo con fitness 100. 
+Como nunca obtenedremos un individuo con un fitness mayor a 100 (siendo 100 el porcentaje de aciertos en la clasificación) no tiene sentido continuar el entrenamiento normalmente. Las raras ocasiones serían que otro individuo con un fitness muy elevado o de 100 tuviera diferentes reglas que fueran más óptimas para el conjunto de test o en el problema real. Pero nosotros no nos hemos encontrado nunca con esto al obtener porcentajes de error del 0% en cada partición y para los diferentes tamaños de población y número de generaciones. 
+
+titanic: Se puede comprobar como un mayor número de rondas no implica menor error. Esto es debido al sobreajuste que pueden realizar los algoritmos genéticos, así como puede haber llegado casi a su "tope" el algoritmo. Esta ejecucción tarda mucho es por ello que es recomendable poner en el "mode" "Threshold" en un 75-80 aproximadamente. Si que se puede comprobar como el valor del fitness del mejor individuo si mejora en las sucesivas pruebas con valores de población y número de generaciones más altos. (Pero es una variación muy pequeña del órden del 3%) Pero si que aumenta considerablemente el tiempo de ejecucción es por ello que creemos que la opción con mejor balance es un tamaño de población de 200 y 100 generaciones. [Debería ser el cinco veces más rápido que tamPoblacion=200 y numGeneraciones=500, y obtiene unos resultados parejos]. Aunque si sacrifica un poco de tiempo podríamos optar por tamaño de poblacion de 200 y 250 generaciones. 
+
+
+
+
+============================================ 
+Errores titanic:
+
+10 - 100: 21.6666666667 %
+10 - 500: 24.0476190476 %
+200 - 100: 20.9523809524 %
+200 - 500: 16.1904761905 %
+500 - 100: 23.8095238095 %
+500 - 500: 18.3421567739 %

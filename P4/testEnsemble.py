@@ -14,8 +14,8 @@ from Clasificador import ClasificadorVecinosProximos
 from Clasificador import ClasificadorNaiveBayes
 print "Practica 4 test de Clasificador Ensemble"
 
-print "\nFichero de datos: ejemplo5.data"
-dataset=Datos('./ConjuntosDatos/pruebas_short_priori.data',True)
+print "\nFichero de datos: titanic.data"
+dataset=Datos('./ConjuntosDatos/titanic.data',True)
 print "Estrategia: validacion cruzada, numParticiones: 5"
 estrategia=ValidacionCruzada(5)
 
@@ -40,7 +40,7 @@ arrayClf = [clf1, clf2, clf3]
 
 print "Clasificador: Ensamble (Nuestra implementación)"
 clasificador = ClasificadorEnsemble(arrayClf)
-print "Ejecucción: "
+print "Ejecución: "
 print "________________________________________________________________"
 errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
 print "\n"
@@ -50,11 +50,9 @@ print "\n"
 
 
 """ Segunda parte: VotingClassifier - Clasificadores Sklearn """ 
-"""
 print "Clasificador: Ensamble Sklearn"
 clasificador = ClasificadorEnsembleSklearn()
-print "Ejecucción: "
+print "Ejecución: "
 print "________________________________________________________________"
 errores=clasificador.validacion(estrategia,dataset,clasificador,laplace,normalizar)
 print "\n"
-"""
