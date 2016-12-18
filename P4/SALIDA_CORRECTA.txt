@@ -1,0 +1,268 @@
+Practica 4 test de Clasificador Ensemble
+
+Fichero de datos: wine_proc.data
+Estrategia: validacion cruzada, numParticiones: 5
+
+RESULTADOS CLASIFICADORES INDIVIDUALES - wine_proc.data: 
+Clasificador: Naive Bayes
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [72.222 63.889 66.667 60.000 60.000] 
+Media de errores total: 64.5555555556 %
+Mediana de errores total: 63.8888888889 %
+DesviaciÃ³n tÃ­pica: 4.58661498679 %
+
+
+Clasificador: Vecinos Proximos (7)
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [8.333 16.667 2.778 0.000 2.857] 
+Media de errores total: 6.12698412698 %
+Mediana de errores total: 2.85714285714 %
+DesviaciÃ³n tÃ­pica: 5.92286863689 %
+
+
+Clasificador: Multiclase (Regresion Logistica)
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [0.000 0.000 5.556 2.857 5.714] 
+Media de errores total: 2.8253968254 %
+Mediana de errores total: 2.85714285714 %
+DesviaciÃ³n tÃ­pica: 2.52056295127 %
+
+
+Clasificador: Ensamble (Nuestra implementaciÃ³n)
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [8.333 16.667 11.111 0.000 0.000] 
+Media de errores total: 7.22222222222 %
+Mediana de errores total: 8.33333333333 %
+DesviaciÃ³n tÃ­pica: 6.47883543872 %
+
+
+Clasificador: Ensamble Sklearn
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [0.000 11.111 2.778 5.714 0.000] 
+Media de errores total: 3.92063492063 %
+Mediana de errores total: 2.77777777778 %
+DesviaciÃ³n tÃ­pica: 4.1705877242 %
+
+
+########################################################################################
+
+Fichero de datos: tic-tac-toe.data
+Estrategia: validacion cruzada, numParticiones: 5
+
+RESULTADOS CLASIFICADORES INDIVIDUALES - tic-tac-toe.data: 
+Clasificador: Naive Bayes
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [32.812 32.292 25.521 32.461 30.366] 
+Media de errores total: 30.6904450262 %
+Mediana de errores total: 32.2916666667 %
+DesviaciÃ³n tÃ­pica: 2.7214252895 %
+
+
+Clasificador: Vecinos Proximos (7)
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [19.792 14.583 13.542 14.660 21.466] 
+Media de errores total: 16.8084642234 %
+Mediana de errores total: 14.6596858639 %
+DesviaciÃ³n tÃ­pica: 3.18848760078 %
+
+
+Clasificador: Regresion Logistica
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [34.375 30.208 35.938 36.649 38.220] 
+Media de errores total: 35.0779886562 %
+Mediana de errores total: 35.9375 %
+DesviaciÃ³n tÃ­pica: 2.73081761387 %
+
+
+Clasificador: Ensamble (Nuestra implementaciÃ³n)
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [24.479 22.917 32.812 23.560 22.513] 
+Media de errores total: 25.2563263525 %
+Mediana de errores total: 23.5602094241 %
+DesviaciÃ³n tÃ­pica: 3.83603724154 %
+
+
+Clasificador: Ensamble Sklearn
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [22.917 26.042 31.771 25.131 27.749] 
+Media de errores total: 26.7217495637 %
+Mediana de errores total: 26.0416666667 %
+DesviaciÃ³n tÃ­pica: 2.96714874638 %
+
+
+###################################################################################
+
+Fichero de datos: titanic.data
+Estrategia: validacion cruzada, numParticiones: 5
+
+RESULTADOS CLASIFICADORES INDIVIDUALES - titanic.data: 
+Clasificador: Naive Bayes
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [27.143 25.837 22.967 20.096 19.617] 
+Media de errores total: 23.1319207109 %
+Mediana de errores total: 22.966507177 %
+DesviaciÃ³n tÃ­pica: 3.00019738938 %
+
+
+Clasificador: Vecinos Proximos (7)
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [18.095 22.488 21.053 23.445 21.531] 
+Media de errores total: 21.3223969013 %
+Mediana de errores total: 21.5311004785 %
+DesviaciÃ³n tÃ­pica: 1.81079798128 %
+
+
+Clasificador: Regresion Logistica
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [32.857 56.459 58.852 57.895 38.756] 
+Media de errores total: 48.963773069 %
+Mediana de errores total: 56.4593301435 %
+DesviaciÃ³n tÃ­pica: 10.9301294211 %
+
+
+Clasificador: Ensamble (Nuestra implementaciÃ³n)
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [22.381 26.794 25.359 20.574 19.139] 
+Media de errores total: 22.8493962178 %
+Mediana de errores total: 22.380952381 %
+DesviaciÃ³n tÃ­pica: 2.86441206412 %
+
+
+Clasificador: Ensamble Sklearn
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [22.857 17.703 25.837 22.488 21.531] 
+Media de errores total: 22.0833902939 %
+Mediana de errores total: 22.4880382775 %
+DesviaciÃ³n tÃ­pica: 2.6208475298 %
+
+
+####################################################################################
+
+Fichero de datos: digits.data
+Estrategia: validacion cruzada, numParticiones: 5
+
+RESULTADOS CLASIFICADORES INDIVIDUALES - digits.data: 
+Clasificador: Naive Bayes
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [ 92.55  87.23  92.02  90.43  90.96] 
+Media de errores total: 90.6382978723 %
+Mediana de errores total: 90.9574468085 %
+DesviaciÃ³n tÃ­pica: 1.8609420941 %
+
+
+Clasificador: Vecinos Proximos (7)
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [ 15.43  18.09  13.83  18.62  14.36] 
+Media de errores total: 16.0638297872 %
+Mediana de errores total: 15.4255319149 %
+DesviaciÃ³n tÃ­pica: 1.94421988112 %
+
+
+Clasificador: Multiclase (Regresion Logistica)
+EjecuciÃ³n: 
+________________________________________________________________
+=================RESULTADO====================
+Array de % de errores obtenidos: [ 22.34  21.28  23.4   21.28  21.28] 
+Media de errores total: 21.914893617 %
+Mediana de errores total: 21.2765957447 %
+DesviaciÃ³n tÃ­pica: 0.851063829787 %
+
+
+Clasificador: Ensamble (Nuestra implementaciÃ³n)
+EjecuciÃ³n: 
+________________________________________________________________
+Matriz de confusiÃ³n = True
+Confusion matrix, without normalization
+[[16  0  0  0  0  0  0  0  0  0]
+ [ 1 21  0  0  0  0  0  0  0  2]
+ [ 1  0 12  0  0  0  0  0  0  1]
+ [ 2  1  0 12  0  0  0  0  0  0]
+ [ 2  0  0  0 13  0  0  0  0  2]
+ [ 4  2  2  3  0 14  0  0  0  0]
+ [ 2  0  0  0  0  0 21  0  0  0]
+ [ 2  1  1  0  0  0  0  7  3  1]
+ [ 0  0  3  0  0  0  0  0 17  0]
+ [ 0  1  0  0  0  0  0  0  0 18]]
+Normalized confusion matrix
+[[ 1.    0.    0.    0.    0.    0.    0.    0.    0.    0.  ]
+ [ 0.04  0.88  0.    0.    0.    0.    0.    0.    0.    0.08]
+ [ 0.07  0.    0.86  0.    0.    0.    0.    0.    0.    0.07]
+ [ 0.13  0.07  0.    0.8   0.    0.    0.    0.    0.    0.  ]
+ [ 0.12  0.    0.    0.    0.76  0.    0.    0.    0.    0.12]
+ [ 0.16  0.08  0.08  0.12  0.    0.56  0.    0.    0.    0.  ]
+ [ 0.09  0.    0.    0.    0.    0.    0.91  0.    0.    0.  ]
+ [ 0.13  0.07  0.07  0.    0.    0.    0.    0.47  0.2   0.07]
+ [ 0.    0.    0.15  0.    0.    0.    0.    0.    0.85  0.  ]
+ [ 0.    0.05  0.    0.    0.    0.    0.    0.    0.    0.95]]
+=================RESULTADO====================
+Array de % de errores obtenidos: [ 32.45  20.74  27.66  16.49  19.68] 
+Media de errores total: 23.4042553191 %
+Mediana de errores total: 20.7446808511 %
+DesviaciÃ³n tÃ­pica: 5.80738045275 %
+
+
+Clasificador: Ensamble Sklearn
+EjecuciÃ³n: 
+________________________________________________________________
+Matriz de confusiÃ³n = True
+Confusion matrix, without normalization
+[[16  0  0  0  0  0  0  0  0  0]
+ [ 1 19  0  0  0  1  0  0  0  0]
+ [ 0  2 19  0  0  0  0  0  1  0]
+ [ 0  0  0 15  0  0  0  0  0  0]
+ [ 2  1  0  0 12  0  1  0  1  0]
+ [ 2  0  0  4  0 14  1  0  1  0]
+ [ 0  1  0  0  0  0 17  0  0  0]
+ [ 0  0  0  0  0  0  0 21  0  0]
+ [ 0  0  2  0  1  1  0  0 13  0]
+ [ 1  0  0  2  1  0  0  0  0 15]]
+Normalized confusion matrix
+[[ 1.    0.    0.    0.    0.    0.    0.    0.    0.    0.  ]
+ [ 0.05  0.9   0.    0.    0.    0.05  0.    0.    0.    0.  ]
+ [ 0.    0.09  0.86  0.    0.    0.    0.    0.    0.05  0.  ]
+ [ 0.    0.    0.    1.    0.    0.    0.    0.    0.    0.  ]
+ [ 0.12  0.06  0.    0.    0.71  0.    0.06  0.    0.06  0.  ]
+ [ 0.09  0.    0.    0.18  0.    0.64  0.05  0.    0.05  0.  ]
+ [ 0.    0.06  0.    0.    0.    0.    0.94  0.    0.    0.  ]
+ [ 0.    0.    0.    0.    0.    0.    0.    1.    0.    0.  ]
+ [ 0.    0.    0.12  0.    0.06  0.06  0.    0.    0.76  0.  ]
+ [ 0.05  0.    0.    0.11  0.05  0.    0.    0.    0.    0.79]]
+=================RESULTADO====================
+Array de % de errores obtenidos: [ 14.89  20.21  17.55  13.3   14.36] 
+Media de errores total: 16.0638297872 %
+Mediana de errores total: 14.8936170213 %
+DesviaciÃ³n tÃ­pica: 2.50395793531 %

@@ -18,8 +18,11 @@ class Datos(object):
   arrayM=[]
   #lista de desviaciones típicas (STDs) de los atributos continúos
   arrayS=[]
+  nombreFichero = None  
   
   def __init__(self, nombreFichero,sup):
+      
+    self.nombreFichero = nombreFichero
       
       
     del self.tipoAtributos[:] #Limpiar la lista de ejecucciones anteriores

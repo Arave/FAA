@@ -12,6 +12,9 @@ from sklearn.naive_bayes import GaussianNB, MultinomialNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.ensemble import VotingClassifier
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+import itertools
 
 
 
@@ -53,6 +56,40 @@ class Clasificador(object):
       numAciertos = np.sum(arrayEqual) #Contar los True
       numFallos =  numFilas - numAciertos
       return (numFallos / numFilas) * 100
+
+  @staticmethod  
+  def plot_confusion_matrix(cm, classes,
+                          normalize=False,
+                          title='Confusion matrix',
+                          cmap=plt.cm.Blues):
+        """
+        This function prints and plots the confusion matrix.
+        Normalization can be applied by setting `normalize=True`.
+        """
+        plt.imshow(cm, interpolation='nearest', cmap=cmap)
+        plt.title(title)
+        plt.colorbar()
+        tick_marks = np.arange(len(classes))
+        plt.xticks(tick_marks, classes, rotation=45)
+        plt.yticks(tick_marks, classes)
+    
+        if normalize:
+            cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+            print("Normalized confusion matrix")
+        else:
+            print('Confusion matrix, without normalization')
+    
+        print(cm)
+    
+        thresh = cm.max() / 2.
+        for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+            plt.text(j, i, cm[i, j],
+                     horizontalalignment="center",
+                     color="white" if cm[i, j] > thresh else "black")
+    
+        plt.tight_layout()
+        plt.ylabel('True label')
+        plt.xlabel('Predicted label')
     
   # Realiza una clasificacion utilizando una estrategia de particionado determinada
   @staticmethod
@@ -110,20 +147,40 @@ class Clasificador(object):
 
            #para algoritmo genetico, plot
            plot_flag = None
-           """if idx == 0:
+           """"
+           if idx == 4:
                plot_flag = True
-               print "PLOT_FLAG = True"
-               """
-
+               print "Matriz de confusión = True" 
+           """
+               
            # Entrenamiento
-           clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios, plot_flag)
-           pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios,correcionL)
+           clasificador.entrenamiento(datosTrain, dataset.nominalAtributos, dataset.diccionarios)
+           pred = clasificador.clasifica(datosTest, dataset.nominalAtributos, dataset.diccionarios, correcionL)
 
            #print "Predicción: "
            #print pred
 
            error = clasificador.error(datosTest, pred)
            arrayErrores[idx] = error
+
+           if (idx == 4) and (dataset.nombreFichero == "./ConjuntosDatos/digits.data"):
+               print "Matriz de confusión = True"
+               numColumnas = datosTest.shape[1]
+               idxColumnaClase =  numColumnas - 1
+               cnf_matrix = confusion_matrix( datosTest[:,idxColumnaClase], pred)
+               np.set_printoptions(precision=2)
+               
+               # Plot non-normalized confusion matrix
+               plt.figure()
+               clasificador.plot_confusion_matrix(cnf_matrix, classes=dataset.nombreAtributos,
+                                      title='Matriz de confusion sin normalizar')
+                
+               # Plot normalized confusion matrix
+               plt.figure()
+               clasificador.plot_confusion_matrix(cnf_matrix, classes=dataset.nombreAtributos, normalize=True,
+                                      title='Matriz de confusion normalizada')
+               
+               plt.show()
 
 
            #print "\t Porcentaje de error (%): ",error
@@ -135,11 +192,13 @@ class Clasificador(object):
        print "Mediana de errores total:" ,np.median(arrayErrores), "%"
        print "Desviación típica:" ,np.std(arrayErrores), "%"
 
+       """"
        if isinstance(clasificador, ClasificadorVecinosProximos) or isinstance(clasificador, ClasificadorRegresionLogistica):
            ii = particiones[-1].indicesTrain
            # clasificador = ClasificadorVecinosProximos(1)
            # print plotName
            plotModel(dataset.datos[ii, 0], dataset.datos[ii, 1], dataset.datos[ii, -1] != 0, clasificador, "Frontera", plotName)
+       """
 #################################################################################################################
 class ClasificadorEnsemble(Clasificador):
 
